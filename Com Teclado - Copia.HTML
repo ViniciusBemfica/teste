@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Wordle Game</title>
+  <style>
+    .wordle-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+    }
+    .line {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+    .letter-input {
+      width: 50px;
+      height: 50px;
+      text-align: center;
+      font-size: 30px;
+      margin: 0 5px;
+    }
+    .proceed-button {
+      margin-top: 20px;
+    }
+    .keyboard-container {
+      margin-top: 20px;
+    }
+    .keyboard-key {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      text-align: center;
+      line-height: 30px;
+      font-size: 20px;
+      border: 1px solid black;
+      margin: 1px;
+      cursor: pointer;
+    }
+    .keyboard-key.disabled {
+      background-color: lightgray;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <div class="wordle-container">
+    <div id="lines-container">
+      <!-- Line 1 -->
+      <div class="line">
+        <input type="text" class="letter-input" maxlength="1">
+        <input type="text" class="letter-input" maxlength="1">
+        <input type="text" class="letter-input" maxlength="1">
+        <input type="text" class="letter-input" maxlength="1">
+        <input type="text" class="letter-input" maxlength="1">
+      </div>
+      <!-- Line 2 -->
+      <div class="line">
+        <input type="text" class="letter-input" maxlength="1" disabled>
+        <input type="text" class="letter-input" maxlength="1" disabled>
+        <input type="text" class="letter-input" maxlength="1" disabled>
+        <input type="text" class="letter-input" maxlength="1" disabled>
+        <input type="text" class="letter-input" maxlength="1" disabled>
+      </div>
+      <!-- Line 3 -->
+      <div class="line">
+        <input type="text" class="letter-input" maxlength="1" disabled>
+        <input type="text" class="letter-input" maxlength="1" disabled>
+        <input type="text" class="letter-input" maxlength="1" disabled>
+        <input type="text" class="letter-input" maxlength="1" disabled>
+        <input type="text" class="letter-input" maxlength="1" disabled>
+      </div>
+      <!-- Line 4 -->
+      <div class="line">
+        <input type="text" class="letter-input" maxlength="1" disabled>
+        <input type="text" class="letter-input" maxlength="1" disabled>
+        <input type="text" class="letter-input" maxlength="1" disabled>
+        <input type="text" class="letter-input" maxlength="1" disabled>
+        <input type="text" class="letter-input" maxlength="1" disabled>
+      </div>
+      <!-- Line 5 -->
+      <div class="line">
+        <input type="text" class="letter-input" maxlength="1" disabled>
+        <input type="text" class="letter-input" maxlength="1" disabled>
+        <input type="text" class="letter-input" maxlength="1" disabled>
+        <input type="text" class="letter-input" maxlength="1" disabled>
+        <input type="text" class="letter-input" maxlength="1" disabled>
+      </div>
+    </div>
+    <button class="proceed-button" onclick="proceed()">Proceed</button>
+    <div class="keyboard-container">
+      <br>
+      <div class="keyboard-key" onclick="insertLetter(this)">Q</div>
+      <div class="keyboard-key" onclick="insertLetter(this)">W</div>
+      <div class="keyboard-key" onclick="insertLetter(this)">E</div>
+      <div class="keyboard-key" onclick="insertLetter(this)">R</div>
+      <div class="keyboard-key" onclick="insertLetter(this)">T</div>
+      <div class="keyboard-key" onclick="insertLetter(this)">Y</div>
+      <div class="keyboard-key" onclick="insertLetter(this)">U</div>
+      <div class="keyboard-key" onclick="insertLetter(this)">I</div>
+      <div class="keyboard-key" onclick="insertLetter(this)">O</div>
+      <div class="keyboard-key" onclick="insertLetter(this)">P</div>
+      </br>
+      <br>
+      <div class="keyboard-key" onclick="insertLetter(this)">A</div>
+      <div class="keyboard-key" onclick="insertLetter(this)">S</div>
+      <div class="keyboard-key" onclick="insertLetter(this)">D</div>
+      <div class="keyboard-key" onclick="insertLetter(this)">F</div>
+      <div class="keyboard-key" onclick="insertLetter(this)">G</div>
+      <div class="keyboard-key" onclick="insertLetter(this)">H</div>
+      <div class="keyboard-key" onclick="insertLetter(this)">J</div>
+      <div class="keyboard-key" onclick="insertLetter(this)">K</div>
+      <div class="keyboard-key" onclick="insertLetter(this)">L</div>
+      </br>
+      <br>
+      <div class="keyboard-key" onclick="insertLetter(this)">Z</div>
+      <div class="keyboard-key" onclick="insertLetter(this)">X</div>
+      <div class="keyboard-key" onclick="insertLetter(this)">C</div>
+      <div class="keyboard-key" onclick="insertLetter(this)">V</div>
+      <div class="keyboard-key" onclick="insertLetter(this)">B</div>
+      <div class="keyboard-key" onclick="insertLetter(this)">N</div>
+      <div class="keyboard-key" onclick="insertLetter(this)">M</div>
+      </br>
+    </div>
+  </div>
+
+  <script>
+    // Array of words
+    var words = ["SAGAZ", "NEGRO", "TERMO", "MEXER", "NOBRE", "SENSO", "AFETO", "ALGOZ", "PLENA", "FAZER", "ASSIM", "SUTIL", "VIGOR", "SANAR", "FOSSE", "AUDAZ", "PODER", "IDEIA", "CERNE", "INATO", "MORAL", "DESDE", "SOBRE", "JUSTO", "MUITO", "HONRA", "TORPE", "SONHO", "ETNIA", "ANEXO", "AMIGO", "TANGE", "LAPSO", "EXPOR", "HAVER", "DENGO", "TEMPO", "CASAL", "SEARA", "PESAR", "ARDIL", "GENRO", "CAUSA", "SABER", "DIZER", "POSSE", "COSER", "DEVER", "PROLE", "TENAZ", "CORJA", "BRADO", "CRIVO", "COMUM", "SENDO", "TEMOR", "CEDER", "AINDA", "DIGNO", "PAUTA", "CULTO", "ASSAZ", "ESTAR", "ATROZ", "MUNDO", "CENSO", "FUGAZ", "GLEBA", "FORTE", "XIBIU", "VULGO", "VALHA", "COZER", "DENSO", "PUDOR", "REGRA", "DOGMA", "CRIAR", "LOUCO", "JEITO", "ROUND", "BANAL", "ORDEM", "MESMO", "IMPOR", "CLAVA", "PEDIR", "HOMEM", "FELIZ", "APRAZ", "TENRO", "DESSE", "USURA", "COISA", "SERVO", "PROSA", "TODOS", "LIMBO", "FORMA", "PRESA"];
+
+    // Generate a random word
+    var randomIndex = Math.floor(Math.random() * words.length);
+    var word = words[randomIndex];
+    var vLetrasVermelho = [];
+
+    // Current line and letter index
+    var currentLine = 1;
+    var currentLetter = 0;
+
+    // Function to proceed to the next line
+    function proceed() {
+      var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input');
+      var correctWord = word.split('');
+      var guessedWord = Array.from(lineInputs).map(input => input.value.toUpperCase());
+
+      // Check the guessed word against the correct word
+      for (var i = 0; i < guessedWord.length; i++) {
+        var letter = guessedWord[i];
+        var input = lineInputs[i];
+
+        if (letter === correctWord[i]) {
+          input.style.backgroundColor = 'green';
+        } else if (correctWord.includes(letter)) {
+          input.style.backgroundColor = 'yellow';
+        } else {
+          vLetrasVermelho = vLetrasVermelho + [letter];
+          input.style.backgroundColor = 'red';
+        }
+      }
+
+      // Disable the current line and enable the next line
+      lineInputs.forEach(input => input.disabled = true);
+      currentLine++;
+      if (currentLine <= 5) {
+        document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input').forEach(input => input.disabled = false);
+      }
+
+      // Check if the player has won
+      if (guessedWord.join('') === word) {
+        alert('Congratulations! You guessed the word correctly.');
+      }
+
+      // Check if the player has lost
+      if (currentLine > 5 && guessedWord.join('') !== word) {
+        alert('Sorry! You couldn\'t guess the word. The correct word was: ' + word);
+      }
+
+      // Disable letters that don't exist in the word
+      document.querySelectorAll('.keyboard-key').forEach(key => {
+        if (vLetrasVermelho.includes(key.innerText)) {
+          key.classList.add('disabled');
+          key.onclick = null;
+        }
+      });
+      
+    }
+
+    // Function to insert a letter into the input box
+    function insertLetter(element) {
+      if (element.classList.contains('disabled')) return;
+
+      var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input');
+      var input = lineInputs[currentLetter];
+      input.value = element.innerText;
+
+      // Move to the next input box or proceed to the next line
+      currentLetter++;
+      if (currentLetter >= 5) {
+        proceed();
+        currentLetter = 0;
+      }
+    }
+  </script>
+</body>
+</html>
