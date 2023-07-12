@@ -15,9 +15,15 @@
     .line {
       display: flex;
       justify-content: center;
-      margin-bottom: 10px;
+      margin-bottom: 5px;
       width: 100%;
-      height: 15%;
+      height: 9vh;
+    }
+    .lines-container {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      height: 50%;
     }
     .letter-input {
       //width: 41px;
@@ -30,10 +36,11 @@
       //height: 5vh;
     }
     .proceed-button {
+    	display: inline-block;
       margin-top: 20px;
     }
     .keyboard-container {
-      margin-top: 30px;
+      margin-top: 5px;
       width: 100%;
       //height: 80;
       height: 10vh;
@@ -142,12 +149,13 @@
       <div class="keyboard-key" onclick="delete()">←</div>
       </br>
     </div>
-    <div>
+    
+  </div>
+  <div>
       <button class="proceed-button" onclick="Reiniciar()">Reiniciar</button>
       --------------
       <button class="proceed-button" onclick="proceed()">Enviar</button>
     </div>
-  </div>
 
   <script>
     // Array of words
