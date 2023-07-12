@@ -156,7 +156,7 @@
       <div class="keyboard-key" onclick="insertLetter(this)">B</div>
       <div class="keyboard-key" onclick="insertLetter(this)">N</div>
       <div class="keyboard-key" onclick="insertLetter(this)">M</div>
-      <div class="keyboard-key" onclick="delete()">←</div>
+      <div class="keyboard-key" onclick="Delete()">←</div>
       </br>
       <br>
       <div class="keyboard-key" onclick="Reiniciar()">⟳</div>
@@ -257,6 +257,18 @@
     function Reiniciar() {
     
     	document.location.reload();
+    
+    }
+    
+    function Delete() {
+    	
+        if (!currentLetter == 0) {
+        	currentLetter--;
+        }
+    	
+        var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input');
+      var input = lineInputs[currentLetter];
+        input.value = "";
     
     }
     
