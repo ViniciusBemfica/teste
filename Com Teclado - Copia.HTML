@@ -17,7 +17,7 @@
       justify-content: center;
       margin-bottom: 5px;
       width: 100%;
-      height: 9vh;
+      height: 8vh;
     }
     .lines-container {
       display: flex;
@@ -29,21 +29,27 @@
       //width: 41px;
       //height: 41px;
       text-align: center;
-      font-size: 100%;
+      font-size: 200%;
       margin: 0 5px;
       border: 2px solid black;
       width: 100%;
       //height: 5vh;
     }
     .proceed-button {
-    	display: inline-block;
-      margin-top: 20px;
+    	//margin-top: 1vh;
+    	
     }
-    .keyboard-container {
-      margin-top: 5px;
+    .botao-container {
+    	margin-top: 35vh;
       width: 100%;
       //height: 80;
-      height: 10vh;
+      height: 10vh;	
+    }
+    .keyboard-container {
+      margin-top: 1vh;
+      width: 100%;
+      //height: 80;
+      height: 7%;
     }
     .keyboard-key {
       display: inline-block;
@@ -51,13 +57,13 @@
       //width: 30px;
       //height: 40px;
       text-align: center;
-      line-height: 300%;
-      font-size: 100%;
+      line-height: 100%;
+      font-size: 200%;
       border: 1px solid black;
       //margin: 1px;
       cursor: pointer;
       width: 11.5%;
-      height: 80%;
+      height: 100%;
     }
     .keyboard-key.disabled {
       background-color: lightgray;
@@ -148,14 +154,14 @@
       <div class="keyboard-key" onclick="insertLetter(this)">M</div>
       <div class="keyboard-key" onclick="delete()">←</div>
       </br>
-    </div>
-    
-  </div>
-  <div>
-      <button class="proceed-button" onclick="Reiniciar()">Reiniciar</button>
+      <br>
+      <div class="keyboard-key" onclick="Reiniciar()">⟳</div>
       --------------
-      <button class="proceed-button" onclick="proceed()">Enviar</button>
+      <div class="keyboard-key" onclick="proceed()">→</div>
+      </br>
     </div>
+  </div>
+  
 
   <script>
     // Array of words
