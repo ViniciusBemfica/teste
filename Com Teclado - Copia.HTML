@@ -84,50 +84,50 @@
     <div id="lines-container">
       <!-- Line 1 -->
       <div class="line">
-        <input type="text" class="letter-input" maxlength="1">
-        <input type="text" class="letter-input" maxlength="1">
-        <input type="text" class="letter-input" maxlength="1">
-        <input type="text" class="letter-input" maxlength="1">
-        <input type="text" class="letter-input" maxlength="1">
+        <input type="text" class="letter-input" maxlength="1" readonly="readonly">
+        <input type="text" class="letter-input" maxlength="1" readonly="readonly">
+        <input type="text" class="letter-input" maxlength="1" readonly="readonly">
+        <input type="text" class="letter-input" maxlength="1" readonly="readonly">
+        <input type="text" class="letter-input" maxlength="1" readonly="readonly">
       </div>
       <!-- Line 2 -->
       <div class="line">
-        <input type="text" class="letter-input" maxlength="1" disabled>
-        <input type="text" class="letter-input" maxlength="1" disabled>
-        <input type="text" class="letter-input" maxlength="1" disabled>
-        <input type="text" class="letter-input" maxlength="1" disabled>
-        <input type="text" class="letter-input" maxlength="1" disabled>
+        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly">
+        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly">
+        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly">
+        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly">
+        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly">
       </div>
       <!-- Line 3 -->
       <div class="line">
-        <input type="text" class="letter-input" maxlength="1" disabled>
-        <input type="text" class="letter-input" maxlength="1" disabled>
-        <input type="text" class="letter-input" maxlength="1" disabled>
-        <input type="text" class="letter-input" maxlength="1" disabled>
-        <input type="text" class="letter-input" maxlength="1" disabled>
+        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly">
+        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly">
+        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly">
+        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly">
+        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly">
       </div>
       <!-- Line 4 -->
       <div class="line">
-        <input type="text" class="letter-input" maxlength="1" disabled>
-        <input type="text" class="letter-input" maxlength="1" disabled>
-        <input type="text" class="letter-input" maxlength="1" disabled>
-        <input type="text" class="letter-input" maxlength="1" disabled>
-        <input type="text" class="letter-input" maxlength="1" disabled>
+        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly">
+        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly">
+        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly">
+        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly">
+        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly">
       </div>
       <!-- Line 5 -->
       <div class="line">
-        <input type="text" class="letter-input" maxlength="1" disabled>
-        <input type="text" class="letter-input" maxlength="1" disabled>
-        <input type="text" class="letter-input" maxlength="1" disabled>
-        <input type="text" class="letter-input" maxlength="1" disabled>
-        <input type="text" class="letter-input" maxlength="1" disabled>
+        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly">
+        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly">
+        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly">
+        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly">
+        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly">
       </div>
       <div class="line">
-        <input type="text" class="letter-input" maxlength="1" disabled>
-        <input type="text" class="letter-input" maxlength="1" disabled>
-        <input type="text" class="letter-input" maxlength="1" disabled>
-        <input type="text" class="letter-input" maxlength="1" disabled>
-        <input type="text" class="letter-input" maxlength="1" disabled>
+        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly">
+        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly">
+        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly">
+        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly">
+        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly">
       </div>
     </div>
     <div class="keyboard-container">
@@ -181,15 +181,8 @@
     var currentLine = 1;
     var currentLetter = 0;
     
-    if (!wordAntiga == '') {
-    	word = wordAntiga
-    }
+     
     
-    function simulateKeyPress(key) {
-      const event = new KeyboardEvent('keydown', { key });
-      textField.dispatchEvent(event);
-    }
-
     // Function to proceed to the next line
     function proceed() {
       var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input');
@@ -238,15 +231,18 @@
       
     }
     
-
+    
+    
+   
     // Function to insert a letter into the input box
     function insertLetter(element) {
       if (element.classList.contains('disabled')) return;
 
       var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input');
       var input = lineInputs[currentLetter];
+      var NextInput = lineInputs[currentLetter + 1];
       input.value = element.innerText;
-
+      
       // Move to the next input box or proceed to the next line
       currentLetter++;
       if (currentLetter >= 5) {
@@ -273,15 +269,6 @@
     
     }
     
-    function DeNovo() {
-    	
-        wordAntiga = word;
-    
-    	document.location.reload();
-        
-        
-    
-    }
     
     /*<br>
       <div class="keyboard-key" onclick="Reiniciar()">⟳</div>
