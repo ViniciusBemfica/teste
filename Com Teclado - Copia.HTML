@@ -46,6 +46,7 @@
   </style>
 </head>
 <body>
+ 
   <div class="wordle-container">
     <div id="lines-container">
       <!-- Line 1 -->
@@ -91,6 +92,7 @@
     </div>
     <button class="proceed-button" onclick="proceed()">Enviar</button>
     <button class="proceed-button" onclick="Reiniciar()">Reiniciar</button>
+    <button class="proceed-button" onclick="DeNovo()">Tentar de novo</button>
     <div class="keyboard-container">
     	<br>
       <div class="keyboard-key" onclick="insertLetter(this)">Q</div>
@@ -139,6 +141,10 @@
     var currentLine = 1;
     var currentLetter = 0;
     
+    if (!wordAntiga == '') {
+    	word = wordAntiga
+    }
+    
     function simulateKeyPress(key) {
       const event = new KeyboardEvent('keydown', { key });
       textField.dispatchEvent(event);
@@ -156,12 +162,12 @@
         var input = lineInputs[i];
 
         if (letter === correctWord[i]) {
-          input.style.borderColor = 'green';
+          input.style.backgroundColor = 'green';
         } else if (correctWord.includes(letter)) {
-          input.style.borderColor = 'yellow';
+          input.style.backgroundColor = 'yellow';
         } else {
         	vLetrasVermelho = vLetrasVermelho + [letter];
-          input.style.borderColor = 'red';
+          input.style.backgroundColor = 'red';
         }
       }
 
@@ -211,9 +217,20 @@
     
     function Reiniciar() {
     
-    document.location.reload();
+    	document.location.reload();
     
     }
+    
+    function DeNovo() {
+    	
+        wordAntiga = word;
+    
+    	document.location.reload();
+        
+        
+    
+    }
+
   </script>
 </body>
 </html>
