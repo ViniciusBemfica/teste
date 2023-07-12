@@ -7,7 +7,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-top: 50px;
+      //margin-top: 50px;
       background-Color: grey;
     }
     .line {
@@ -90,9 +90,16 @@
         <input type="text" class="letter-input" maxlength="1" disabled>
         <input type="text" class="letter-input" maxlength="1" disabled>
       </div>
+      <div class="line">
+        <input type="text" class="letter-input" maxlength="1" disabled>
+        <input type="text" class="letter-input" maxlength="1" disabled>
+        <input type="text" class="letter-input" maxlength="1" disabled>
+        <input type="text" class="letter-input" maxlength="1" disabled>
+        <input type="text" class="letter-input" maxlength="1" disabled>
+      </div>
     </div>
     <button class="proceed-button" onclick="proceed()">Enviar</button>
-    <button class="proceed-button" onclick="Reiniciar()">Reiniciar</button>
+    
     <div class="keyboard-container">
     	<br>
       <div class="keyboard-key" onclick="insertLetter(this)">Q</div>
@@ -126,6 +133,7 @@
       <div class="keyboard-key" onclick="insertLetter(this)">M</div>
       </br>
     </div>
+    <button class="proceed-button" onclick="Reiniciar()">Reiniciar</button>
   </div>
 
   <script>
@@ -174,7 +182,7 @@
       // Disable the current line and enable the next line
       lineInputs.forEach(input => input.disabled = true);
       currentLine++;
-      if (currentLine <= 5) {
+      if (currentLine <= 6) {
         document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input').forEach(input => input.disabled = false);
       }
 
@@ -184,7 +192,7 @@
       }
 
       // Check if the player has lost
-      if (currentLine > 5 && guessedWord.join('') !== word) {
+      if (currentLine > 6 && guessedWord.join('') !== word) {
         alert('Sorry! You couldn\'t guess the word. The correct word was: ' + word);
       }
 
