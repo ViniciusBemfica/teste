@@ -9,6 +9,10 @@
       align-items: center;
       //margin-top: 50px;
       background-Color: grey;
+      //width: 300px;
+      height: 580px;
+      //flex-wrap: wrap;
+      width: 100%;
     }
     .line {
       display: flex;
@@ -16,8 +20,8 @@
       margin-bottom: 10px;
     }
     .letter-input {
-      width: 50px;
-      height: 50px;
+      width: 41px;
+      height: 41px;
       text-align: center;
       font-size: 30px;
       margin: 0 5px;
@@ -27,17 +31,17 @@
       margin-top: 20px;
     }
     .keyboard-container {
-      margin-top: 20px;
+      margin-top: 1px;
     }
     .keyboard-key {
       display: inline-block;
       width: 30px;
       height: 40px;
       text-align: center;
-      line-height: 30px;
+      line-height: 35px;
       font-size: 20px;
       border: 1px solid black;
-      margin: 1px;
+      //margin: 1px;
       cursor: pointer;
     }
     .keyboard-key.disabled {
@@ -98,15 +102,12 @@
         <input type="text" class="letter-input" maxlength="1" disabled>
       </div>
     </div>
-    <button class="proceed-button" onclick="proceed()">Enviar</button>
-    
     <div class="keyboard-container">
     	<br>
       <div class="keyboard-key" onclick="insertLetter(this)">Q</div>
       <div class="keyboard-key" onclick="insertLetter(this)">E</div>
       <div class="keyboard-key" onclick="insertLetter(this)">R</div>
       <div class="keyboard-key" onclick="insertLetter(this)">T</div>
-      <div class="keyboard-key" onclick="insertLetter(this)">Y</div>
       <div class="keyboard-key" onclick="insertLetter(this)">U</div>
       <div class="keyboard-key" onclick="insertLetter(this)">I</div>
       <div class="keyboard-key" onclick="insertLetter(this)">O</div>
@@ -120,7 +121,6 @@
       <div class="keyboard-key" onclick="insertLetter(this)">G</div>
       <div class="keyboard-key" onclick="insertLetter(this)">H</div>
       <div class="keyboard-key" onclick="insertLetter(this)">J</div>
-      <div class="keyboard-key" onclick="insertLetter(this)">K</div>
       <div class="keyboard-key" onclick="insertLetter(this)">L</div>
       </br>
       <br>
@@ -131,9 +131,14 @@
       <div class="keyboard-key" onclick="insertLetter(this)">B</div>
       <div class="keyboard-key" onclick="insertLetter(this)">N</div>
       <div class="keyboard-key" onclick="insertLetter(this)">M</div>
+      <div class="keyboard-key" onclick="delete()">←</div>
       </br>
     </div>
-    <button class="proceed-button" onclick="Reiniciar()">Reiniciar</button>
+    <div>
+      <button class="proceed-button" onclick="Reiniciar()">Reiniciar</button>
+      --------------
+      <button class="proceed-button" onclick="proceed()">Enviar</button>
+    </div>
   </div>
 
   <script>
