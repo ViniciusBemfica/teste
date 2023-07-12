@@ -207,7 +207,7 @@
           input.style.backgroundColor = 'GoldenRod';
         } else {
         	vLetrasVermelho = vLetrasVermelho + [letter];
-          input.style.backgroundColor = 'red';
+          input.style.backgroundColor = 'DarkRed';
         }
       }
 
@@ -220,12 +220,12 @@
 
       // Check if the player has won
       if (guessedWord.join('') === word) {
-        alert('Congratulations! You guessed the word correctly.');
+        alert('Parabéns! Você acertou a palavra secreta!');
       }
 
       // Check if the player has lost
       if (currentLine > 6 && guessedWord.join('') !== word) {
-        alert('Sorry! You couldn\'t guess the word. The correct word was: ' + word);
+        alert('Você perdeu! A palavra certa era: ' + word);
       }
 
       // Disable letters that don't exist in the word
