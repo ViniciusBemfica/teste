@@ -39,6 +39,9 @@
       background-color: grey;
       //height: 5vh;
     }
+    .letter-input:focus {
+      border: 4px solid blue;
+    }
     .proceed-button {
     	//margin-top: 1vh;
     	
@@ -231,8 +234,8 @@
     
     
     // Check if an element is focused
-    function isElementFocused(element) {
-      return element === document.activeElement;
+    function isElementFocused(FocusedElement) {
+      return FocusedElement === document.activeElement;
     }
    
     // Function to insert a letter into the input box
@@ -244,14 +247,15 @@
       var NextInput = lineInputs[currentLetter + 1];
       input.value = element.innerText;
       
-     if (isElementFocused(NextInput)) {
-      	alert('1');
-     }
       
       if (currentLetter < 4) {
       	NextInput.focus();
       }
       
+      /*
+      var FocusedElement = document.activeElement;
+      FocusedElement.value = element.innerText;
+      */    
           
       // Move to the next input box or proceed to the next line
       currentLetter++;
