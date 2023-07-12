@@ -20,6 +20,7 @@
       text-align: center;
       font-size: 30px;
       margin: 0 5px;
+      border: 2px solid black;
     }
     .proceed-button {
       margin-top: 20px;
@@ -30,7 +31,7 @@
     .keyboard-key {
       display: inline-block;
       width: 30px;
-      height: 30px;
+      height: 40px;
       text-align: center;
       line-height: 30px;
       font-size: 20px;
@@ -88,11 +89,11 @@
         <input type="text" class="letter-input" maxlength="1" disabled>
       </div>
     </div>
-    <button class="proceed-button" onclick="proceed()">Proceed</button>
+    <button class="proceed-button" onclick="proceed()">Enviar</button>
+    <button class="proceed-button" onclick="Reiniciar()">Reiniciar</button>
     <div class="keyboard-container">
-      <br>
+    	<br>
       <div class="keyboard-key" onclick="insertLetter(this)">Q</div>
-      <div class="keyboard-key" onclick="insertLetter(this)">W</div>
       <div class="keyboard-key" onclick="insertLetter(this)">E</div>
       <div class="keyboard-key" onclick="insertLetter(this)">R</div>
       <div class="keyboard-key" onclick="insertLetter(this)">T</div>
@@ -137,6 +138,11 @@
     // Current line and letter index
     var currentLine = 1;
     var currentLetter = 0;
+    
+    function simulateKeyPress(key) {
+      const event = new KeyboardEvent('keydown', { key });
+      textField.dispatchEvent(event);
+    }
 
     // Function to proceed to the next line
     function proceed() {
@@ -150,12 +156,12 @@
         var input = lineInputs[i];
 
         if (letter === correctWord[i]) {
-          input.style.backgroundColor = 'green';
+          input.style.borderColor = 'green';
         } else if (correctWord.includes(letter)) {
-          input.style.backgroundColor = 'yellow';
+          input.style.borderColor = 'yellow';
         } else {
-          vLetrasVermelho = vLetrasVermelho + [letter];
-          input.style.backgroundColor = 'red';
+        	vLetrasVermelho = vLetrasVermelho + [letter];
+          input.style.borderColor = 'red';
         }
       }
 
@@ -185,6 +191,7 @@
       });
       
     }
+    
 
     // Function to insert a letter into the input box
     function insertLetter(element) {
@@ -200,6 +207,12 @@
         proceed();
         currentLetter = 0;
       }
+    }
+    
+    function Reiniciar() {
+    
+    document.location.reload();
+    
     }
   </script>
 </body>
