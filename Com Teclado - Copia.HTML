@@ -181,8 +181,6 @@
     var currentLine = 1;
     var currentLetter = 0;
     
-     
-    
     // Function to proceed to the next line
     function proceed() {
       var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input');
@@ -243,6 +241,11 @@
       var NextInput = lineInputs[currentLetter + 1];
       input.value = element.innerText;
       
+      
+      if (currentLetter < 4) {
+      	NextInput.focus();
+      }
+      
       // Move to the next input box or proceed to the next line
       currentLetter++;
       if (currentLetter >= 5) {
@@ -266,6 +269,8 @@
         var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input');
       var input = lineInputs[currentLetter];
         input.value = "";
+        
+        input.focus();
     
     }
     
