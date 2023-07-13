@@ -240,10 +240,32 @@
     }
     
     
+    //Palavra não existe no vocabulário
+    function PalavraNaoExiste(lineInputs) {
+      var guessedWord = Array.from(lineInputs).map(input => input.value.toUpperCase());
+      if (!words.includes(guessedWord.join(''))) {
+        alert('A palavra ' + guessedWord.join('') + ' não existe no vocabulário');
+        return true;
+      }       
+   	}   
+    
+    //focus primeiro elemento
+    function FocusPrimeiroElemento() {
+        var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input');
+        input = lineInputs[currentLetter];
+        input.focus();
+    }    
+    
     // Check if an element is focused
     function isElementFocused(FocusedElement) {
       return FocusedElement === document.activeElement;
     }
+    
+    // Limpa linha
+    function LimpaLinha() {
+    	document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input').forEach(input => input.value = '');
+    }
+            
    
     // Function to insert a letter into the input box
     function insertLetter(element) {
@@ -251,7 +273,7 @@
 
       var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input');
       var input = lineInputs[currentLetter];
-      var NextInput = lineInputs[currentLetter + 1];
+      var NextInput = lineInputs[currentLetter + 1];   
       input.value = element.innerText;
       
       
@@ -266,14 +288,19 @@
           
       // Move to the next input box or proceed to the next line
       currentLetter++;
-      if (currentLetter >= 5) {      	
+      if (currentLetter >= 5) {  
+      
+      	if (PalavraNaoExiste(lineInputs)){
+        	currentLetter = 0;
+            LimpaLinha();
+            FocusPrimeiroElemento();
+            return;
+        }
+      	
         proceed();
         currentLetter = 0;
         
-        //focus primeiro elemento
-       lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input');
-        input = lineInputs[currentLetter];
-        input.focus();
+        FocusPrimeiroElemento();
       }
     }
     
