@@ -189,9 +189,9 @@
         <div class="keyboard-key" onclick="insertLetter(this)">Ç</div>
       </div>
       <div class="keyboard-line">
-      	<div class="Adivinhar" onclick="Delete()">←</div>
+      	<div class="Adivinhar" onclick="MoveLeft()">←</div>
+        <div class="Adivinhar" onclick="MoveRight()">→</div>
         <div class="Adivinhar" onclick="LimpaLinha()">Limpar</div>
-      	<div class="Adivinhar" onclick="insertLetter(this)">⎵</div>
         <div class="Adivinhar" onclick="proceed()">Adivinhar</div>
       </div>
       
@@ -351,6 +351,38 @@
         
         input.focus();
     
+    }
+    
+    function MoveLeft() {
+    	var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input');
+      	
+    	if (currentLetter == 0) {
+        	var input = lineInputs[4];
+        	currentLetter = 4;
+        }
+        else
+        {
+        	var input = lineInputs[currentLetter - 1];
+        	currentLetter--;
+        }   
+        
+        input.focus();
+    }
+    
+    function MoveRight() {
+    	var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input');
+      	 
+    	if (currentLetter == 4) {
+        	var input = lineInputs[0];
+        	currentLetter = 0;
+        }
+        else
+        {
+        	var input = lineInputs[currentLetter + 1];
+        	currentLetter++;
+        }   
+        
+        input.focus();
     }
     
     
