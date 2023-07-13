@@ -27,7 +27,7 @@
     .lines-container {
       display: flex;
       justify-content: center;
-      width: 100%;
+      width: 80%;
       height: 50%;
     }
     .letter-input {
@@ -56,7 +56,7 @@
       height: 10vh;	
     }
     .keyboard-container {
-      margin-top: 5vh;
+      //margin-top: 5vh;
       text-align: center;
       width: 100%;
       //height: 80;
@@ -77,23 +77,28 @@
       width: 100%;
       background-color: DarkSlateGrey;
     }
+    .lines-Adivinhar-container {
+      display: flex;  
+      width: 100%;
+      height: 20%;
+    }
     .Adivinhar {
       display: inline-block;
       //display: flex;
       //width: 30px;
       //height: 40px;
       text-align: center;
-      line-height: 300%;
+      line-height: 200%;
       font-size: 300%;
       color: white;
       border: 1px solid black;
       margin-top: 30px;
+      margin-bottom: 30px;
       margin-left: 2px;
       margin-right: 2px;
       cursor: pointer;
       width: 100%;
-      background-color: DarkSlateGrey;
-      margin-bottom: 30px;
+      background-color: DarkSlateGrey;     
     }
     .keyboard-line{
       display: flex;  
@@ -158,11 +163,12 @@
         <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly">
       </div>
     </div>
-    <div class="keyboard-container">
-      <div class="keyboard-line">
+    <div class="lines-Adivinhar-container">
         <div class="Adivinhar" onclick="LimpaLinha()">Limpar</div>
         <div class="Adivinhar" onclick="proceed()">Adivinhar</div>
       </div>
+    <div class="keyboard-container">
+      
       <div class="keyboard-line">
         <div class="keyboard-key" onclick="insertLetter(this)">Q</div>
         <div class="keyboard-key" onclick="insertLetter(this)">E</div>
@@ -193,13 +199,14 @@
         <div class="keyboard-key" onclick="insertLetter(this)">M</div>
         <div class="keyboard-key" onclick="insertLetter(this)">Ç</div>
       </div>
-      <div class="keyboard-line">
+      
+      
+    </div>
+    <div class="lines-Adivinhar-container">
       	<div class="Adivinhar" onclick="MoveLeft()">←</div>
         <div class="Adivinhar" onclick="MoveRight()">→</div>
         <div class="Adivinhar" onclick="Delete()">Del</div>
       </div>
-      
-    </div>
   </div>
   
 
