@@ -190,6 +190,7 @@
       </div>
       <div class="keyboard-line">
       	<div class="Adivinhar" onclick="Delete()">←</div>
+        <div class="Adivinhar" onclick="LimpaLinha()">Limpar</div>
       	<div class="Adivinhar" onclick="insertLetter(this)">⎵</div>
         <div class="Adivinhar" onclick="proceed()">Adivinhar</div>
       </div>
@@ -255,17 +256,17 @@
         document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input').forEach(input => input.disabled = false);
       }
       
-      FocusPrimeiroElemento();
-      
       // Check if the player has won
       if (guessedWord.join('') === word) {
         alert('Parabéns! Você acertou a palavra secreta! Palavra: ' + wordComAcento);
       }
-
+	
       // Check if the player has lost
       if (currentLine > 6 && guessedWord.join('') !== word) {
-        alert('Você perdeu! A palavra certa era: ' + word);
+        alert('Você perdeu! A palavra certa era: ' + wordComAcento);
       }
+      
+      FocusPrimeiroElemento();
 
       // Disable letters that don't exist in the word
       document.querySelectorAll('.keyboard-key').forEach(key => {
@@ -289,8 +290,8 @@
     
     //focus primeiro elemento
     function FocusPrimeiroElemento() {
-        var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input');
-        input = lineInputs[0];
+        var vlineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input');
+        input = vlineInputs[0];
         input.focus();
         currentLetter = 0;
     }    
@@ -304,6 +305,8 @@
     function LimpaLinha() {
     	document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input').forEach(input => input.value = '');
         document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input').forEach(input => input.style.backgroundColor = 'grey');
+        
+        FocusPrimeiroElemento();
     }
           
               
