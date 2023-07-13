@@ -77,6 +77,21 @@
       width: 100%;
       background-color: DarkSlateGrey;
     }
+    .Adivinhar {
+      display: inline-block;
+      //display: flex;
+      //width: 30px;
+      //height: 40px;
+      text-align: center;
+      line-height: 300%;
+      font-size: 300%;
+      color: white;
+      border: 1px solid black;
+      margin-top: 30px;
+      cursor: pointer;
+      width: 100%;
+      background-color: DarkSlateGrey;
+    }
     .keyboard-line{
       display: flex;  
       width: 100%;
@@ -171,6 +186,9 @@
         <div class="keyboard-key" onclick="insertLetter(this)">M</div>
         <div class="keyboard-key" onclick="Delete()">←</div>
       </div>
+      <div class="keyboard-line">
+        <div class="Adivinhar" onclick="proceed()">Adivinhar</div>
+      </div>
       
     </div>
   </div>
@@ -211,6 +229,13 @@
           input.style.backgroundColor = 'DarkRed';
         }
       }
+      
+      if (PalavraNaoExiste(lineInputs)){
+        currentLetter = 0;
+        LimpaLinha();
+        FocusPrimeiroElemento();
+        return;
+      }
 
       // Disable the current line and enable the next line
       lineInputs.forEach(input => input.disabled = true);
@@ -218,7 +243,9 @@
       if (currentLine <= 6) {
         document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input').forEach(input => input.disabled = false);
       }
-
+      
+      FocusPrimeiroElemento();
+      
       // Check if the player has won
       if (guessedWord.join('') === word) {
         alert('Parabéns! Você acertou a palavra secreta!');
@@ -264,8 +291,10 @@
     // Limpa linha
     function LimpaLinha() {
     	document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input').forEach(input => input.value = '');
+        document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input').forEach(input => input.style.backgroundColor = 'grey');
     }
-            
+          
+              
    
     // Function to insert a letter into the input box
     function insertLetter(element) {
@@ -275,31 +304,15 @@
       var input = lineInputs[currentLetter];
       var NextInput = lineInputs[currentLetter + 1];   
       input.value = element.innerText;
-      
-      
+       
       if (currentLetter < 4) {
       	NextInput.focus();
       }
-      
-      /*
-      var FocusedElement = document.activeElement;
-      FocusedElement.value = element.innerText;
-      */    
-          
+         
       // Move to the next input box or proceed to the next line
       currentLetter++;
       if (currentLetter >= 5) {  
-      
-      	if (PalavraNaoExiste(lineInputs)){
-        	currentLetter = 0;
-            LimpaLinha();
-            FocusPrimeiroElemento();
-            return;
-        }
-      	
-        proceed();
         currentLetter = 0;
-        
         FocusPrimeiroElemento();
       }
     }
