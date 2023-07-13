@@ -270,11 +270,13 @@
       // Check if the player has won
       if (guessedWord.join('') === word) {
         alert('Parabéns! Você acertou a palavra secreta! Palavra: ' + wordComAcento);
+        PesquisaPalavraNaWeb(wordComAcento);
       }
 	
       // Check if the player has lost
       if (currentLine > 6 && guessedWord.join('') !== word) {
         alert('Você perdeu! A palavra certa era: ' + wordComAcento);
+        PesquisaPalavraNaWeb(wordComAcento);
       }
       
       FocusPrimeiroElemento();
@@ -390,6 +392,15 @@
         }   
         
         input.focus();
+    }
+    
+    function PesquisaPalavraNaWeb(Palavra) {
+      var Confirma = confirm("Pesquisar a palavra " + Palavra + " na web?");
+
+      if (Confirma) {
+        var url = "https://www.google.com/search?q=" + encodeURIComponent(Palavra);
+        window.open(url, "_blank");
+      }
     }
     
     
