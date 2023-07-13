@@ -405,7 +405,11 @@
     }
     
     function RegistrarPalavraDontpad() {
-      window.open('https://dontpad.com/REGVIN/palavras/' + wordComAcento);
+      var Confirma = confirm("Registrar a palavra " + wordComAcento + "?");
+
+      if (Confirma) {
+      	window.open('https://dontpad.com/REGVIN/palavras/' + wordComAcento);
+      }
     }
     
 
