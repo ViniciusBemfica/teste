@@ -191,6 +191,7 @@
       <div class="keyboard-line">
       	<div class="Adivinhar" onclick="MoveLeft()">←</div>
         <div class="Adivinhar" onclick="MoveRight()">→</div>
+        <div class="Adivinhar" onclick="Delete()">Del</div>
         <div class="Adivinhar" onclick="LimpaLinha()">Limpar</div>
         <div class="Adivinhar" onclick="proceed()">Adivinhar</div>
       </div>
@@ -340,10 +341,6 @@
     }
     
     function Delete() {
-    	
-        if (!currentLetter == 0) {
-        	currentLetter--;
-        }
     	
         var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input');
       var input = lineInputs[currentLetter];
