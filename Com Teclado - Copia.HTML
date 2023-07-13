@@ -203,6 +203,7 @@
       
     </div>
     <div class="lines-Adivinhar-container">
+    	<div class="Adivinhar" onclick="RegistrarPalavraDontpad()">Registrar</div>
         <div class="Adivinhar" onclick="LimpaLinha()">Limpar</div>
         <div class="Adivinhar" onclick="proceed()">Adivinhar</div>
       </div>
@@ -403,12 +404,10 @@
       }
     }
     
+    function RegistrarPalavraDontpad() {
+      window.open('https://dontpad.com/REGVIN/palavras/' + wordComAcento);
+    }
     
-    /*<br>
-      <div class="keyboard-key" onclick="Reiniciar()">⟳</div>
-      --------------
-      <div class="keyboard-key" onclick="proceed()">→</div>
-      </br>*/
 
   </script>
 </body>
