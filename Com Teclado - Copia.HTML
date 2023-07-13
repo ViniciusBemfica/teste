@@ -290,8 +290,9 @@
     //focus primeiro elemento
     function FocusPrimeiroElemento() {
         var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input');
-        input = lineInputs[currentLetter];
+        input = lineInputs[0];
         input.focus();
+        currentLetter = 0;
     }    
     
     // Check if an element is focused
