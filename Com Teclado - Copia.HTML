@@ -72,11 +72,15 @@
       font-size: 300%;
       color: white;
       border: 1px solid black;
-      //margin: 1px;
+      margin: 1px;
       cursor: pointer;
-      width: 11.5%;
+      width: 100%;
       height: 100%;
       background-color: DarkSlateGrey;
+    }
+    .keyboard-line{
+      display: flex;  
+      width: 100%;
     }
     .keyboard-key.disabled {
       background-color: gray;
@@ -137,36 +141,36 @@
       </div>
     </div>
     <div class="keyboard-container">
-    	<br>
-      <div class="keyboard-key" onclick="insertLetter(this)">Q</div>
-      <div class="keyboard-key" onclick="insertLetter(this)">E</div>
-      <div class="keyboard-key" onclick="insertLetter(this)">R</div>
-      <div class="keyboard-key" onclick="insertLetter(this)">T</div>
-      <div class="keyboard-key" onclick="insertLetter(this)">U</div>
-      <div class="keyboard-key" onclick="insertLetter(this)">I</div>
-      <div class="keyboard-key" onclick="insertLetter(this)">O</div>
-      <div class="keyboard-key" onclick="insertLetter(this)">P</div>
-      </br>
-      <br>
-      <div class="keyboard-key" onclick="insertLetter(this)">A</div>
-      <div class="keyboard-key" onclick="insertLetter(this)">S</div>
-      <div class="keyboard-key" onclick="insertLetter(this)">D</div>
-      <div class="keyboard-key" onclick="insertLetter(this)">F</div>
-      <div class="keyboard-key" onclick="insertLetter(this)">G</div>
-      <div class="keyboard-key" onclick="insertLetter(this)">H</div>
-      <div class="keyboard-key" onclick="insertLetter(this)">J</div>
-      <div class="keyboard-key" onclick="insertLetter(this)">L</div>
-      </br>
-      <br>
-      <div class="keyboard-key" onclick="insertLetter(this)">Z</div>
-      <div class="keyboard-key" onclick="insertLetter(this)">X</div>
-      <div class="keyboard-key" onclick="insertLetter(this)">C</div>
-      <div class="keyboard-key" onclick="insertLetter(this)">V</div>
-      <div class="keyboard-key" onclick="insertLetter(this)">B</div>
-      <div class="keyboard-key" onclick="insertLetter(this)">N</div>
-      <div class="keyboard-key" onclick="insertLetter(this)">M</div>
-      <div class="keyboard-key" onclick="Delete()">←</div>
-      </br>
+      <div class="keyboard-line">
+        <div class="keyboard-key" onclick="insertLetter(this)">Q</div>
+        <div class="keyboard-key" onclick="insertLetter(this)">E</div>
+        <div class="keyboard-key" onclick="insertLetter(this)">R</div>
+        <div class="keyboard-key" onclick="insertLetter(this)">T</div>
+        <div class="keyboard-key" onclick="insertLetter(this)">U</div>
+        <div class="keyboard-key" onclick="insertLetter(this)">I</div>
+        <div class="keyboard-key" onclick="insertLetter(this)">O</div>
+        <div class="keyboard-key" onclick="insertLetter(this)">P</div>
+      </div>
+      <div class="keyboard-line">
+        <div class="keyboard-key" onclick="insertLetter(this)">A</div>
+        <div class="keyboard-key" onclick="insertLetter(this)">S</div>
+        <div class="keyboard-key" onclick="insertLetter(this)">D</div>
+        <div class="keyboard-key" onclick="insertLetter(this)">F</div>
+        <div class="keyboard-key" onclick="insertLetter(this)">G</div>
+        <div class="keyboard-key" onclick="insertLetter(this)">H</div>
+        <div class="keyboard-key" onclick="insertLetter(this)">J</div>
+        <div class="keyboard-key" onclick="insertLetter(this)">L</div>
+      </div>
+      <div class="keyboard-line">
+        <div class="keyboard-key" onclick="insertLetter(this)">Z</div>
+        <div class="keyboard-key" onclick="insertLetter(this)">X</div>
+        <div class="keyboard-key" onclick="insertLetter(this)">C</div>
+        <div class="keyboard-key" onclick="insertLetter(this)">V</div>
+        <div class="keyboard-key" onclick="insertLetter(this)">B</div>
+        <div class="keyboard-key" onclick="insertLetter(this)">N</div>
+        <div class="keyboard-key" onclick="insertLetter(this)">M</div>
+        <div class="keyboard-key" onclick="Delete()">←</div>
+      </div>
       
     </div>
   </div>
