@@ -111,6 +111,10 @@
     .keyboard-key.TecladoCorAmarelo {
       background-color: GoldenRod;
     }
+    .keyboard-key.TecladoCorVerde {
+      background-color: Green;
+    }
+    
     
   </style>
 </head>
@@ -231,6 +235,7 @@
     var word = words[randomIndex];
     var vLetrasVermelho = [];   
     var vLetrasAmarelo = []; 
+    vLetrasVerde = [];
     var wordComAcento = word;
     var vModoLivre = false;
     
@@ -265,6 +270,7 @@
 
         if (letter === correctWord[i]) {
           input.style.backgroundColor = 'green';
+          vLetrasVerde = vLetrasVerde + [letter];
         } else if (correctWord.includes(letter)) {
           input.style.backgroundColor = 'GoldenRod';
           vLetrasAmarelo= vLetrasAmarelo + [letter];
@@ -308,9 +314,12 @@
           key.classList.add('disabledColor');
          // key.onclick = null;
         }
+        if (vLetrasVerde.includes(key.innerText)) {
+          key.classList.add('TecladoCorVerde');
+        }
+        else
         if (vLetrasAmarelo.includes(key.innerText)) {
           key.classList.add('TecladoCorAmarelo');
-         // key.onclick = null;
         }
       });
       
@@ -396,12 +405,12 @@
     }
     
     function Delete() {
-    	
-        var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input');
-      var input = lineInputs[currentLetter];
-        input.value = "";
-        
-        input.focus();
+    	if (vModoLivre == true){
+          Elemento.value = '';
+          vModoLivre = false;
+          FocusPrimeiroElemento();
+        }
+        FocusPrimeiroElemento();
     
     }
     
