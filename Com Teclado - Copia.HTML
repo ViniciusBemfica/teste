@@ -265,6 +265,16 @@
       var correctWord = word.split('');
       var guessedWord = Array.from(lineInputs).map(input => input.value.toUpperCase());
 
+      
+      
+      if (PalavraNaoExiste(lineInputs)){
+        currentLetter = 0;
+        LimpaCores();
+        FocusPrimeiroElemento();
+        return;
+      }
+      else
+      {
       // Check the guessed word against the correct word
       for (var i = 0; i < guessedWord.length; i++) {
         var letter = guessedWord[i];
@@ -281,13 +291,8 @@
           input.style.backgroundColor = 'DarkRed';
         }
       }
-      
-      if (PalavraNaoExiste(lineInputs)){
-        currentLetter = 0;
-        LimpaCores();
-        FocusPrimeiroElemento();
-        return;
       }
+    
 
       // Disable the current line and enable the next line
       lineInputs.forEach(input => input.disabled = true);
@@ -325,7 +330,7 @@
         }
       });
       
-      vLetrasAmarelo
+      
     }
     
     
@@ -476,4 +481,3 @@
   </script>
 </body>
 </html>
-
