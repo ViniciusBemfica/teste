@@ -205,14 +205,14 @@
         <div class="keyboard-key" onclick="insertLetter(this)">B</div>
         <div class="keyboard-key" onclick="insertLetter(this)">N</div>
         <div class="keyboard-key" onclick="insertLetter(this)">M</div>
-        <div class="keyboard-key" disabled>Ç</div>
+        <div class="keyboard-key" onclick="Info()">?</div>
       </div>
       
       
     </div>
     <div class="lines-Adivinhar-container">
     <div class="Adivinhar" onclick="Delete()">Del</div>
-    	<div class="Adivinhar" onclick="RegistrarPalavraDontpad()">Registrar</div>
+    	<div class="Adivinhar" onclick="RegistrarPalavraDontpad()">Reportar</div>
 
       </div>
     
@@ -256,6 +256,8 @@
     // Current line and letter index
     var currentLine = 1;
     var currentLetter = 0;
+    
+    
     
     // Function to proceed to the next line
     function proceed() {
@@ -456,15 +458,22 @@
     }
     
     function RegistrarPalavraDontpad() {
-      var Confirma = confirm("Registrar a palavra " + wordComAcento + "?");
+      var Confirma = confirm("Deseja Reportar a palavra " + wordComAcento + " para revisão?");
 
       if (Confirma) {
       	window.open('https://dontpad.com/REGVIN/palavras/' + wordComAcento);
       }
     }
     
+    function Info(){
+    	alert('- 6.000 palavras possíveis.\n- Não precisa informar o acento para acertar a palavra, porém a resposta pode conter acentos.\n- Não tem palavras com cedilha.');
+    }
+    
+    
+    
 /*<div class="Adivinhar" onclick="MoveLeft()">←</div>
         <div class="Adivinhar" onclick="MoveRight()">→</div>*/
   </script>
 </body>
 </html>
+
