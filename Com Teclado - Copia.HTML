@@ -497,7 +497,7 @@
         
         for (var i = 0; i < 5; i++) {
         	letrasNaColuna = [];
-        	for (var j = 0; j < 6; j++) {
+        	for (var j = 0; j < currentLine - 1; j++) {
           		var lineInputs = document.querySelectorAll('.line')[j].querySelectorAll('.letter-input');  	 
     			var input = lineInputs[i];	
                 
@@ -514,17 +514,7 @@
       
       
       function LinhasUsadas(){
-      		var counter = 0;
-      		for (var j = 0; j < 6; j++) {
-          		var lineInputs = document.querySelectorAll('.line')[j].querySelectorAll('.letter-input');  	 
-    			var input = lineInputs[0];	
-                
-                if (input.value != ''){
-                	counter++;
-                }     
-                
-        	} 	
-            return counter;
+      	return currentLine - 1;         
       }
         var Pontos = (10) - ((6 - LinhasUsadas()) + Duplicacoes());
         var Nota = 'Nota: ' + Pontos + ' - Linhas Usadas: ' + LinhasUsadas()+ ' - Duplicações: ' + Duplicacoes() + '\nNota = (10) - ((6 - LinhasUsadas()) + Duplicacoes());';
