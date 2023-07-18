@@ -349,6 +349,7 @@
         input = vlineInputs[0];
         input.focus();
         currentLetter = 0;
+        vModoLivre = false;
     }    
     
     
@@ -383,8 +384,7 @@
       //Grava na caixa em foco
       if (vModoLivre == true){
         Elemento.value = element.innerText;
-        vModoLivre = false;
-        FocusPrimeiroElemento();
+        Elemento.focus();
       }
       else
       {
@@ -414,11 +414,15 @@
     function Delete() {
     	if (vModoLivre == true){
           Elemento.value = '';
-          vModoLivre = false;
-          FocusPrimeiroElemento();
+          Elemento.focus();
         }
-        FocusPrimeiroElemento();
-    
+        else
+        {
+        	var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input');
+            var input = lineInputs[currentLetter];
+            input.value = '';
+            
+        }    
     }
     
     function MoveLeft() {
@@ -557,7 +561,7 @@ Total: 6 linhas sem repetição, 10 pontos.
 Linha: - 1 para cada linha menor que a ultima.
 Repetição da letra na coluna: - 1 para cada repetição.
 
-Fórmula: 10 - (6 - LinhasUsadas + Duplicações).`;
+Fórmula: 10 - ((6 - LinhasUsadas) + Duplicações).`;
         return Nota + '\n\n' + textoPontos;
    }
    
