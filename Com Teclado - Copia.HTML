@@ -517,8 +517,34 @@
       	return currentLine - 1;         
       }
       
+      function obterRank(nota) {
+      if (nota === 1) {
+        return "Imbecil";
+      } else if (nota === 2) {
+        return "Analfabeto";
+      } else if (nota === 3) {
+        return "Iniciante";
+      } else if (nota === 4) {
+        return "Novato";
+      } else if (nota === 5) {
+        return "Amador";
+      } else if (nota === 6) {
+        return "Aprendiz";
+      } else if (nota === 7) {
+        return "Fluente";
+      } else if (nota === 8) {
+        return "Proficiente";
+      } else if (nota === 9) {
+        return "Erudito";
+      } else if (nota === 10) {
+        return "Gênio Linguístico";
+      } else {
+        return "Completo Imbecil";
+      }
+    }
+      
         var Pontos = (10) - ((6 - LinhasUsadas()) + Duplicacoes());
-        var Nota = 'Nota: ' + Pontos + '\nLinhas Usadas: ' + LinhasUsadas()+ '\nDuplicações: ' + Duplicacoes();
+        var Nota = 'Nota: ' + Pontos + ' - ' + obterRank(Pontos) + '\nLinhas Usadas: ' + LinhasUsadas()+ '\nDuplicações: ' + Duplicacoes();
         var textoPontos = 
 `Sistema de Pontuação
 
