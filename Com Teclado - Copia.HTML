@@ -518,8 +518,21 @@
       }
       
         var Pontos = (10) - ((6 - LinhasUsadas()) + Duplicacoes());
-        var Nota = 'Nota: ' + Pontos + ' - Linhas Usadas: ' + LinhasUsadas()+ ' - Duplicações: ' + Duplicacoes() + '\nNota = (10) - ((6 - LinhasUsadas()) + Duplicacoes());';
-        return Nota;
+        var Nota = 'Nota: ' + Pontos + '\nLinhas Usadas: ' + LinhasUsadas()+ '\nDuplicações: ' + Duplicacoes();
+        var textoPontos = 
+`Sistema de Pontuação
+
+O objetivo é incentivar a diversificação do vocabulário, inserindo palavras diferentes e não repetindo as dicas. Incentivar ter certeza de que é a palavra ao inserí-la como resposta.
+Total 10 pontos, que é a pontuação máxima e perfeita, o objetivo final. 
+Para atingir 10 pontos, deve-se conseguir colocar 6 palavras diferentes, com cada letra não repetindo na coluna que já foi (a última posição não conta porque é a resposta final). 
+
+Regras: Para cada letra colocada em uma coluna onde essa letra já tinha sido colocada antes, descontar pontos. Para cada linha colocada, adicionar pontos.
+Total: 6 linhas sem repetição, 10 pontos.
+Linha: - 1 para cada linha menor que a ultima.
+Repetição da letra na coluna: - 1 para cada repetição.
+
+Fórmula: 10 - (6 - LinhasUsadas + Duplicações).`;
+        return Nota + '\n\n' + textoPontos;
    }
    
     
