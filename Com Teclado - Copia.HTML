@@ -307,7 +307,7 @@
       
       // Check if the player has won
       if (guessedWord.join('') === word) {
-        alert('Parabéns! Você acertou a palavra secreta! Palavra: ' + wordComAcento + '\n' + Pontuacao());
+        alert('Parabéns, você venceu! Palavra: ' + wordComAcento + '\n' + Pontuacao(true));
         PesquisaPalavraNaWeb(wordComAcento);
       }
 	
@@ -481,10 +481,10 @@
     function Info(){
     	//alert('- 6.000 palavras possíveis.\n- Não precisa informar o acento para acertar a palavra, porém a resposta pode conter acentos.\n- Não tem palavras com cedilha.');
         
-       alert(Pontuacao()); 
+       alert(Pontuacao(false)); 
     }
     
-    function Pontuacao(){
+    function Pontuacao(MsgAoVencer){
 	  function Duplicacoes(){
         function countDuplicates(arr) {
           let counter = 0;
@@ -545,7 +545,7 @@
       } else if (nota === 9) {
         return "Erudito";
       } else if (nota === 10) {
-        return "Omnipantólogo Pentavernacular";
+        return "Omnipantólogo Pentavernacular. Nível supremo, parabéns!";
       } else {
         return "Completo Imbecil";
       }
@@ -553,6 +553,7 @@
       
         var Pontos = (10) - ((6 - LinhasUsadas()) + Duplicacoes());
         var Nota = 'Nota: ' + Pontos + ' - ' + obterRank(Pontos) + '\nLinhas Usadas: ' + LinhasUsadas()+ '\nDuplicações: ' + Duplicacoes();
+        var NotaAteAgora = 'Nota até agora (Inválida até vencer): ' + Pontos +  '\nLinhas Usadas: ' + LinhasUsadas()+ '\nDuplicações: ' + Duplicacoes();
         var textoPontos = 
 `Sistema de Pontuação
 
@@ -566,7 +567,14 @@ Linha: - 1 para cada linha menor que a ultima.
 Repetição da letra na coluna: - 1 para cada repetição.
 
 Fórmula: 10 - ((6 - LinhasUsadas) + Duplicações).`;
-        return Nota + '\n\n' + textoPontos;
+
+		if (MsgAoVencer){
+        	return Nota + '\n\n' + textoPontos;
+        }
+        else
+        {
+        	return NotaAteAgora + '\n\n' + textoPontos;
+        }           
    }
    
     
