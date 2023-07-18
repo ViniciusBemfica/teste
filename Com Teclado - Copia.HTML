@@ -345,8 +345,10 @@
       
       // Check if the player has won
       if (guessedWord.join('') === word) {
-        alert('Parabéns, você venceu! Palavra: ' + wordComAcento + '\n' + Pontuacao(true));
+        
         vVenceu = true; 
+        alert('Parabéns, você venceu! Palavra: ' + wordComAcento + '\n' + Pontuacao(true));
+        
         PesquisaPalavraNaWeb(wordComAcento);
       }
   
