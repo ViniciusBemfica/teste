@@ -113,8 +113,27 @@
     }
     .keyboard-key.TecladoCorVerde {
       background-color: Green;
+    }   
+    .caixaPontuacao.gold {
+      background-color: gold;
     }
-    
+    .barraPontuacao {
+      display: flex;  
+      width: 100%;
+    }
+    .caixaPontuacao {
+      display: inline-block;
+      //display: flex;
+      //width: 30px;
+      height: 2vh;
+      border: 1px solid black;
+      margin-top: 20px;     
+      margin-left: 2px;
+      margin-right: 2px;
+      cursor: pointer;
+      width: 100%;
+      background-color: Grey;     
+    }
     
   </style>
 </head>
@@ -171,9 +190,20 @@
         <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)">
       </div>
     </div>
+    <div class="barraPontuacao" onclick="Info()">
+      <div class="caixaPontuacao"></div>
+      <div class="caixaPontuacao"></div>
+      <div class="caixaPontuacao"></div>
+      <div class="caixaPontuacao"></div>
+      <div class="caixaPontuacao"></div>
+      <div class="caixaPontuacao"></div>
+      <div class="caixaPontuacao"></div>
+      <div class="caixaPontuacao"></div>
+      <div class="caixaPontuacao"></div>
+      <div class="caixaPontuacao"></div>
+    </div>
     <div class="lines-Adivinhar-container">
-      	<div class="Adivinhar" onclick="LimpaLinha()">Limpar</div>
-        
+      	<div class="Adivinhar" onclick="LimpaLinha()">Limpar</div>    
         <div class="Adivinhar" onclick="proceed()">Adivinhar</div>
       </div>
     <div class="keyboard-container">
@@ -304,6 +334,8 @@
       if (currentLine <= 6) {
         document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input').forEach(input => input.disabled = false);
       }
+      
+      pintarEstrelas();
       
       // Check if the player has won
       if (guessedWord.join('') === word) {
@@ -481,11 +513,20 @@
     function Info(){
     	//alert('- 6.000 palavras possíveis.\n- Não precisa informar o acento para acertar a palavra, porém a resposta pode conter acentos.\n- Não tem palavras com cedilha.');
         
-       alert(Pontuacao(false)); 
+       alert(Pontuacao(false));       
     }
     
-    function Pontuacao(MsgAoVencer){
-	  function Duplicacoes(){
+    
+    function NotaFinal(){
+      var Pontos = (10) - ((6 - LinhasUsadas()) + Duplicacoes());   
+      return Pontos;       
+	}
+
+	function LinhasUsadas(){
+        return currentLine - 1;         
+    }
+
+	function Duplicacoes(){
         function countDuplicates(arr) {
           let counter = 0;
           const found = new Set();
@@ -518,13 +559,9 @@
         }
         
         return numeroDeLetrasIguais;
-      }
-      
-      
-      function LinhasUsadas(){
-      	return currentLine - 1;         
-      }
-      
+	}
+    
+    function Pontuacao(MsgAoVencer){
       function obterRank(nota) {
       if (nota === 1) {
         return "Imbecil";
@@ -551,7 +588,7 @@
       }
     }
       
-        var Pontos = (10) - ((6 - LinhasUsadas()) + Duplicacoes());
+        var Pontos = NotaFinal();
         var Nota = 'Nota: ' + Pontos + ' - ' + obterRank(Pontos) + '\nLinhas Usadas: ' + LinhasUsadas()+ '\nDuplicações: ' + Duplicacoes();
         var NotaAteAgora = 'Nota até agora (Inválida até vencer): ' + Pontos +  '\nLinhas Usadas: ' + LinhasUsadas()+ '\nDuplicações: ' + Duplicacoes();
         var textoPontos = 
@@ -576,6 +613,26 @@ Fórmula: 10 - ((6 - LinhasUsadas) + Duplicações).`;
         	return NotaAteAgora + '\n\n' + textoPontos;
         }           
    }
+   
+   
+   //pontuacao pinta quadradinhos
+   function pintarEstrelas() {
+      var rating = NotaFinal(); 
+      var stars = document.getElementsByClassName('caixaPontuacao');
+      
+      // Remover classe 'gold' de todas as estrelas
+      for (var i = 0; i < stars.length; i++) {
+        stars[i].classList.remove('gold');
+      }
+      
+      // Pintar estrelas até o rating digitado
+      for (var i = 0; i < rating; i++) {
+        stars[i].classList.add('gold');
+      }
+    }
+    
+  
+  
    
     
     
