@@ -344,10 +344,10 @@
       }
       
       pintarEstrelas();
-      
+
+		alert(word);
       // Check if the player has won
-      if (guessedWord.join('') === word) {
-        
+      if (guessedWord.join('') === word) {        
         vVenceu = true; 
         alert('Parabéns, você venceu! Palavra: ' + wordComAcento + '\n' + Pontuacao(true));
       }
@@ -637,7 +637,7 @@ Fórmula: 10 - ((6 - LinhasUsadas) + Duplicações + TentouENaoExiste).`;
     }
       
       if (vVenceu){      
-      	var Nota = 'Nota: ' + NotaFinal() + '/10' + ' - ' + obterRank(Pontos)
+      	var Nota = 'Nota: ' + NotaFinal() + '/10' + ' - ' + obterRank(NotaFinal())
           		 + '\nLinhas Usadas (+): ' + LinhasUsadas()
                  + '\nDuplicações (-): ' + Duplicacoes()
                  + '\nAdivinhou e não existe (-): ' + vTentouENaoExiste
