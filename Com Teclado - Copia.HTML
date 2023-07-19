@@ -383,11 +383,19 @@
     //Palavra não existe no vocabulário
     function PalavraNaoExiste(lineInputs) {
       var guessedWord = Array.from(lineInputs).map(input => input.value.toUpperCase());
-      if (!wordsSemAcento.includes(guessedWord.join(''))) {
-        alert('A palavra ' + guessedWord.join('') + ' não existe no vocabulário');
-        vTentouENaoExiste++;
-        pintarEstrelas();
-        return true;
+      if (!wordsSemAcento.includes(guessedWord.join(''))) {      
+        var Confirma = confirm('A palavra ' + guessedWord.join('') + ' não existe no vocabulário. Deseja adicionar mesmo assim?');
+
+        if (Confirma) {
+          return false;  
+        }
+        else
+        {
+          vTentouENaoExiste++;
+          pintarEstrelas();
+          return true;
+        }
+        
       }       
     }   
     
@@ -523,9 +531,20 @@
     }
     
     function Info(){
-      alert('- 6.000 palavras possíveis.\n- Não precisa informar o acento para acertar a palavra, porém a resposta pode conter acentos.\n- Não tem palavras com cedilha.\n- A barra inferior é a Pontuação, clique nela para detalhes.');
-        
-       //alert(Pontuacao(false));       
+        var textoPontos = 
+`Sistema de Pontuação
+
+O objetivo é incentivar a diversificação do vocabulário, inserindo palavras diferentes e não repetindo as dicas. Incentivar ter certeza de que é a palavra ao inserí-la como resposta.
+Total 10 pontos, que é a pontuação máxima e perfeita, o objetivo final. 
+Para atingir 10 pontos, deve-se conseguir colocar 6 palavras diferentes, com cada letra não repetindo na coluna que já foi (a última posição não conta porque é a resposta final). 
+
+Regras: Para cada letra colocada em uma coluna onde essa letra já tinha sido colocada antes, descontar pontos. Para cada linha colocada, adicionar pontos.
+Total: 6 linhas sem repetição, 10 pontos.
+Linha: - 1 para cada linha menor que a ultima.
+Repetição da letra na coluna: - 1 para cada repetição.
+
+Fórmula: 10 - ((6 - LinhasUsadas) + Duplicações + TentouENaoExiste).`;
+      alert('- 6.000 palavras possíveis.\n- Não precisa informar o acento para acertar a palavra, porém a resposta pode conter acentos.\n- Não tem palavras com cedilha.\n- A barra inferior é a Pontuação, clique nela para detalhes.\n\n' + textoPontos);      
     }
     
     
@@ -599,40 +618,16 @@
         return "Completo Imbecil";
       }
     }
-    
-    
-
-
-
-
-
       
-        var Pontos = NotaFinal();        
-        var textoPontos = 
-`Sistema de Pontuação
-
-O objetivo é incentivar a diversificação do vocabulário, inserindo palavras diferentes e não repetindo as dicas. Incentivar ter certeza de que é a palavra ao inserí-la como resposta.
-Total 10 pontos, que é a pontuação máxima e perfeita, o objetivo final. 
-Para atingir 10 pontos, deve-se conseguir colocar 6 palavras diferentes, com cada letra não repetindo na coluna que já foi (a última posição não conta porque é a resposta final). 
-
-Regras: Para cada letra colocada em uma coluna onde essa letra já tinha sido colocada antes, descontar pontos. Para cada linha colocada, adicionar pontos.
-Total: 6 linhas sem repetição, 10 pontos.
-Linha: - 1 para cada linha menor que a ultima.
-Repetição da letra na coluna: - 1 para cada repetição.
-
-Fórmula: 10 - ((6 - LinhasUsadas) + Duplicações + TentouENaoExiste).`;
-
-
       if (vVenceu){
-          var Nota = 'Nota: ' + Pontos + ' - ' + obterRank(Pontos) + '\nLinhas Usadas: ' + LinhasUsadas()+ '\nDuplicações: ' + Duplicacoes()+ '\nPal. não existe: ' + vTentouENaoExiste;   
+          var Nota = 'Nota: ' + NotaFinal() + ' - ' + obterRank(Pontos) + '\nLinhas Usadas: ' + LinhasUsadas()+ '\nDuplicações: ' + Duplicacoes()+ '\nPal. não existe: ' + vTentouENaoExiste;   
       }   
       else
       {
-          var Nota = 'Nota até agora (Inválida até vencer): ' + Pontos +  '\nLinhas Usadas: ' + LinhasUsadas()+ '\nDuplicações: ' + Duplicacoes()+ '\nPal. não existe: ' + vTentouENaoExiste;
+          var Nota = 'Nota até agora (Inválida até vencer): ' + NotaFinal() +  '\nLinhas Usadas: ' + LinhasUsadas()+ '\nDuplicações: ' + Duplicacoes()+ '\nPal. não existe: ' + vTentouENaoExiste;
       }
 
-
-      return Nota + '\n\n' + textoPontos;        
+      return Nota;        
    }
    
    
