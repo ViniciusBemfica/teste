@@ -234,7 +234,7 @@
     </div>
       <div class="lines-Adivinhar-container">
       <div class="Adivinhar" onclick="Delete()">Deletar</div>
-      <div class="Adivinhar" onclick="RegistrarPalavraDontpad()">Reportar</div>
+      <div class="Adivinhar" onclick="InserePalavraAleatoria()">Aleatória</div>
   </div>
     
     <div class="barraPontuacao" onclick="alert(Pontuacao())">
@@ -279,8 +279,7 @@
     var wordComAcento = word;
     var vModoLivre = false;
     var vVenceu = false;
-    var vTentouENaoExiste = 0;
-    
+    var vTentouENaoExiste = 0;    
     var Elemento;
     
     function GravaElementoEmFoco() {
@@ -648,12 +647,16 @@ Fórmula: 10 - ((6 - LinhasUsadas) + Duplicações + TentouENaoExiste).`;
     }
     
   
-  
-   
-    
-    
-/*<div class="Adivinhar" onclick="MoveLeft()">←</div>
-        <div class="Adivinhar" onclick="MoveRight()">→</div>*/
+   //InserePalavraAleatoria   
+   function InserePalavraAleatoria(){
+     var randomIndex = Math.floor(Math.random() * wordsSemAcento.length);
+     var vPalavraAleatoria = wordsSemAcento[randomIndex];
+
+
+     for (var j = 0; j < 5; j++) {
+       var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input')[j].value = vPalavraAleatoria[j];   
+     }       
+   }
   </script>
 </body>
 </html>
