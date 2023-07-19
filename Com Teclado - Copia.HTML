@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" 
-      content="user-scalable=0">
+  <meta name="viewport" 
+  content="user-scalable=0">
   <title>Wordle Game</title>
   <style>
     body {
@@ -195,9 +195,9 @@
     </div>
     
     <div class="lines-Adivinhar-container">
-        <div class="Adivinhar" onclick="LimpaLinha()">Limpar</div>    
-        <div class="Adivinhar" onclick="proceed()">Adivinhar</div>
-      </div>
+      <div class="Adivinhar" onclick="LimpaLinha()">Limpar</div>    
+      <div class="Adivinhar" onclick="proceed()">Adivinhar</div>
+    </div>
     <div class="keyboard-container">
       <div class="keyboard-line">
         <div class="keyboard-key" onclick="insertLetter(this)">Q</div>
@@ -232,11 +232,11 @@
       
       
     </div>
-      <div class="lines-Adivinhar-container">
+    <div class="lines-Adivinhar-container">
       <div class="Adivinhar" onclick="Delete()">Deletar</div>
       <div class="Adivinhar" onclick="PesquisaPalavraNaWeb()">Pesquisar</div>
       <div class="Adivinhar" onclick="InserePalavraAleatoria()">Aleatória</div>
-  </div>
+    </div>
     
     <div class="barraPontuacao" onclick="alert(Pontuacao())">
       <div class="caixaPontuacao"></div>
@@ -267,10 +267,10 @@
 
 
   // Code to be executed when the page loads  
-    window.onload = function() {
-      FocusPrimeiroElemento();
-    };
-    
+  window.onload = function() {
+    FocusPrimeiroElemento();
+  };
+  
     // Generate a random word
     var randomIndex = Math.floor(Math.random() * words.length);
     var word = words[randomIndex];
@@ -334,7 +334,7 @@
           input.style.backgroundColor = 'DarkRed';
         }
       }
-      }
+    }
 
       // Disable the current line and enable the next line
       lineInputs.forEach(input => input.disabled = true);
@@ -350,7 +350,7 @@
         vVenceu = true; 
         alert('Parabéns, você venceu! Palavra: ' + wordComAcento + '\n' + Pontuacao(true));
       }
-  
+      
       // Check if the player has lost
       if (currentLine > 6 && guessedWord.join('') !== word) {
         alert('Você perdeu! A palavra certa era: ' + wordComAcento);
@@ -364,11 +364,11 @@
         if (vLetrasVermelho.includes(key.innerText)) {
           key.classList.add('disabledColor');
          // key.onclick = null;
-        }
-        if (vLetrasVerde.includes(key.innerText)) {
-          key.classList.add('TecladoCorVerde');
-        }
-        else
+       }
+       if (vLetrasVerde.includes(key.innerText)) {
+        key.classList.add('TecladoCorVerde');
+      }
+      else
         if (vLetrasAmarelo.includes(key.innerText)) {
           key.classList.add('TecladoCorAmarelo');
         }
@@ -399,33 +399,33 @@
     
     //focus primeiro elemento
     function FocusPrimeiroElemento() {
-        var vlineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input');
-        input = vlineInputs[0];
-        input.focus();
-        currentLetter = 0;
-        vModoLivre = false;
+      var vlineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input');
+      input = vlineInputs[0];
+      input.focus();
+      currentLetter = 0;
+      vModoLivre = false;
     }    
     
     
     // Limpa linha
     function LimpaLinha() {
       document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input').forEach(input => input.value = '');
-        document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input').forEach(input => input.style.backgroundColor = 'grey');
-        
-        FocusPrimeiroElemento();
+      document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input').forEach(input => input.style.backgroundColor = 'grey');
+      
+      FocusPrimeiroElemento();
     }
     
     //Limpa só cores
     function LimpaCores() {
-        document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input').forEach(input => input.style.backgroundColor = 'grey');
-        FocusPrimeiroElemento();
+      document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input').forEach(input => input.style.backgroundColor = 'grey');
+      FocusPrimeiroElemento();
     }
-          
-              
-   
+    
+    
+    
     // Function to insert a letter into the input box
     function insertLetter(element) {
-  
+      
       if (element.classList.contains('disabled')) return;
       
       
@@ -455,71 +455,71 @@
           FocusPrimeiroElemento();
         }
       }
-       
+      
       
     }
     
     function Reiniciar() {
-    
+      
       document.location.reload();
-    
+      
     }
     
     function Delete() {
       if (vModoLivre == true){
-          Elemento.value = '';
-          Elemento.focus();
-        }
-        else
-        {
-          var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input');
-            var input = lineInputs[currentLetter];
-            input.value = '';
-            
-        }    
+        Elemento.value = '';
+        Elemento.focus();
+      }
+      else
+      {
+        var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input');
+        var input = lineInputs[currentLetter];
+        input.value = '';
+        
+      }    
     }
     
     function MoveLeft() {
       var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input');
-        
+      
       if (currentLetter == 0) {
-          var input = lineInputs[4];
-          currentLetter = 4;
-        }
-        else
-        {
-          var input = lineInputs[currentLetter - 1];
-          currentLetter--;
-        }   
-        
-        input.focus();
+        var input = lineInputs[4];
+        currentLetter = 4;
+      }
+      else
+      {
+        var input = lineInputs[currentLetter - 1];
+        currentLetter--;
+      }   
+      
+      input.focus();
     }
     
     function MoveRight() {
       var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input');
-         
+      
       if (currentLetter == 4) {
-          var input = lineInputs[0];
-          currentLetter = 0;
-        }
-        else
-        {
-          var input = lineInputs[currentLetter + 1];
-          currentLetter++;
-        }   
-        
-        input.focus();
+        var input = lineInputs[0];
+        currentLetter = 0;
+      }
+      else
+      {
+        var input = lineInputs[currentLetter + 1];
+        currentLetter++;
+      }   
+      
+      input.focus();
     }
     
     function PesquisaPalavraNaWeb(Palavra) { 
       var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input');
       var vPalavraTestada = Array.from(lineInputs).map(input => input.value.toUpperCase());    
-     vPalavraTestada = vPalavraTestada.join('');
-     
-     if (vPalavraTestada.length == 0){
-      vPalavraTestada = vPalavraTestadaGlobal;
-     }
-     
+      vPalavraTestada = vPalavraTestada.join('');
+      
+      if (vPalavraTestada.length == 0){
+        vPalavraTestada = vPalavraTestadaGlobal;
+      }
+      
       var Confirma = confirm("Pesquisar a palavra " + vPalavraTestada + " na web?");
       
       if (Confirma) {
@@ -531,20 +531,20 @@
     
     
     function Info(){
-        var textoPontos = 
-`Sistema de Pontuação
+      var textoPontos = 
+      `Sistema de Pontuação
 
-O objetivo é incentivar a diversificação do vocabulário, inserindo palavras diferentes e não repetindo as dicas. Incentivar ter certeza de que é a palavra ao inserí-la como resposta.
-Total 10 pontos, que é a pontuação máxima e perfeita, o objetivo final. 
-Para atingir 10 pontos, deve-se conseguir colocar 6 palavras diferentes, com cada letra não repetindo na coluna que já foi (a última posição não conta porque é a resposta final). 
+      O objetivo é incentivar a diversificação do vocabulário, inserindo palavras diferentes e não repetindo as dicas. Incentivar ter certeza de que é a palavra ao inserí-la como resposta.
+      Total 10 pontos, que é a pontuação máxima e perfeita, o objetivo final. 
+      Para atingir 10 pontos, deve-se conseguir colocar 6 palavras diferentes, com cada letra não repetindo na coluna que já foi (a última posição não conta porque é a resposta final). 
 
-Regras: Para cada letra colocada em uma coluna onde essa letra já tinha sido colocada antes, descontar pontos. Para cada linha colocada, adicionar pontos.
-Total: 6 linhas sem repetição, 10 pontos.
-Linha: - 1 para cada linha menor que a ultima.
-Repetição da letra na coluna: - 1 para cada repetição.
-Usou palavra aleatória: - 1 por não ter usado alguma palavra aleatória.
+      Regras: Para cada letra colocada em uma coluna onde essa letra já tinha sido colocada antes, descontar pontos. Para cada linha colocada, adicionar pontos.
+      Total: 6 linhas sem repetição, 10 pontos.
+      Linha: - 1 para cada linha menor que a ultima.
+      Repetição da letra na coluna: - 1 para cada repetição.
+      Usou palavra aleatória: - 1 por não ter usado alguma palavra aleatória.
 
-Fórmula: 10 - ((6 - LinhasUsadas) + Duplicações + TentouENaoExiste).`;
+      Fórmula: 10 - ((6 - LinhasUsadas) + Duplicações + TentouENaoExiste).`;
       alert('- 6.000 palavras possíveis.\n- Não precisa informar o acento para acertar a palavra, porém a resposta pode conter acentos.\n- Não tem palavras com cedilha.\n- A barra inferior é a Pontuação, clique nela para detalhes.\n\n' + textoPontos);      
     }
     
@@ -552,109 +552,109 @@ Fórmula: 10 - ((6 - LinhasUsadas) + Duplicações + TentouENaoExiste).`;
     function NotaFinal(){
       var Pontos = (10) - ((6 - LinhasUsadas()) + Duplicacoes() + vTentouENaoExiste + vNaoUsouPalAleatoria);   
       return Pontos;       
-  }
-
-  function LinhasUsadas(){
-        return currentLine - 1;         
     }
 
-  function Duplicacoes(){
-        function countDuplicates(arr) {
-          let counter = 0;
-          const found = new Set();
-          const dupes = new Set();
-          for (const item of arr) {
-            if (found.has(item)) {
-              dupes.add(item);
-              counter++;
-            }
-            found.add(item);
+    function LinhasUsadas(){
+      return currentLine - 1;         
+    }
+
+    function Duplicacoes(){
+      function countDuplicates(arr) {
+        let counter = 0;
+        const found = new Set();
+        const dupes = new Set();
+        for (const item of arr) {
+          if (found.has(item)) {
+            dupes.add(item);
+            counter++;
           }
-          return counter;
+          found.add(item);
         }
-        
-        var numeroDeLetrasIguais = 0;
-        var letrasNaColuna = [];
-        var LinhaSeVenceu = 0;
-        
-        if (vVenceu){
-          LinhaSeVenceu = currentLine;  
-        }
-        else
-        {
-          LinhaSeVenceu = currentLine + 1;  
-        }
-        
-        for (var i = 0; i < 5; i++) {
-          letrasNaColuna = [];
-          for (var j = 0; j < LinhaSeVenceu - 2; j++) {
-              var lineInputs = document.querySelectorAll('.line')[j].querySelectorAll('.letter-input');    
+        return counter;
+      }
+      
+      var numeroDeLetrasIguais = 0;
+      var letrasNaColuna = [];
+      var LinhaSeVenceu = 0;
+      
+      if (vVenceu){
+        LinhaSeVenceu = currentLine;  
+      }
+      else
+      {
+        LinhaSeVenceu = currentLine + 1;  
+      }
+      
+      for (var i = 0; i < 5; i++) {
+        letrasNaColuna = [];
+        for (var j = 0; j < LinhaSeVenceu - 2; j++) {
+          var lineInputs = document.querySelectorAll('.line')[j].querySelectorAll('.letter-input');    
           var input = lineInputs[i];  
-                
-                if (input.value != ''){
-                  letrasNaColuna.push(input.value);
-                }     
-                
-          }  
-            numeroDeLetrasIguais += countDuplicates(letrasNaColuna);
-        }
-        
-        return numeroDeLetrasIguais;
-  }
+          
+          if (input.value != ''){
+            letrasNaColuna.push(input.value);
+          }     
+          
+        }  
+        numeroDeLetrasIguais += countDuplicates(letrasNaColuna);
+      }
+      
+      return numeroDeLetrasIguais;
+    }
     
     function Pontuacao(MsgAoVencer){
       function obterRank(nota) {
-      if (nota === 1) {
-        return "Graficida";
-      } else if (nota === 2) {
-        return "Graficida";
-      } else if (nota === 3) {
-        return "Graficida";
-      } else if (nota === 4) {
-        return "Graficida";
-      } else if (nota === 5) {
-        return "Graficida";
-      } else if (nota === 6) {
-        return "Penteiro";
-      } else if (nota === 7) {
-        return "Pentografista";
-      } else if (nota === 8) {
-        return "Lusopentografador";
-      } else if (nota === 9) {
-        return "Lusopentigrafovernacoleiro";
-      } else if (nota === 10) {
-        return "Pantolusopentigrafovernacomante";
-      } else {
-        return "Completo Imbecil";
+        if (nota === 1) {
+          return "Graficida";
+        } else if (nota === 2) {
+          return "Graficida";
+        } else if (nota === 3) {
+          return "Graficida";
+        } else if (nota === 4) {
+          return "Graficida";
+        } else if (nota === 5) {
+          return "Graficida";
+        } else if (nota === 6) {
+          return "Penteiro";
+        } else if (nota === 7) {
+          return "Pentografista";
+        } else if (nota === 8) {
+          return "Lusopentografador";
+        } else if (nota === 9) {
+          return "Lusopentigrafovernacoleiro";
+        } else if (nota === 10) {
+          return "Pantolusopentigrafovernacomante";
+        } else {
+          return "Completo Imbecil";
+        }
       }
-    }
       
       if (vVenceu){      
         var Nota = 'Nota: ' + NotaFinal() + '/10' + ' - ' + obterRank(NotaFinal())
-               + '\nLinhas Usadas (+): ' + LinhasUsadas()
-                 + '\nDuplicações (-): ' + Duplicacoes()
-                 + '\nAdivinhou e não existe (-): ' + vTentouENaoExiste
-                 + '\nNão usou Pal. Aleatória (-): ' + vNaoUsouPalAleatoria;   
-          
+        + '\nLinhas Usadas (+): ' + LinhasUsadas()
+        + '\nDuplicações (-): ' + Duplicacoes()
+        + '\nAdivinhou e não existe (-): ' + vTentouENaoExiste
+        + '\nNão usou Pal. Aleatória (-): ' + vNaoUsouPalAleatoria;   
+        
       }   
       else
       {    
-          var Nota = 'Nota até agora (Inválida até vencer): ' + NotaFinal() + '/10'
-                 + '\nLinhas Usadas (+): ' + LinhasUsadas()
-                   + '\nDuplicações (-): ' + Duplicacoes()
-                   + '\nAdivinhou e não existe (-): ' + vTentouENaoExiste
-                   + '\nNão usou Pal. Aleatória (-): ' + vNaoUsouPalAleatoria;
+        var Nota = 'Nota até agora (Inválida até vencer): ' + NotaFinal() + '/10'
+        + '\nLinhas Usadas (+): ' + LinhasUsadas()
+        + '\nDuplicações (-): ' + Duplicacoes()
+        + '\nAdivinhou e não existe (-): ' + vTentouENaoExiste
+        + '\nNão usou Pal. Aleatória (-): ' + vNaoUsouPalAleatoria;
       }
 
       return Nota;        
-   }
-   
-   
+    }
+    
+    
    //pontuacao pinta quadradinhos
    function pintarEstrelas() {
-      var rating = NotaFinal(); 
-      var stars = document.getElementsByClassName('caixaPontuacao');
-      
+    var rating = NotaFinal(); 
+    var stars = document.getElementsByClassName('caixaPontuacao');
+    
       // Remover classe 'gold' de todas as estrelas
       for (var i = 0; i < stars.length; i++) {
         stars[i].classList.remove('gold');
@@ -666,7 +666,7 @@ Fórmula: 10 - ((6 - LinhasUsadas) + Duplicações + TentouENaoExiste).`;
       }
     }
     
-  
+    
    //InserePalavraAleatoria   
    function InserePalavraAleatoria(){
      var randomIndex = Math.floor(Math.random() * wordsSemAcento.length);
@@ -681,6 +681,6 @@ Fórmula: 10 - ((6 - LinhasUsadas) + Duplicações + TentouENaoExiste).`;
      
      proceed();
    }
-  </script>
+ </script>
 </body>
 </html>
