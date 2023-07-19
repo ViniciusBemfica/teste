@@ -386,6 +386,7 @@
       if (!wordsSemAcento.includes(guessedWord.join(''))) {
         alert('A palavra ' + guessedWord.join('') + ' não existe no vocabulário');
         vTentouENaoExiste++;
+        pintarEstrelas();
         return true;
       }       
     }   
