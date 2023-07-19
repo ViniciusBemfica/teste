@@ -575,10 +575,19 @@ Fórmula: 10 - ((6 - LinhasUsadas) + Duplicações + TentouENaoExiste).`;
         
         var numeroDeLetrasIguais = 0;
         var letrasNaColuna = [];
+        var LinhaSeVenceu = 0;
+        
+        if (vVenceu){
+        	LinhaSeVenceu = currentLine;	
+        }
+        else
+        {
+        	LinhaSeVenceu = currentLine + 1;	
+        }
         
         for (var i = 0; i < 5; i++) {
           letrasNaColuna = [];
-          for (var j = 0; j < currentLine - 2; j++) {
+          for (var j = 0; j < LinhaSeVenceu - 2; j++) {
               var lineInputs = document.querySelectorAll('.line')[j].querySelectorAll('.letter-input');    
           var input = lineInputs[i];  
                 
