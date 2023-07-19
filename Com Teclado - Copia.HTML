@@ -345,7 +345,6 @@
       
       pintarEstrelas();
 
-		alert(word);
       // Check if the player has won
       if (guessedWord.join('') === word) {        
         vVenceu = true; 
@@ -518,7 +517,7 @@
      vPalavraTestada = vPalavraTestada.join('');
      
      if (vPalavraTestada.length == 0){
-     	vPalavraTestada = vPalavraTestadaGlobal;
+      vPalavraTestada = vPalavraTestadaGlobal;
      }
      
       var Confirma = confirm("Pesquisar a palavra " + vPalavraTestada + " na web?");
@@ -529,13 +528,7 @@
       }
     }
     
-    function RegistrarPalavraDontpad() {
-      var Confirma = confirm("Deseja Reportar a palavra " + wordComAcento + " para revisão?");
-
-      if (Confirma) {
-        window.open('https://dontpad.com/REGVIN/palavras/' + wordComAcento);
-      }
-    }
+    
     
     function Info(){
         var textoPontos = 
@@ -585,11 +578,11 @@ Fórmula: 10 - ((6 - LinhasUsadas) + Duplicações + TentouENaoExiste).`;
         var LinhaSeVenceu = 0;
         
         if (vVenceu){
-        	LinhaSeVenceu = currentLine;	
+          LinhaSeVenceu = currentLine;  
         }
         else
         {
-        	LinhaSeVenceu = currentLine + 1;	
+          LinhaSeVenceu = currentLine + 1;  
         }
         
         for (var i = 0; i < 5; i++) {
@@ -637,8 +630,8 @@ Fórmula: 10 - ((6 - LinhasUsadas) + Duplicações + TentouENaoExiste).`;
     }
       
       if (vVenceu){      
-      	var Nota = 'Nota: ' + NotaFinal() + '/10' + ' - ' + obterRank(NotaFinal())
-          		 + '\nLinhas Usadas (+): ' + LinhasUsadas()
+        var Nota = 'Nota: ' + NotaFinal() + '/10' + ' - ' + obterRank(NotaFinal())
+               + '\nLinhas Usadas (+): ' + LinhasUsadas()
                  + '\nDuplicações (-): ' + Duplicacoes()
                  + '\nAdivinhou e não existe (-): ' + vTentouENaoExiste
                  + '\nNão usou Pal. Aleatória (-): ' + vNaoUsouPalAleatoria;   
@@ -647,7 +640,7 @@ Fórmula: 10 - ((6 - LinhasUsadas) + Duplicações + TentouENaoExiste).`;
       else
       {    
           var Nota = 'Nota até agora (Inválida até vencer): ' + NotaFinal() + '/10'
-          		   + '\nLinhas Usadas (+): ' + LinhasUsadas()
+                 + '\nLinhas Usadas (+): ' + LinhasUsadas()
                    + '\nDuplicações (-): ' + Duplicacoes()
                    + '\nAdivinhou e não existe (-): ' + vTentouENaoExiste
                    + '\nNão usou Pal. Aleatória (-): ' + vNaoUsouPalAleatoria;
