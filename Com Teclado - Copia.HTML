@@ -281,6 +281,7 @@
     var vVenceu = false;
     var vTentouENaoExiste = 0;    
     var Elemento;
+    var vNaoUsouPalAleatoria = 1;
     
     function GravaElementoEmFoco() {
       Elemento = document.activeElement;
@@ -541,6 +542,7 @@ Regras: Para cada letra colocada em uma coluna onde essa letra já tinha sido co
 Total: 6 linhas sem repetição, 10 pontos.
 Linha: - 1 para cada linha menor que a ultima.
 Repetição da letra na coluna: - 1 para cada repetição.
+Usou palavra aleatória: - 1 por não ter usado alguma palavra aleatória.
 
 Fórmula: 10 - ((6 - LinhasUsadas) + Duplicações + TentouENaoExiste).`;
       alert('- 6.000 palavras possíveis.\n- Não precisa informar o acento para acertar a palavra, porém a resposta pode conter acentos.\n- Não tem palavras com cedilha.\n- A barra inferior é a Pontuação, clique nela para detalhes.\n\n' + textoPontos);      
@@ -548,7 +550,7 @@ Fórmula: 10 - ((6 - LinhasUsadas) + Duplicações + TentouENaoExiste).`;
     
     
     function NotaFinal(){
-      var Pontos = (10) - ((6 - LinhasUsadas()) + Duplicacoes() + vTentouENaoExiste);   
+      var Pontos = (10) - ((6 - LinhasUsadas()) + Duplicacoes() + vTentouENaoExiste + vNaoUsouPalAleatoria);   
       return Pontos;       
   }
 
@@ -618,12 +620,21 @@ Fórmula: 10 - ((6 - LinhasUsadas) + Duplicações + TentouENaoExiste).`;
       }
     }
       
-      if (vVenceu){
-          var Nota = 'Nota: ' + NotaFinal() + ' - ' + obterRank(Pontos) + '\nLinhas Usadas: ' + LinhasUsadas()+ '\nDuplicações: ' + Duplicacoes()+ '\nPal. não existe: ' + vTentouENaoExiste;   
+      if (vVenceu){      
+      	var Nota = 'Nota: ' + NotaFinal() + '/10' + ' - ' + obterRank(Pontos)
+          		 + '\nLinhas Usadas (+): ' + LinhasUsadas()
+                 + '\nDuplicações (-): ' + Duplicacoes()
+                 + '\nAdivinhou e não existe (-): ' + vTentouENaoExiste
+                 + '\nNão usou Pal. Aleatória (-): ' + vNaoUsouPalAleatoria;   
+          
       }   
       else
-      {
-          var Nota = 'Nota até agora (Inválida até vencer): ' + NotaFinal() +  '\nLinhas Usadas: ' + LinhasUsadas()+ '\nDuplicações: ' + Duplicacoes()+ '\nPal. não existe: ' + vTentouENaoExiste;
+      {    
+          var Nota = 'Nota até agora (Inválida até vencer): ' + NotaFinal() + '/10'
+          		   + '\nLinhas Usadas (+): ' + LinhasUsadas()
+                   + '\nDuplicações (-): ' + Duplicacoes()
+                   + '\nAdivinhou e não existe (-): ' + vTentouENaoExiste
+                   + '\nNão usou Pal. Aleatória (-): ' + vNaoUsouPalAleatoria;
       }
 
       return Nota;        
@@ -656,6 +667,10 @@ Fórmula: 10 - ((6 - LinhasUsadas) + Duplicações + TentouENaoExiste).`;
      for (var j = 0; j < 5; j++) {
        var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input')[j].value = vPalavraAleatoria[j];   
      }       
+     
+     vNaoUsouPalAleatoria = 0;
+     
+     proceed();
    }
   </script>
 </body>
