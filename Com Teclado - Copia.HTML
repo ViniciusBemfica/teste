@@ -234,6 +234,7 @@
     </div>
       <div class="lines-Adivinhar-container">
       <div class="Adivinhar" onclick="Delete()">Deletar</div>
+      <div class="Adivinhar" onclick="PesquisaPalavraNaWeb()">Pesquisar</div>
       <div class="Adivinhar" onclick="InserePalavraAleatoria()">Aleatória</div>
   </div>
     
@@ -282,6 +283,7 @@
     var vTentouENaoExiste = 0;    
     var Elemento;
     var vNaoUsouPalAleatoria = 1;
+    var vPalavraTestadaGlobal = '';
     
     function GravaElementoEmFoco() {
       Elemento = document.activeElement;
@@ -306,8 +308,7 @@
       var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input');
       var correctWord = word.split('');
       var guessedWord = Array.from(lineInputs).map(input => input.value.toUpperCase());
-
-      
+      vPalavraTestadaGlobal = guessedWord.join('');
       
       if (PalavraNaoExiste(lineInputs)){
         currentLetter = 0;
@@ -349,8 +350,6 @@
         
         vVenceu = true; 
         alert('Parabéns, você venceu! Palavra: ' + wordComAcento + '\n' + Pontuacao(true));
-        
-        PesquisaPalavraNaWeb(wordComAcento);
       }
   
       // Check if the player has lost
@@ -513,11 +512,19 @@
         input.focus();
     }
     
-    function PesquisaPalavraNaWeb(Palavra) {
-      var Confirma = confirm("Pesquisar a palavra " + Palavra + " na web?");
-
+    function PesquisaPalavraNaWeb(Palavra) { 
+      var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input');
+      var vPalavraTestada = Array.from(lineInputs).map(input => input.value.toUpperCase());    
+     vPalavraTestada = vPalavraTestada.join('');
+     
+     if (vPalavraTestada.length == 0){
+     	vPalavraTestada = vPalavraTestadaGlobal;
+     }
+     
+      var Confirma = confirm("Pesquisar a palavra " + vPalavraTestada + " na web?");
+      
       if (Confirma) {
-        var url = "https://www.google.com/search?q=" + encodeURIComponent(Palavra);
+        var url = "https://www.google.com/search?q=" + encodeURIComponent(vPalavraTestada);
         window.open(url, "_blank");
       }
     }
