@@ -281,7 +281,7 @@
     var vVenceu = false;
     var vTentouENaoExiste = 0;    
     var Elemento;
-    var vNaoUsouPalAleatoria = 0;
+    var vNaoUsouPalAleatoria = 1;
     var vPalavraTestadaGlobal = '';
     var vRepetiuLetraVermelha = 0;
     
@@ -639,7 +639,7 @@
        var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input')[j].value = vPalavraAleatoria[j];   
      }       
      
-     vNaoUsouPalAleatoria = 1;
+     vNaoUsouPalAleatoria = 0;
      
      proceed();
    }
