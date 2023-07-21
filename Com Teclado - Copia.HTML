@@ -137,10 +137,62 @@
       width: 100%;
       background-color: Grey;     
     }
+
+
+    /* The Modal (background) */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      padding-top: 100px; /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+    }
+
+    /* The Close Button */
+    .close {
+      color: #aaaaaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+    }
     
   </style>
 </head>
 <body>
+
+  <!-- Trigger/Open The Modal -->
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Some text in the Modal..</p>
+  </div>
+</div>
+
   <div class="wordle-container">
     <div class="lines-container">
       <!-- Line 1 -->
@@ -226,7 +278,7 @@
         <div class="keyboard-key" onclick="insertLetter(this)">B</div>
         <div class="keyboard-key" onclick="insertLetter(this)">N</div>
         <div class="keyboard-key" onclick="insertLetter(this)">M</div>
-        <div class="keyboard-key" onclick="Info()">?</div>
+        <div class="keyboard-key" onclick="ShowModal()">?</div>
       </div>
       
       
@@ -237,7 +289,7 @@
       <div class="Adivinhar" onclick="InserePalavraAleatoria()">Aleatória</div>
     </div>
     
-    <div class="barraPontuacao" onclick="alert(Pontuacao())">
+    <div class="barraPontuacao" onclick="alert(MensagemPontuacao())">
       <div class="caixaPontuacao"></div>
       <div class="caixaPontuacao"></div>
       <div class="caixaPontuacao"></div>
@@ -268,7 +320,6 @@
   // Code to be executed when the page loads  
   window.onload = function() {
     FocusPrimeiroElemento();
-    alert(PontuacaoTotal);
   };
 
     // Generate a random word
@@ -358,7 +409,7 @@
       // Check if the player has won
       if (guessedWord.join('') === word) {        
         vVenceu = true; 
-        alert('Parabéns, você venceu! Palavra: ' + wordComAcento + '\n' + Pontuacao(true));
+        alert('Parabéns, você venceu! Palavra: ' + wordComAcento + '\n' + MensagemPontuacao(true));
       }
 
       // Check if the player has lost
@@ -383,6 +434,7 @@
           key.classList.add('TecladoCorAmarelo');
         }
       });  
+
     }
     
     
@@ -564,19 +616,9 @@
       return numeroDeLetrasIguais;
     }
     
-    function Pontuacao(MsgAoVencer){
+    function MensagemPontuacao(MsgAoVencer){
       function obterRank(nota) {
-        if (nota === 1) {
-          return "Neopente";
-        } else if (nota === 2) {
-          return "Neopente";
-        } else if (nota === 3) {
-          return "Neopente";
-        } else if (nota === 4) {
-          return "Neopente";
-        } else if (nota === 5) {
-          return "Neopente";
-        } else if (nota === 6) {
+        if (nota === 6) {
           return "Penteiro";
         } else if (nota === 7) {
           return "Pentografeiro";
@@ -587,7 +629,7 @@
         } else if (nota === 10) {
           return "Pantoludopentigrafovernacomante";
         } else {
-          return "Neopente";
+          return "Penteiro";
         }
       }
 
@@ -654,14 +696,11 @@
    // Get the modal
   var modal = document.getElementById("myModal");
 
-  // Get the button that opens the modal
-  var btn = document.getElementById("myBtn");
-
   // Get the <span> element that closes the modal
   var span = document.getElementsByClassName("close")[0];
 
   // When the user clicks the button, open the modal 
-  btn.onclick = function() {
+  function ShowModal(){
     modal.style.display = "block";
   }
 
