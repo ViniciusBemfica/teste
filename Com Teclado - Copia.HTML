@@ -281,7 +281,7 @@
     var vVenceu = false;
     var vTentouENaoExiste = 0;    
     var Elemento;
-    var vUsouPalAleatoria = 0;
+    var vNaoUsouPalAleatoria = 0;
     var vPalavraTestadaGlobal = '';
     var vRepetiuLetraVermelha = 0;
     
@@ -509,7 +509,7 @@
     
     
     function NotaFinal(){
-      var Pontos = (10 + vUsouPalAleatoria) - ((6 - LinhasUsadas()) + Duplicacoes() + vTentouENaoExiste  + vRepetiuLetraVermelha);   
+      var Pontos = (10) - ((6 - LinhasUsadas()) + Duplicacoes() + vTentouENaoExiste  + vRepetiuLetraVermelha + vNaoUsouPalAleatoria);   
       return Pontos;       
     }
 
@@ -585,14 +585,14 @@
         } else if (nota === 10) {
           return "Pantoludopentigrafovernacomante";
         } else {
-          return "Completo Imbecil";
+          return "Neopente";
         }
       }
       
       if (vVenceu){      
         var Nota = 'Nota: ' + NotaFinal() + '/10' + ' - ' + obterRank(NotaFinal())
         + '\nLinhas Usadas (+): ' + LinhasUsadas()
-        + '\nUsou Pal. Aleatória (+): ' + vUsouPalAleatoria
+        + '\nNão Usou Pal. Aleatória (-): ' + vNaoUsouPalAleatoria
         + '\nConsoante Amarelo ou Verde na mesma coluna(-): ' + Duplicacoes()
         + '\nRepetiu Consoante Vermelha (-): ' + vRepetiuLetraVermelha
         + '\nAdivinhou e não existe (-): ' + vTentouENaoExiste;   
@@ -602,7 +602,7 @@
       {    
         var Nota = 'Nota até agora (Inválida até vencer): ' + NotaFinal() + '/10'
         + '\nLinhas Usadas (+): ' + LinhasUsadas()
-        + '\nUsou Pal. Aleatória (+): ' + vUsouPalAleatoria
+        + '\nNão Usou Pal. Aleatória (-): ' + vNaoUsouPalAleatoria
         + '\nConsoante Amarelo ou Verde na mesma coluna (-): ' + Duplicacoes()
         + '\nRepetiu Consoante Vermelha (-): ' + vRepetiuLetraVermelha
         + '\nAdivinhou e não existe (-): ' + vTentouENaoExiste;
@@ -639,7 +639,7 @@
        var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input')[j].value = vPalavraAleatoria[j];   
      }       
      
-     vUsouPalAleatoria = 1;
+     vNaoUsouPalAleatoria = 1;
      
      proceed();
    }
