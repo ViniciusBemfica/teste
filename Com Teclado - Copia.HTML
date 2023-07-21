@@ -156,18 +156,21 @@
 
     /* Modal Content */
     .modal-content {
-      background-color: #fefefe;
+      background-color: LightGrey;
+      //display:  flex;
+      align-items: text-top;
       margin: auto;
       padding: 20px;
       border: 1px solid #888;
       width: 80%;
+      height: 80%;
     }
 
     /* The Close Button */
     .close {
       color: #aaaaaa;
       float: right;
-      font-size: 28px;
+      font-size: 4vh;
       font-weight: bold;
     }
 
@@ -176,6 +179,28 @@
       color: #000;
       text-decoration: none;
       cursor: pointer;
+    }
+
+    .TituloModal{
+      /*display:  flex;
+      align: center;
+      font-size: 4vh; */
+
+      display: inline-block;
+      //display: flex;
+      //width: 30px;
+      //height: 40px;
+      text-align: center;
+      line-height: 200%;
+      font-size: 300%;
+      color: white;
+      border: 1px solid black;
+      margin-top: 30px;
+      margin-bottom: 30px;
+      margin-left: 2px;
+      margin-right: 2px;
+      width: 100%;
+      background-color: DarkSlateGrey; 
     }
     
   </style>
@@ -188,8 +213,8 @@
 <div id="myModal" class="modal">
   <!-- Modal content -->
   <div class="modal-content">
-    <span class="close">&times;</span>
-    <p>Some text in the Modal..</p>
+    <span class="close" >&times;</span>
+    <div id="IDTituloModal" class="TituloModal" type="text">Some text in the Modal..</div>
   </div>
 </div>
 
@@ -278,7 +303,7 @@
         <div class="keyboard-key" onclick="insertLetter(this)">B</div>
         <div class="keyboard-key" onclick="insertLetter(this)">N</div>
         <div class="keyboard-key" onclick="insertLetter(this)">M</div>
-        <div class="keyboard-key" onclick="ShowModal()">?</div>
+        <div class="keyboard-key" onclick="Info()">?</div>
       </div>
       
       
@@ -537,7 +562,8 @@
       var Confirma = confirm("Pesquisar a palavra " + vPalavraTestada + " na web?");
       
       if (Confirma) {
-        var url = "https://www.google.com/search?q=" + encodeURIComponent(vPalavraTestada);
+        
+        var url = "https://www.palavras.net/search.php?ms="+encodeURIComponent(vPalavraTestada)+"&fnl=5&fnl2=5&d=18";
         window.open(url, "_blank");
       }
     }
@@ -558,7 +584,7 @@
       Repetição da letra na coluna: - 1 para cada repetição.
       Usou palavra aleatória: - 1 por não ter usado alguma palavra aleatória.
       Fórmula: 10 - ((6 - LinhasUsadas) + Duplicações + TentouENaoExiste).`;
-      alert('- 6.000 palavras possíveis.\n- Não precisa informar o acento para acertar a palavra, porém a resposta pode conter acentos.\n- Não tem palavras com cedilha.\n- A barra inferior é a Pontuação, clique nela para detalhes.\n\n' + textoPontos);      
+      alert('- 6.000 palavras possíveis.\n- Não precisa informar o acento para acertar a palavra, porém a resposta pode conter acentos.\n- Não tem palavras com cedilha.\n- A barra inferior é a Pontuação, clique nela para detalhes.\n\n' + textoPontos); 
     }
     
     
@@ -695,6 +721,7 @@
    //------- Imagens --------
    // Get the modal
   var modal = document.getElementById("myModal");
+  var vTituloModal = document.getElementById("IDTituloModal");
 
   // Get the <span> element that closes the modal
   var span = document.getElementsByClassName("close")[0];
@@ -702,7 +729,12 @@
   // When the user clicks the button, open the modal 
   function ShowModal(){
     modal.style.display = "block";
+
   }
+
+  modal.onload = function() {
+    vTituloModal.text = "asdsa";
+  };
 
   // When the user clicks on <span> (x), close the modal
   span.onclick = function() {
