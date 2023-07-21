@@ -268,6 +268,7 @@
   // Code to be executed when the page loads  
   window.onload = function() {
     FocusPrimeiroElemento();
+    alert(PontuacaoTotal);
   };
 
     // Generate a random word
@@ -284,6 +285,7 @@
     var vNaoUsouPalAleatoria = 1;
     var vPalavraTestadaGlobal = '';
     var vRepetiuLetraVermelha = 0;
+    var PontuacaoTotal = 5;
     
     function GravaElementoEmFoco() {
       Elemento = document.activeElement;
@@ -508,9 +510,9 @@
     }
     
     
-    function NotaFinal(){
-      var Pontos = (10) - ((6 - LinhasUsadas()) + Duplicacoes() + vTentouENaoExiste  + vRepetiuLetraVermelha + vNaoUsouPalAleatoria);   
-      return Pontos;       
+    function AtualizaPontuacao(){
+      PontuacaoTotal = (10) - ((6 - LinhasUsadas()) + Duplicacoes() + vTentouENaoExiste  + vRepetiuLetraVermelha + vNaoUsouPalAleatoria);   
+      return PontuacaoTotal;       
     }
 
     function LinhasUsadas(){
@@ -588,9 +590,11 @@
           return "Neopente";
         }
       }
+
+      AtualizaPontuacao();
       
       if (vVenceu){      
-        var Nota = 'Nota: ' + NotaFinal() + '/10' + ' - ' + obterRank(NotaFinal())
+        var Nota = 'Nota: ' + PontuacaoTotal+ '/10' + ' - ' + obterRank(PontuacaoTotal)
         + '\nLinhas Usadas (+): ' + LinhasUsadas()
         + '\nNão Usou Pal. Aleatória (-): ' + vNaoUsouPalAleatoria
         + '\nConsoante Amarelo ou Verde na mesma coluna(-): ' + Duplicacoes()
@@ -600,7 +604,7 @@
       }   
       else
       {    
-        var Nota = 'Nota até agora (Inválida até vencer): ' + NotaFinal() + '/10'
+        var Nota = 'Nota até agora (Inválida até vencer): ' + PontuacaoTotal + '/10'
         + '\nLinhas Usadas (+): ' + LinhasUsadas()
         + '\nNão Usou Pal. Aleatória (-): ' + vNaoUsouPalAleatoria
         + '\nConsoante Amarelo ou Verde na mesma coluna (-): ' + Duplicacoes()
@@ -613,19 +617,20 @@
 
 
    //pontuacao pinta quadradinhos
-   function pintarEstrelas() {
-    var rating = NotaFinal(); 
+   function pintarEstrelas() { 
     var stars = document.getElementsByClassName('caixaPontuacao');
-
+      
+      AtualizaPontuacao();  
       // Remover classe 'gold' de todas as estrelas
       for (var i = 0; i < stars.length; i++) {
         stars[i].classList.remove('gold');
       }
       
       // Pintar estrelas até o rating digitado
-      for (var i = 0; i < rating; i++) {
+      for (var i = 0; i < PontuacaoTotal; i++) {
         stars[i].classList.add('gold');
       }
+      
     }
     
 
