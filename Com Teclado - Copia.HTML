@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="viewport" 
-  content="user-scalable=0">
+  <meta name="viewport" content="user-scalable=0">
   <title>Wordle Game</title>
   <style>
     body {
@@ -115,109 +114,35 @@
     .keyboard-key.TecladoCorVerde {
       background-color: Green;
     }   
-    .caixaPontuacao.gold {
-      background-color: gold;
-    }
     .barraPontuacao {
       display: flex;  
+      justify-content: center;
       width: 100%;
       margin-bottom: 20px;
       //margin-top: 10px;
     }
-    .caixaPontuacao {
+    .textoPontuacao {
       display: inline-block;
-      //display: flex;
-      //width: 30px;
-      height: 2vh;
-      border: 1px solid black;
-      //margin-top: 10px;     
-      margin-left: 2px;
-      margin-right: 2px;
-      cursor: pointer;
-      width: 100%;
-      background-color: Grey;     
-    }
-
-
-    /* The Modal (background) */
-    .modal {
-      display: none; /* Hidden by default */
-      position: fixed; /* Stay in place */
-      z-index: 1; /* Sit on top */
-      padding-top: 100px; /* Location of the box */
-      left: 0;
-      top: 0;
-      width: 100%; /* Full width */
-      height: 100%; /* Full height */
-      overflow: auto; /* Enable scroll if needed */
-      background-color: rgb(0,0,0); /* Fallback color */
-      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    }
-
-    /* Modal Content */
-    .modal-content {
-      background-color: LightGrey;
-      //display:  flex;
-      align-items: text-top;
-      margin: auto;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 80%;
-      height: 80%;
-    }
-
-    /* The Close Button */
-    .close {
-      color: #aaaaaa;
-      float: right;
-      font-size: 4vh;
-      font-weight: bold;
-    }
-
-    .close:hover,
-    .close:focus {
-      color: #000;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    .TituloModal{
-      /*display:  flex;
-      align: center;
-      font-size: 4vh; */
-
-      display: inline-block;
-      //display: flex;
-      //width: 30px;
-      //height: 40px;
-      text-align: center;
-      line-height: 200%;
-      font-size: 300%;
+      font-size: 250%;
       color: white;
-      border: 1px solid black;
-      margin-top: 30px;
       margin-bottom: 30px;
       margin-left: 2px;
-      margin-right: 2px;
-      width: 100%;
-      background-color: DarkSlateGrey; 
+      padding-left: 10px;
+      line-height: 140%;
+      background-color: Sienna; 
     }
-    
+    .texto100{
+      display: inline-block;
+      font-size: 250%;
+      color: white;
+      line-height: 140%;
+      margin-bottom: 30px;
+      padding-right: 10px;
+      background-color: Sienna;     
+    }
   </style>
 </head>
 <body>
-
-  <!-- Trigger/Open The Modal -->
-
-<!-- The Modal -->
-<div id="myModal" class="modal">
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close" >&times;</span>
-    <div id="IDTituloModal" class="TituloModal" type="text">Some text in the Modal..</div>
-  </div>
-</div>
-
   <div class="wordle-container">
     <div class="lines-container">
       <!-- Line 1 -->
@@ -303,7 +228,7 @@
         <div class="keyboard-key" onclick="insertLetter(this)">B</div>
         <div class="keyboard-key" onclick="insertLetter(this)">N</div>
         <div class="keyboard-key" onclick="insertLetter(this)">M</div>
-        <div class="keyboard-key" onclick="Info()">?</div>
+        <div class="keyboard-key" onclick="checkCookie()">?</div>
       </div>
       
       
@@ -315,16 +240,11 @@
     </div>
     
     <div class="barraPontuacao" onclick="alert(MensagemPontuacao())">
-      <div class="caixaPontuacao"></div>
-      <div class="caixaPontuacao"></div>
-      <div class="caixaPontuacao"></div>
-      <div class="caixaPontuacao"></div>
-      <div class="caixaPontuacao"></div>
-      <div class="caixaPontuacao"></div>
-      <div class="caixaPontuacao"></div>
-      <div class="caixaPontuacao"></div>
-      <div class="caixaPontuacao"></div>
-      <div class="caixaPontuacao"></div>
+      <div class="textoPontuacao" id="textoPontuacaoRodape">23</div>
+      <div class="texto100">/100</div>
+      <div class="texto100"><= </div>
+      <div class="texto100" id="rankPontuacaoRodape">Pantoludopentigrafovernacomante</div>
+      <div class="texto100"> =></div>
     </div>
     
   </div>
@@ -429,8 +349,6 @@
         document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input').forEach(input => input.disabled = false);
       }
       
-      pintarEstrelas();
-
       // Check if the player has won
       if (guessedWord.join('') === word) {        
         vVenceu = true; 
@@ -475,7 +393,6 @@
         else
         {
           vTentouENaoExiste++;
-          pintarEstrelas();
           return true;
         }       
       }       
@@ -562,7 +479,7 @@
       var Confirma = confirm("Pesquisar a palavra " + vPalavraTestada + " na web?");
       
       if (Confirma) {
-        
+
         var url = "https://www.palavras.net/search.php?ms="+encodeURIComponent(vPalavraTestada)+"&fnl=5&fnl2=5&d=18";
         window.open(url, "_blank");
       }
@@ -682,24 +599,6 @@
 
       return Nota;        
     }
-
-
-   //pontuacao pinta quadradinhos
-   function pintarEstrelas() { 
-    var stars = document.getElementsByClassName('caixaPontuacao');
-      
-      AtualizaPontuacao();  
-      // Remover classe 'gold' de todas as estrelas
-      for (var i = 0; i < stars.length; i++) {
-        stars[i].classList.remove('gold');
-      }
-      
-      // Pintar estrelas até o rating digitado
-      for (var i = 0; i < PontuacaoTotal; i++) {
-        stars[i].classList.add('gold');
-      }
-      
-    }
     
 
    //InserePalavraAleatoria   
@@ -718,33 +617,38 @@
    }
 
 
-   //------- Imagens --------
-   // Get the modal
-  var modal = document.getElementById("myModal");
-  var vTituloModal = document.getElementById("IDTituloModal");
-
-  // Get the <span> element that closes the modal
-  var span = document.getElementsByClassName("close")[0];
-
-  // When the user clicks the button, open the modal 
-  function ShowModal(){
-    modal.style.display = "block";
-
+  function setCookie(cname,cvalue,exdays) {
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    let expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
   }
 
-  modal.onload = function() {
-    vTituloModal.text = "asdsa";
-  };
-
-  // When the user clicks on <span> (x), close the modal
-  span.onclick = function() {
-    modal.style.display = "none";
+  function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
   }
 
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
+  function checkCookie() {
+    let user = getCookie("CookiePontuacao");
+    if (user != "") {
+      alert("Welcome again " + user);
+    } else {
+       user = prompt("Please enter your name:","");
+       if (user != "" && user != null) {
+         setCookie("CookiePontuacao", user, 30);
+       }
     }
   }
  </script>
