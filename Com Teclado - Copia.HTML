@@ -239,7 +239,7 @@
       <div class="Adivinhar" onclick="InserePalavraAleatoria()">Aleatória</div>
     </div>
     
-    <div class="barraPontuacao" onclick="alert(MensagemPontuacao())">
+    <div class="barraPontuacao" id="barraPontuacao" onclick="alert(MensagemPontuacao())">
       <div class="texto100">Rank</div>      
       <div class="texto100" id="rankPontuacaoRodape">Pantoludopentigrafovernacomante</div>
       <div class="textoPontuacao" id="textoPontuacaoRodape">0</div> 
@@ -282,6 +282,7 @@
     var vPalavraTestadaGlobal = '';
     var vRepetiuLetraVermelha = 0;
     var PontuacaoTotal = 5;
+    var CorDoRank = '';
     
     function GravaElementoEmFoco() {
       Elemento = document.activeElement;
@@ -493,7 +494,7 @@
     
     
     function Info(){
-      var textoPontos = 
+      /*var textoPontos = 
       `Sistema de Pontuação
 
       O objetivo é incentivar a diversificação do vocabulário, inserindo palavras diferentes e não repetindo as dicas. Incentivar ter certeza de que é a palavra ao inserí-la como resposta.
@@ -506,22 +507,9 @@
       Repetição da letra na coluna: - 1 para cada repetição.
       Usou palavra aleatória: - 1 por não ter usado alguma palavra aleatória.
       Fórmula: 10 - ((6 - LinhasUsadas) + Duplicações + TentouENaoExiste).`;
-      alert('- 6.000 palavras possíveis.\n- Não precisa informar o acento para acertar a palavra, porém a resposta pode conter acentos.\n- Não tem palavras com cedilha.\n- A barra inferior é a Pontuação, clique nela para detalhes.\n\n' + textoPontos); 
-   
+      alert('- 6.000 palavras possíveis.\n- Não precisa informar o acento para acertar a palavra, porém a resposta pode conter acentos.\n- Não tem palavras com cedilha.\n- A barra inferior é a Pontuação, clique nela para detalhes.\n\n' + textoPontos); */
     }
     
-    function setTextoPontuacaoRodape(){
-      var vPontuacaoNoCookie = getCookie("CookiePontuacao");
-      document.getElementById("textoPontuacaoRodape").innerHTML = vPontuacaoNoCookie + "/100";
-      document.getElementById("rankPontuacaoRodape").innerHTML = obterRank(vPontuacaoNoCookie);
-    }
-    
-    function AtualizaPontuacao(){
-      PontuacaoTotal = (10) - ((6 - LinhasUsadas()) + Duplicacoes() + vTentouENaoExiste  + vRepetiuLetraVermelha + vNaoUsouPalAleatoria); 
-  
-      return PontuacaoTotal;       
-    }
-
     function LinhasUsadas(){
       return currentLine - 1;         
     }
@@ -572,58 +560,62 @@
     }
 
     function obterRank(nota) {
-      /*if (nota >= 50 && nota < 75) {
-        return "Pentografeiro";
-      } else if (nota >= 75 && nota < 90) {
-        return "Ludopentografador";
-      } else if (nota >= 90 && nota < 100) {
-        return "Ludopentografovernacultor";
-      } else if (nota >= 100) {
-        return "Centiludopentografovernacurador";
-      } else {
-        return "- Penteiro -";
-      }*/
-
-
       if (nota >= 50 && nota < 75) {
+        CorDoRank = "#cdb01d"; //Amarelo
         return "<- Pentografeiro ->";
       } else if (nota >= 75 && nota < 90) {
+        CorDoRank = "#f39830"; //Laranja Claro
         return "<{= Ludopentografador =}>";
       } else if (nota >= 90 && nota < 100) {
+        CorDoRank = "#e97c16"; //Laranja Escuro
         return "<{(≡ Ludopentografovernacultor ≡)}> ";
       } else if (nota >= 100) {
+        CorDoRank = "#9e5524"; //Marrom
         return "<{:[≡ Centiludopentografovernacurador ≡]:}>";
       } else {
+        CorDoRank = "#1a932a"; //Verde
         return "- Penteiro -";
       }
+    }
+
+    function setTextoPontuacaoRodape(){
+      var vPontuacaoNoCookie = getCookie("CookiePontuacao");
+      document.getElementById("textoPontuacaoRodape").innerHTML = vPontuacaoNoCookie + "/100";
+      document.getElementById("rankPontuacaoRodape").innerHTML = obterRank(vPontuacaoNoCookie);
+      document.getElementById("barraPontuacao").style.backgroundColor = CorDoRank; 
     }
     
     function MensagemPontuacao(MsgAoVencer){
       AtualizaPontuacao();
       
       if (vVenceu){      
-        var Nota = 'Nota: ' + PontuacaoTotal+ '/10'
+        var Nota = 'Pontos: ' + PontuacaoTotal+ '/10'
         + '\nLinhas Usadas (+): ' + LinhasUsadas()
         + '\nNão Usou Pal. Aleatória (-): ' + vNaoUsouPalAleatoria
-        + '\nConsoante Amarelo ou Verde na mesma coluna(-): ' + Duplicacoes()
+        + '\nRepetiu Amarelo ou Verde na mesma coluna(-): ' + Duplicacoes()
         + '\nRepetiu Consoante Vermelha (-): ' + vRepetiuLetraVermelha
         + '\nAdivinhou e não existe (-): ' + vTentouENaoExiste;   
 
       }   
       else
       {    
-        var Nota = 'Nota até agora (Inválida até vencer): ' + PontuacaoTotal + '/10'
+        var Nota = 'Pontos até agora: ' + PontuacaoTotal + '/10'
         + '\nLinhas Usadas (+): ' + LinhasUsadas()
         + '\nNão Usou Pal. Aleatória (-): ' + vNaoUsouPalAleatoria
-        + '\nConsoante Amarelo ou Verde na mesma coluna (-): ' + Duplicacoes()
+        + '\nRepetiu Amarelo ou Verde na mesma coluna (-): ' + Duplicacoes()
         + '\nRepetiu Consoante Vermelha (-): ' + vRepetiuLetraVermelha
         + '\nAdivinhou e não existe (-): ' + vTentouENaoExiste;
       }
 
       return Nota;        
     }
+  
+    function AtualizaPontuacao(){
+      PontuacaoTotal = (10) - ((6 - LinhasUsadas()) + Duplicacoes() + vTentouENaoExiste  + vRepetiuLetraVermelha + vNaoUsouPalAleatoria); 
+  
+      return PontuacaoTotal;       
+    }
     
-
    //InserePalavraAleatoria   
    function InserePalavraAleatoria(){
      var randomIndex = Math.floor(Math.random() * wordsSemAcento.length);
@@ -639,25 +631,25 @@
      proceed();
    }
 
-  function AtualizaCookie(vValor) {
-    let vCookie = getCookie("CookiePontuacao");
-    if (vCookie != "" && vCookie !== null) {
-      vCookie = parseInt(vCookie) + vValor; 
-      setCookie("CookiePontuacao", vCookie, 30);
-    } else {
-      setCookie("CookiePontuacao", 0, 30);  
+    function AtualizaCookie(vValor) {
+      let vCookie = getCookie("CookiePontuacao");
+      if (vCookie != "" && vCookie !== null) {
+        vCookie = parseInt(vCookie) + vValor; 
+        setCookie("CookiePontuacao", vCookie, 30);
+      } else {
+        setCookie("CookiePontuacao", 0, 30);  
+      }
+
+      setTextoPontuacaoRodape();
+    } 
+
+    function getCookie(c_name) {
+      return localStorage.getItem(c_name);
     }
 
-    setTextoPontuacaoRodape();
-  } 
-
-  function getCookie(c_name) {
-    return localStorage.getItem(c_name);
-  }
-
-  function setCookie(c_name, value, expiredays) {
+    function setCookie(c_name, value, expiredays) {
       return localStorage.setItem(c_name, value);
-  }
+    }
 
   
  </script>
