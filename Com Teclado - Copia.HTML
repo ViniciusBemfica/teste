@@ -263,7 +263,7 @@
   // Code to be executed when the page loads  
   window.onload = function() {
     FocusPrimeiroElemento();
-    //setCookie("CookiePontuacao", 0, 30);
+    //setCookie("CookiePontuacao", "0|0|0", 30);
     setTextoPontuacaoRodape();
   };
 
@@ -281,7 +281,7 @@
     var vNaoUsouPalAleatoria = 1;
     var vPalavraTestadaGlobal = '';
     var vRepetiuLetraVermelha = 0;
-    var PontuacaoTotal = 5;
+    var PontuacaoPartida = 5;
     var CorDoRank = '';
     
     function GravaElementoEmFoco() {
@@ -355,7 +355,7 @@
         vVenceu = true; 
 
         AtualizaPontuacao();
-        AtualizaCookie(PontuacaoTotal);
+        AtualizaCookie();
 
         alert('Parabéns, você venceu! Palavra: ' + wordComAcento + '\n' + MensagemPontuacao(true));
       }
@@ -508,6 +508,9 @@
       Usou palavra aleatória: - 1 por não ter usado alguma palavra aleatória.
       Fórmula: 10 - ((6 - LinhasUsadas) + Duplicações + TentouENaoExiste).`;
       alert('- 6.000 palavras possíveis.\n- Não precisa informar o acento para acertar a palavra, porém a resposta pode conter acentos.\n- Não tem palavras com cedilha.\n- A barra inferior é a Pontuação, clique nela para detalhes.\n\n' + textoPontos); */
+
+      var vCookieString = getCookie("CookiePontuacao");
+      alert(vCookieString + '\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n' + word);
     }
     
     function LinhasUsadas(){
@@ -579,17 +582,18 @@
     }
 
     function setTextoPontuacaoRodape(){
-      var vPontuacaoNoCookie = getCookie("CookiePontuacao");
-      document.getElementById("textoPontuacaoRodape").innerHTML = vPontuacaoNoCookie + "/100";
-      document.getElementById("rankPontuacaoRodape").innerHTML = obterRank(vPontuacaoNoCookie);
-      document.getElementById("barraPontuacao").style.backgroundColor = CorDoRank; 
+      var vCookieString = getCookie("CookiePontuacao");    
+      var vPontuacao = CookieRetornaTotal(vCookieString);
+      document.getElementById("textoPontuacaoRodape").innerHTML = vPontuacao + "/100";
+      document.getElementById("rankPontuacaoRodape").innerHTML = obterRank(vPontuacao);
+      document.getElementById("barraPontuacao").style.backgroundColor = CorDoRank;     
     }
     
     function MensagemPontuacao(MsgAoVencer){
       AtualizaPontuacao();
       
       if (vVenceu){      
-        var Nota = 'Pontos: ' + PontuacaoTotal+ '/10'
+        var Nota = 'Pontos da partida: ' + PontuacaoPartida+ '/10'
         + '\nLinhas Usadas (+): ' + LinhasUsadas()
         + '\nNão Usou Pal. Aleatória (-): ' + vNaoUsouPalAleatoria
         + '\nRepetiu Amarelo ou Verde na mesma coluna(-): ' + Duplicacoes()
@@ -599,7 +603,7 @@
       }   
       else
       {    
-        var Nota = 'Pontos até agora: ' + PontuacaoTotal + '/10'
+        var Nota = 'Pontos da partida até agora: ' + PontuacaoPartida + '/10'
         + '\nLinhas Usadas (+): ' + LinhasUsadas()
         + '\nNão Usou Pal. Aleatória (-): ' + vNaoUsouPalAleatoria
         + '\nRepetiu Amarelo ou Verde na mesma coluna (-): ' + Duplicacoes()
@@ -611,9 +615,9 @@
     }
   
     function AtualizaPontuacao(){
-      PontuacaoTotal = (10) - ((6 - LinhasUsadas()) + Duplicacoes() + vTentouENaoExiste  + vRepetiuLetraVermelha + vNaoUsouPalAleatoria); 
+      PontuacaoPartida = (10) - ((6 - LinhasUsadas()) + Duplicacoes() + vTentouENaoExiste  + vRepetiuLetraVermelha + vNaoUsouPalAleatoria); 
   
-      return PontuacaoTotal;       
+      return PontuacaoPartida;       
     }
     
    //InserePalavraAleatoria   
@@ -632,12 +636,12 @@
    }
 
     function AtualizaCookie(vValor) {
-      let vCookie = getCookie("CookiePontuacao");
-      if (vCookie != "" && vCookie !== null) {
-        vCookie = parseInt(vCookie) + vValor; 
-        setCookie("CookiePontuacao", vCookie, 30);
+      let vCookieString = getCookie("CookiePontuacao");
+      if (vCookieString != "" && vCookieString !== null) {
+        vCookieString = CookieRetornaTextoSoma(vCookieString); 
+        setCookie("CookiePontuacao", vCookieString, 30);
       } else {
-        setCookie("CookiePontuacao", 0, 30);  
+        setCookie("CookiePontuacao", "0|0|0|0|0|0|0|0|0|0", 30);  
       }
 
       setTextoPontuacaoRodape();
@@ -649,6 +653,38 @@
 
     function setCookie(c_name, value, expiredays) {
       return localStorage.setItem(c_name, value);
+    }
+
+    function CookieRetornaTextoSoma(vString){
+      const QtdJogosSomar = 10;
+      var PontuacaoTodosJogos = 0;
+      var vArray = vString.split('|');
+
+      if (vArray.length != QtdJogosSomar){
+        vArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      }
+
+      vArray.shift();
+      vArray.push(PontuacaoPartida);
+      vString = vArray.join('|');
+      
+      return vString;
+    }
+
+    function CookieRetornaTotal(vString){
+      const QtdJogosSomar = 10;
+      var PontuacaoTodosJogos = 0;
+      var vArray = vString.split('|');
+
+      if (vArray.length != QtdJogosSomar){
+        vArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      }
+
+      vArray.forEach(item => {
+          PontuacaoTodosJogos += parseInt(item);
+      });
+      
+      return PontuacaoTodosJogos;
     }
 
   
