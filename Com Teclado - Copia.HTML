@@ -355,6 +355,7 @@
       if (guessedWord.join('') === word) {        
         vVenceu = true; 
 
+        AtualizaPontuacao();
         AtualizaCookie(PontuacaoTotal);
 
         alert('Parabéns, você venceu! Palavra: ' + wordComAcento + '\n' + MensagemPontuacao(true));
@@ -573,9 +574,7 @@
     }
 
     function obterRank(nota) {
-      if (nota >= 60 && nota < 70) {
-        return "Penteiro";
-      } else if (nota >= 70 && nota < 80) {
+      if (nota >= 70 && nota < 80) {
         return "Pentografeiro";
       } else if (nota >= 80 && nota < 90) {
         return "Ludopentografador";
@@ -592,7 +591,7 @@
       AtualizaPontuacao();
       
       if (vVenceu){      
-        var Nota = 'Nota: ' + PontuacaoTotal+ '/10' + ' - ' + obterRank(PontuacaoTotal)
+        var Nota = 'Nota: ' + PontuacaoTotal+ '/10'
         + '\nLinhas Usadas (+): ' + LinhasUsadas()
         + '\nNão Usou Pal. Aleatória (-): ' + vNaoUsouPalAleatoria
         + '\nConsoante Amarelo ou Verde na mesma coluna(-): ' + Duplicacoes()
@@ -628,44 +627,6 @@
      
      proceed();
    }
-
-
-
-
-  /*function setCookie(cname,cvalue,exdays) {
-    const d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    let expires = "expires=" + d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-  }
-
-  function getCookie(cname) {
-    let name = cname + "=";
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(';');
-    for(let i = 0; i < ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return "";
-
-   function checkCookie() {
-    let user = getCookie("CookiePontuacao");
-    if (user != "") {
-      alert("Welcome again " + user);
-    } else {
-       user = prompt("Please enter your name:","");
-       if (user != "" && user != null) {
-         setCookie("CookiePontuacao", user, 30);
-       }
-    }
-  } 
-  }*/
 
   function AtualizaCookie(vValor) {
     let vCookie = getCookie("CookiePontuacao");
