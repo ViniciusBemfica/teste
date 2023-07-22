@@ -585,15 +585,15 @@
 
 
       if (nota >= 50 && nota < 75) {
-        return "Pentografeiro";
+        return "<- Pentografeiro ->";
       } else if (nota >= 75 && nota < 90) {
-        return "Ludopentografador";
+        return "<{= Ludopentografador =}>";
       } else if (nota >= 90 && nota < 100) {
-        return "Ludopentografovernacultor";
-      } else if (nota >= 100) {
-        return "Centiludopentografovernacurador";
-      } else {
+        return "<{(≡ Ludopentografovernacultor ≡)}> ";
+      } else if (nota >= 1) {
         return "<{:[≡ Centiludopentografovernacurador ≡]:}>";
+      } else {
+        return "- Penteiro -";
       }
     }
     
