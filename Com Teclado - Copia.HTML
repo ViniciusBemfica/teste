@@ -494,23 +494,19 @@
     
     
     function Info(){
-      /*var textoPontos = 
-      `Sistema de Pontuação
+      var texto = 
+      `
+      - Não tem palavras com cedilha.
+      - A barra inferior é seu ranking e pontuação, quão bem você esta indo no jogo nas últimas partidas. Clique nela para ver a pontuação da Partida.
 
-      O objetivo é incentivar a diversificação do vocabulário, inserindo palavras diferentes e não repetindo as dicas. Incentivar ter certeza de que é a palavra ao inserí-la como resposta.
-      Total 10 pontos, que é a pontuação máxima e perfeita, o objetivo final. 
-      Para atingir 10 pontos, deve-se conseguir colocar 6 palavras diferentes, com cada letra não repetindo na coluna que já foi (a última posição não conta porque é a resposta final). 
+      --- Sistema de Pontuação e Ranking --- 
 
-      Regras: Para cada letra colocada em uma coluna onde essa letra já tinha sido colocada antes, descontar pontos. Para cada linha colocada, adicionar pontos.
-      Total: 6 linhas sem repetição, 10 pontos.
-      Linha: - 1 para cada linha menor que a ultima.
-      Repetição da letra na coluna: - 1 para cada repetição.
-      Usou palavra aleatória: - 1 por não ter usado alguma palavra aleatória.
-      Fórmula: 10 - ((6 - LinhasUsadas) + Duplicações + TentouENaoExiste).`;
-      alert('- 6.000 palavras possíveis.\n- Não precisa informar o acento para acertar a palavra, porém a resposta pode conter acentos.\n- Não tem palavras com cedilha.\n- A barra inferior é a Pontuação, clique nela para detalhes.\n\n' + textoPontos); */
+      O objetivo é incentivar a diversificação do vocabulário e reduzir o fator de sorte no jogo. A ideia geral das regras é buscar não repetir as dicas e usar o máximo de dicas e linhas possíveis, para se ter certeza quando for Adivinhar a palavra secreta. 
+      Em cada partida é possível marcar um total máximo 10 pontos. Ao perder a partida, nenhum ponto é marcado. Na barra inferior tem a sua pontuação total nas últimas 10 partidas, vença várias partidas em sequência fazendo muitos pontos para avançar de Rank.
+      Para atingir 10 pontos, deve-se acertar a palavra usando todas as 6 linhas disponíveis, dentre outras regras conforme pode ser visto ao clicar na barra de Ranking inferior.`;
 
-      var vCookieString = getCookie("CookiePontuacao");
-      alert(vCookieString + '\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n' + word);
+      alert(texto
+        + '\n\n' + word); 
     }
     
     function LinhasUsadas(){
@@ -592,24 +588,15 @@
     function MensagemPontuacao(MsgAoVencer){
       AtualizaPontuacao();
       
-      if (vVenceu){      
-        var Nota = 'Pontos da partida: ' + PontuacaoPartida+ '/10'
+      var vCookieString = getCookie("CookiePontuacao");    
+
+      var Nota = 'Pontos da partida: ' + PontuacaoPartida+ '/10'
         + '\nLinhas Usadas (+): ' + LinhasUsadas()
         + '\nNão Usou Pal. Aleatória (-): ' + vNaoUsouPalAleatoria
         + '\nRepetiu Amarelo ou Verde na mesma coluna(-): ' + Duplicacoes()
         + '\nRepetiu Consoante Vermelha (-): ' + vRepetiuLetraVermelha
-        + '\nAdivinhou e não existe (-): ' + vTentouENaoExiste;   
-
-      }   
-      else
-      {    
-        var Nota = 'Pontos da partida até agora: ' + PontuacaoPartida + '/10'
-        + '\nLinhas Usadas (+): ' + LinhasUsadas()
-        + '\nNão Usou Pal. Aleatória (-): ' + vNaoUsouPalAleatoria
-        + '\nRepetiu Amarelo ou Verde na mesma coluna (-): ' + Duplicacoes()
-        + '\nRepetiu Consoante Vermelha (-): ' + vRepetiuLetraVermelha
-        + '\nAdivinhou e não existe (-): ' + vTentouENaoExiste;
-      }
+        + '\nAdivinhou e não existe (-): ' + vTentouENaoExiste
+        + '\n\n- Pontos nas Partidas Anteriores: \n' + vCookieString.split('|');  
 
       return Nota;        
     }
