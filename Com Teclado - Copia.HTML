@@ -267,6 +267,14 @@
     setTextoPontuacaoRodape();
   };
 
+  window.addEventListener('beforeunload', function (e) {
+      if (!vVenceu){
+        e.preventDefault();
+        e.returnValue = '';
+        AtualizaCookie(0);
+      }
+  });
+
     // Generate a random word
     var randomIndex = Math.floor(Math.random() * words.length);
     var word = words[randomIndex];
@@ -355,14 +363,15 @@
         vVenceu = true; 
 
         AtualizaPontuacao();
-        AtualizaCookie();
+        AtualizaCookie(PontuacaoPartida);
 
         alert('Parabéns, você venceu! Palavra: ' + wordComAcento + '\n' + MensagemPontuacao(true));
       }
 
       // Check if the player has lost
       if (currentLine > 6 && guessedWord.join('') !== word) {
-        alert('Você perdeu! A palavra certa era: ' + wordComAcento);
+        AtualizaCookie(0);
+        alert('Você perdeu! A palavra certa era: ' + wordComAcento);       
         PesquisaPalavraNaWeb(wordComAcento);
       }
       
@@ -474,19 +483,31 @@
     }
           
     function PesquisaPalavraNaWeb(Palavra) { 
-      var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input');
+      var linhaPesquisar = 0;
+      if (currentLine > 6){
+        linhaPesquisar = 5;   
+      }
+      else{
+        linhaPesquisar = currentLine - 1;
+      }
+
+      var lineInputs = document.querySelectorAll('.line')[linhaPesquisar].querySelectorAll('.letter-input');
       var vPalavraTestada = Array.from(lineInputs).map(input => input.value.toUpperCase());    
       vPalavraTestada = vPalavraTestada.join('');
+      var vTipoBusca = 'ms'; //i - começa com essas letras; ms - letras existem na palavra 
 
       if (vPalavraTestada.length == 0){
         vPalavraTestada = vPalavraTestadaGlobal;
+        vTipoBusca = "i";
       }
-
+      else if (vPalavraTestada.length == 5){
+        vTipoBusca = "i";
+      }
+      
       var Confirma = confirm("Pesquisar a palavra " + vPalavraTestada + " na web?");
       
       if (Confirma) {
-
-        var url = "https://www.palavras.net/search.php?ms="+encodeURIComponent(vPalavraTestada)+"&fnl=5&fnl2=5&d=18";
+        var url = "https://www.palavras.net/search.php?"+vTipoBusca+"="+encodeURIComponent(vPalavraTestada)+"&fnl=5&fnl2=5&d=18";
         window.open(url, "_blank");
       }
     }
@@ -498,6 +519,7 @@
       `
       - Não tem palavras com cedilha.
       - A barra inferior é seu ranking e pontuação, quão bem você esta indo no jogo nas últimas partidas. Clique nela para ver a pontuação da Partida.
+      - O botão pesquisar pesquisa a palavra digitada na linha na web conforme as regras: se nenhuma palavra foi inserida, pesquia a palavra anterior. Se uma palavra de 5 letras foi inserida, pesquisa a palavra exatamente como esta. Se a palavra tem menos de 5 letras, pesquisa palavras que existem com as letras digitadas.
 
       --- Sistema de Pontuação e Ranking --- 
 
@@ -506,7 +528,7 @@
       Para atingir 10 pontos, deve-se acertar a palavra usando todas as 6 linhas disponíveis, dentre outras regras conforme pode ser visto ao clicar na barra de Ranking inferior.`;
 
       alert(texto
-        + '\n\n' + word); 
+        + '\n' + word); 
     }
     
     function LinhasUsadas(){
@@ -625,7 +647,7 @@
     function AtualizaCookie(vValor) {
       let vCookieString = getCookie("CookiePontuacao");
       if (vCookieString != "" && vCookieString !== null) {
-        vCookieString = CookieRetornaTextoSoma(vCookieString); 
+        vCookieString = CookieRetornaTextoSoma(vCookieString, vValor); 
         setCookie("CookiePontuacao", vCookieString, 30);
       } else {
         setCookie("CookiePontuacao", "0|0|0|0|0|0|0|0|0|0", 30);  
@@ -642,7 +664,7 @@
       return localStorage.setItem(c_name, value);
     }
 
-    function CookieRetornaTextoSoma(vString){
+    function CookieRetornaTextoSoma(vString, vPontosPartida){
       const QtdJogosSomar = 10;
       var PontuacaoTodosJogos = 0;
       var vArray = vString.split('|');
@@ -652,7 +674,7 @@
       }
 
       vArray.shift();
-      vArray.push(PontuacaoPartida);
+      vArray.push(vPontosPartida);
       vString = vArray.join('|');
       
       return vString;
