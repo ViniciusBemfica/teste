@@ -550,12 +550,13 @@
       `
       - Não tem palavras com cedilha.
       - A barra inferior é seu ranking e pontuação, quão bem você esta indo no jogo nas últimas partidas. Clique nela para ver a pontuação da Partida.
-      - O botão pesquisar pesquisa a palavra digitada na linha na web conforme as regras: se nenhuma palavra foi inserida, pesquia a palavra anterior. Se uma palavra de 5 letras foi inserida, pesquisa a palavra exatamente como esta. Se a palavra tem menos de 5 letras, pesquisa palavras que existem com as letras digitadas.
+      - Clique duas vezes sobre a letra já inserida para deletar a letra. 
+      - De vez em quando a partida terá um Desafio opcional. Vença o desafio para ganhar mais pontos de uma só vez. 
 
       --- Sistema de Pontuação e Ranking --- 
 
       O objetivo é incentivar a diversificação do vocabulário e reduzir o fator de sorte no jogo. A ideia geral das regras é buscar não repetir as dicas e usar o máximo de dicas e linhas possíveis, para se ter certeza quando for Adivinhar a palavra secreta. 
-      Em cada partida é possível marcar um total máximo 10 pontos. Ao perder a partida, nenhum ponto é marcado. Na barra inferior tem a sua pontuação total nas últimas 10 partidas, vença várias partidas em sequência fazendo muitos pontos para avançar de Rank.
+      Em cada partida é possível marcar um total máximo 10 pontos (exceto Desafios que podem conceder mais pontos). Na barra inferior tem a sua pontuação total nas últimas 10 partidas, vença várias partidas em sequência fazendo muitos pontos para avançar de Rank.
       Para atingir 10 pontos, deve-se acertar a palavra usando todas as 6 linhas disponíveis, dentre outras regras conforme pode ser visto ao clicar na barra de Ranking inferior.`;
 
       alert(texto
@@ -620,10 +621,10 @@
         CorDoRank = "#f39830"; //Laranja Claro
         return "<{= Ludopentografador =}>";
       } else if (nota >= 90 && nota < 100) {
-        CorDoRank = "#e97c16"; //Laranja Escuro
+        CorDoRank = "#9f5209"; //Laranja Escuro
         return "<{(≡ Ludopentografovernacultor ≡)}> ";
       } else if (nota >= 100) {
-        CorDoRank = "#9e5524"; //Marrom
+        CorDoRank = "#420042"; //Roxo
         return "<{:[≡ Centiludopentografovernacurador ≡]:}>";
       } else {
         CorDoRank = "#1a932a"; //Verde
