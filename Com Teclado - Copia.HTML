@@ -235,6 +235,7 @@
     </div>
     <div class="lines-Adivinhar-container">
       <div class="Adivinhar" id="botaDesafio" onclick="VerDesafio()">Desafio</div>
+      <div class="Adivinhar" id="botaDesafio" onclick="VerDica()">Dica</div>
       <div class="Adivinhar" onclick="PesquisaPalavraNaWeb()">Pesquisar</div>
       <div class="Adivinhar" onclick="InserePalavraAleatoria()">Aleatória</div>
     </div>
@@ -281,12 +282,13 @@
     var word = words[randomIndex];
     var vLetrasVermelho = [];   
     var vLetrasAmarelo = []; 
-    vLetrasVerde = [];
+    var vLetrasVerde = [];
     var wordComAcento = word;
     var vModoLivre = false;
     var vVenceu = false;
     var vPerdeu = false;
-    var vTentouENaoExiste = 0;    
+    var vTentouENaoExiste = 0; 
+    var vUsouDica = 0;   
     var Elemento;
     var vNaoUsouPalAleatoria = 1;
     var vPalavraTestadaGlobal = '';
@@ -651,6 +653,7 @@
         + '\nRepetiu Amarelo ou Verde na mesma coluna(-): ' + Duplicacoes()
         + '\nRepetiu Consoante Vermelha (-): ' + vRepetiuLetraVermelha
         + '\nAdivinhou e não existe (-): ' + vTentouENaoExiste
+        + '\nUsou Dica (-): ' + vUsouDica
         + '\n\n- Pontos nas Partidas Anteriores: \n' + vCookieString.split('|');  
 
       return Nota;        
@@ -661,7 +664,7 @@
         PontuacaoPartida = pPontos;
       }
       else{
-        PontuacaoPartida = (10) - ((6 - LinhasUsadas()) + Duplicacoes() + vTentouENaoExiste  + vRepetiuLetraVermelha + vNaoUsouPalAleatoria); 
+        PontuacaoPartida = (10) - ((6 - LinhasUsadas()) + Duplicacoes() + vTentouENaoExiste  + vRepetiuLetraVermelha + vNaoUsouPalAleatoria + vUsouDica); 
       }
   
       return PontuacaoPartida;       
@@ -802,6 +805,25 @@
 
       return vLetrasDiferentes;
     }  
+
+    function VerDica(){
+      var vLetraDica = [];    
+      var vTodasLetras = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'X', 'Z'];
+      var vNaoPalavraNaoVermelho = [];
+      var vNaoPalavra = [];
+      var vLetrasNaPalavra = word;
+
+      vNaoPalavra = vTodasLetras.filter(value => !vLetrasNaPalavra.includes(value));
+      vNaoPalavraNaoVermelho = vNaoPalavra.filter(value => !vLetrasVermelho.includes(value));
+
+      var vLetraAleatoriaNaoPalavra = vNaoPalavraNaoVermelho[Math.floor(Math.random()*vNaoPalavraNaoVermelho.length)];
+
+      vUsouDica++;
+      AtualizaPontuacao(0);
+      
+      alert('Letra que não existe na Palavra Secreta: ' + vLetraAleatoriaNaoPalavra);
+
+    }
 
  </script>
 </body>
