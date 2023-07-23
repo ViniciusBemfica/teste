@@ -269,7 +269,7 @@
   };
 
   window.addEventListener('beforeunload', function (e) {
-      if (!vVenceu){
+      if ((!vVenceu) && (!vPerdeu)){
         e.preventDefault();
         e.returnValue = '';
         AtualizaCookie(0);
@@ -285,6 +285,7 @@
     var wordComAcento = word;
     var vModoLivre = false;
     var vVenceu = false;
+    var vPerdeu = false;
     var vTentouENaoExiste = 0;    
     var Elemento;
     var vNaoUsouPalAleatoria = 1;
@@ -364,18 +365,30 @@
       }
       
       // Check if the player has won
-      if (guessedWord.join('') === word) {        
+      if (guessedWord.join('') === word) {  
+        var vPontosDesafio = 0;      
         vVenceu = true; 
         vMsgVenceu = 'Parabéns, você venceu! Palavra: ' + wordComAcento + '\n' + MensagemPontuacao(true);
 
         if (DesafioExiste('Desafio4Aleatorias')){
           if(vQtdPalavrasAleatorias > 3){
-            var vPontosDesafio = 20;
+            vPontosDesafio = 20;
 
             vMsgVenceu =  'Parabéns, você venceu completando o Desafio! Palavra: ' 
                        + wordComAcento + '\n' 
                        + '\nDesafio: ' + vDesafioDescricao
                        + '\nPontos: 20';
+          }  
+        }
+        if (DesafioExiste('Desafio20Letras')){
+          if(CalculaLetrasDiferentesUsadas() > 19){
+            vPontosDesafio = 20;
+
+            vMsgVenceu =  'Parabéns, você venceu completando o Desafio! Palavra: ' 
+                       + wordComAcento + '\n' 
+                       + '\nDesafio: ' + vDesafioDescricao
+                       + '\nPontos: 20'
+                       + '\nLetras usadas: ' + CalculaLetrasDiferentesUsadas();
           }  
         }
 
@@ -388,6 +401,7 @@
       // Check if the player has lost
       if (currentLine > 6 && guessedWord.join('') !== word) {
         AtualizaCookie(0);
+        vPerdeu = true;
         alert('Você perdeu! A palavra certa era: ' + wordComAcento);       
         PesquisaPalavraNaWeb(wordComAcento);
       }
@@ -409,7 +423,7 @@
         }
       });  
 
-      AtualizaPontuacao();
+      AtualizaPontuacao(0);
     }
     
     
@@ -546,6 +560,7 @@
 
       alert(texto
         + '\n' + word); 
+
     }
     
     function LinhasUsadas(){
@@ -625,7 +640,7 @@
     }
     
     function MensagemPontuacao(MsgAoVencer){
-      AtualizaPontuacao();
+      AtualizaPontuacao(0);
       
       var vCookieString = getCookie("CookiePontuacao");    
 
@@ -641,7 +656,7 @@
     }
   
     function AtualizaPontuacao(pPontos){
-      if (pPontos != null){
+      if (pPontos != 0){
         PontuacaoPartida = pPontos;
       }
       else{
@@ -723,11 +738,21 @@
     }
 
     function VerDesafio(){
-      alert('- Desafio - \n' + vDesafioDescricao);
+      var vTextoCustomizado = '';
+
+      if (DesafioExiste('Desafio20Letras')){
+        vTextoCustomizado = '\nLetras usadas: ' + CalculaLetrasDiferentesUsadas(); 
+      }
+      else if (DesafioExiste('Desafio4Aleatorias')){
+        vTextoCustomizado = '\nPalavras Aleatórias usadas: ' + vQtdPalavrasAleatorias; 
+      }
+
+
+      alert('- Desafio - \n' + vDesafioDescricao + vTextoCustomizado);
     }
 
     function DesafioExiste(pDesafioNome){
-      if (vDesafioNome = pDesafioNome){
+      if (vDesafioNome == pDesafioNome){
         return true;
       }
     }
@@ -757,13 +782,26 @@
         document.getElementById("botaDesafio").style.backgroundColor = 'grey';
         document.getElementById("botaDesafio").onclick = null;
       }
+    }
+
+    function CalculaLetrasDiferentesUsadas(){
+      var vLetrasDiferentes = 0;
+
+      document.querySelectorAll('.keyboard-key').forEach(key => {
+        if (key.classList.contains('disabledColor')){
+          vLetrasDiferentes++;  
+        }    
+        else if (key.classList.contains('TecladoCorVerde')){
+          vLetrasDiferentes++;  
+        } 
+        else if (key.classList.contains('TecladoCorAmarelo')){
+          vLetrasDiferentes++;  
+        }      
+      });
+
+      return vLetrasDiferentes;
     }  
 
-    
-      
-
-
-  
  </script>
 </body>
 </html>
