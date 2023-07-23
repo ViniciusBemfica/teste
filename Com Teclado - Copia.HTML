@@ -196,8 +196,8 @@
     </div>
     
     <div class="lines-Adivinhar-container">
-      <div class="Adivinhar" onclick="LimpaLinha()">Limpar</div>    
-      <div class="Adivinhar" onclick="proceed()">Adivinhar</div>
+      <div class="Adivinhar" onclick="LimpaLinha()">🗑</div>    
+      <div class="Adivinhar" onclick="proceed()">➯</div>
     </div>
     <div class="keyboard-container">
       <div class="keyboard-line">
@@ -234,10 +234,10 @@
       
     </div>
     <div class="lines-Adivinhar-container">
-      <div class="Adivinhar" id="botaDesafio" onclick="VerDesafio()">Desafio</div>
-      <div class="Adivinhar" id="botaDesafio" onclick="VerDica()">Dica</div>
-      <div class="Adivinhar" onclick="PesquisaPalavraNaWeb()">Pesquisar</div>
-      <div class="Adivinhar" onclick="InserePalavraAleatoria()">Aleatória</div>
+      <div class="Adivinhar" id="botaDesafio" onclick="VerDesafio()">☑</div>
+      <div class="Adivinhar" id="botaDesafio" onclick="VerDica()">💡︎</div>
+      <div class="Adivinhar" onclick="PesquisaPalavraNaWeb()">🔎︎</div>
+      <div class="Adivinhar" onclick="InserePalavraAleatoria()">⚅</div>
     </div>
     
     <div class="barraPontuacao" id="barraPontuacao" onclick="alert(MensagemPontuacao())">
@@ -821,7 +821,7 @@
       vUsouDica++;
       AtualizaPontuacao(0);
       
-      alert('Letra que não existe na Palavra Secreta: ' + vLetraAleatoriaNaoPalavra);
+      alert('- Dica - \nLetra que não existe na Palavra Secreta: ' + vLetraAleatoriaNaoPalavra);
 
     }
 
