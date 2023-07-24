@@ -286,7 +286,7 @@
     var PalavraComAcento = PalavraSecreta;
     var currentLine = 1;
     var currentLetter = 0;
-    var vLetrasVermelho = [];   
+    var vLetrasVermelho = []; 
     var vLetrasAmarelo = []; 
     var vLetrasVerde = [];   
     var vModoLivre = false;
@@ -303,6 +303,11 @@
     var vDesafioNome = '';
     var vDesafioDescricao = '';
     var vQtdPalavrasAleatorias = 0;
+    var textoDica = '';
+    var vLetrasVermelhoDica = [];
+    var DicaLetrasUnicasJaUsada = false;
+    var DicaQtdVogaisJaUsada = false;
+
 
     function GravaElementoEmFoco() {
       elementoEmFoco = document.activeElement;
@@ -792,22 +797,60 @@
       return vLetrasDiferentes;
     }  
 
-    function VerDica(){
-      var vLetraDica = [];    
+    function VerDica(){  
       var vTodasLetras = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'X', 'Z'];
-      var vNaoPalavraNaoVermelho = [];
-      var vNaoPalavra = [];
-      var vLetrasNaPalavra = PalavraSecreta;
+      var vTodasVogais = ['A', 'E', 'I', 'O', 'U'];
+      
+      function DicaLetraNaoExiste(){
+        var vNaoPalavra = vTodasLetras.filter(value => !PalavraSecreta.includes(value));
+        var vNaoPalavraNaoVermelho = vNaoPalavra.filter(value => !vLetrasVermelho.includes(value));
+        var vNaoNaDica = vNaoPalavraNaoVermelho.filter(value => !vLetrasVermelhoDica.includes(value));
+        var vLetraAleatoriaNaoPalavra = vNaoNaDica[Math.floor(Math.random()*vNaoNaDica.length)]; 
 
-      vNaoPalavra = vTodasLetras.filter(value => !vLetrasNaPalavra.includes(value));
-      vNaoPalavraNaoVermelho = vNaoPalavra.filter(value => !vLetrasVermelho.includes(value));
+        if (vLetraAleatoriaNaoPalavra == null){
+          textoDica = textoDica + '\n' + 'Acabaram as dicas de Letra que não existe na Palavra'; 
+        }
+        else{
+          vLetrasVermelhoDica = vLetrasVermelhoDica + [vLetraAleatoriaNaoPalavra]; 
 
-      var vLetraAleatoriaNaoPalavra = vNaoPalavraNaoVermelho[Math.floor(Math.random()*vNaoPalavraNaoVermelho.length)];
+          textoDica = textoDica + '\n' + 'Letra que não existe na Palavra Secreta: ' + vLetraAleatoriaNaoPalavra;
+        }     
+      }
+
+      function DicaLetrasUnicas(){
+        textoDica = textoDica + '\n' + 'Letras úinicas na Palavra Secreta: ' + new Set(PalavraSecreta).size;
+        DicaLetrasUnicasJaUsada = true;
+      }
+
+      function DicaQtdVogais(){
+        textoDica = textoDica + '\n' + 'Vogais na Palavra Secreta: ' + PalavraSecreta.match(/[AEIOU]/gi).length;
+        DicaQtdVogaisJaUsada = true;
+      }
+
+      var chance = Math.random();
+      if (chance > 0.66){
+        DicaLetraNaoExiste();
+      }
+      else if (chance > 0.33){
+        if (DicaLetrasUnicasJaUsada){
+          DicaLetraNaoExiste();
+        }
+        else{
+          DicaLetrasUnicas();
+        }          
+      } 
+      else{
+        if (DicaQtdVogaisJaUsada){
+          DicaLetraNaoExiste();
+        }
+        else{
+          DicaQtdVogais();
+        }          
+      } 
 
       vUsouDica++;
       AtualizaPontuacao(0);
-      
-      alert('- Dica - \nLetra que não existe na Palavra Secreta: ' + vLetraAleatoriaNaoPalavra);
+      alert('- Dica - \n' + textoDica);      
     }
 
  </script>
