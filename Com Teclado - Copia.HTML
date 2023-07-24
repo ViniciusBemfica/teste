@@ -629,6 +629,10 @@
     function setTextoPontuacaoRodape(){
       var vCookieString = getCookie("CookiePontuacao");    
       var vPontuacao = CookieRetornaTotal(vCookieString);
+
+      if (vPontuacao > 100){
+        vPontuacao = 100;    
+      }
       document.getElementById("textoPontuacaoRodape").innerHTML = vPontuacao + "/100";
       document.getElementById("rankPontuacaoRodape").innerHTML = obterRank(vPontuacao);
       document.getElementById("barraPontuacao").style.backgroundColor = CorDoRank;     
