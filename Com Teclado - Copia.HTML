@@ -376,23 +376,26 @@
 
         if (DesafioExiste('Desafio4Aleatorias')){
           if(vQtdPalavrasAleatorias > 3){
-            vPontosDesafio = 20 - vUsouDica;
+            vPontosDesafio = 20 - (vUsouDica * 2);
 
             vMsgVenceu =  'Parabéns, você venceu completando o Desafio! Palavra: ' 
                        + PalavraComAcento + '\n' 
-                       + '\nDesafio: ' + vDesafioDescricao
-                       + '\nPontos: ' + vPontosDesafio;
+                       + '\n\nDesafio: ' + vDesafioDescricao
+                       + '\nPalavras Aleatórias: ' + vQtdPalavrasAleatorias
+                       + '\nDicas (x 2): ' + (vUsouDica * 2)
+                       + '\n\n- Pontuação: ' + vPontosDesafio;
           }  
         }
         if (DesafioExiste('Desafio20Letras')){
           if(CalculaLetrasDiferentesUsadas() > 19){
-            vPontosDesafio = 20 - vUsouDica;
+            vPontosDesafio = 20 - (vUsouDica * 2);
 
             vMsgVenceu =  'Parabéns, você venceu completando o Desafio! Palavra: ' 
                        + PalavraComAcento + '\n' 
-                       + '\nDesafio: ' + vDesafioDescricao
-                       + '\nPontos: ' + vPontosDesafio;
-                       + '\nLetras usadas: ' + CalculaLetrasDiferentesUsadas();
+                       + '\n\nDesafio: ' + vDesafioDescricao
+                       + '\nLetras usadas: ' + CalculaLetrasDiferentesUsadas()
+                       + '\nDicas (x 2): ' + (vUsouDica * 2)
+                       + '\n\n- Pontuação: ' + vPontosDesafio;
           }  
         }
 
@@ -644,7 +647,7 @@
       var vCookieString = getCookie("CookiePontuacao");    
 
       var Nota = 'Pontos da partida: ' + PontuacaoPartida+ '/10'
-        + '\nLinhas Usadas (+): ' + LinhasUsadas()
+        + '\n\nLinhas Usadas (+): ' + LinhasUsadas()
         + '\nNão Usou Pal. Aleatória (-): ' + vNaoUsouPalAleatoria
         + '\nRepetiu Amarelo ou Verde na mesma coluna(-): ' + Duplicacoes()
         + '\nRepetiu Consoante Vermelha (-): ' + vRepetiuLetraVermelha
@@ -740,10 +743,12 @@
       var vTextoCustomizado = '';
 
       if (DesafioExiste('Desafio20Letras')){
-        vTextoCustomizado = '\nLetras usadas: ' + CalculaLetrasDiferentesUsadas(); 
+        vTextoCustomizado = '\n\nLetras usadas: ' + CalculaLetrasDiferentesUsadas()
+                          + '\nDicas: ' + vUsouDica; 
       }
       else if (DesafioExiste('Desafio4Aleatorias')){
-        vTextoCustomizado = '\nPalavras Aleatórias usadas: ' + vQtdPalavrasAleatorias; 
+        vTextoCustomizado = '\n\nPalavras Aleatórias usadas: ' + vQtdPalavrasAleatorias 
+                          + '\nDicas: ' + vUsouDica; 
       }
 
 
