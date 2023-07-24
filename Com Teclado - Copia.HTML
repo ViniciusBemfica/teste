@@ -197,7 +197,7 @@
     
     <div class="lines-Adivinhar-container">
       <div class="Adivinhar" onclick="LimpaLinha()">🗑</div>    
-      <div class="Adivinhar" onclick="proceed()">➯</div>
+      <div class="Adivinhar" onclick="ProximaLinha()">➯</div>
     </div>
     <div class="keyboard-container">
       <div class="keyboard-line">
@@ -236,7 +236,7 @@
     <div class="lines-Adivinhar-container">
       <div class="Adivinhar" id="botaDesafio" onclick="VerDesafio()">✅︎</div>
       <div class="Adivinhar" id="botaDesafio" onclick="VerDica()">💡︎</div>
-      <div class="Adivinhar" onclick="PesquisaPalavraNaWeb()">🔎︎</div>
+      <div class="Adivinhar" onclick="PesquisaPalavraNaWeb()">🔎︎&#xFE0E;</div>
       <div class="Adivinhar" onclick="InserePalavraAleatoria()">⚅</div>
     </div>
     
@@ -261,35 +261,40 @@
     ;
 
 
-  // Code to be executed when the page loads  
-  window.onload = function() {
-    FocusPrimeiroElemento();
-    //setCookie("CookiePontuacao", "0|0|0", 30);
-    setTextoPontuacaoRodape();
-    DesafioAleatorio();
-  };
+    // Ao carregar a pagina 
+    window.onload = function() {
+      FocusPrimeiroElemento();
+      //setCookie("CookiePontuacao", "0|0|0", 30);
+      setTextoPontuacaoRodape();
+      DesafioAleatorio();
+      
+      PalavraSecreta = removerAcentos(PalavraSecreta);
+    };
 
-  window.addEventListener('beforeunload', function (e) {
+    //Antes de recarregar
+    window.addEventListener('beforeunload', function (e) {
       if ((!vVenceu) && (!vPerdeu)){
         e.preventDefault();
         e.returnValue = '';
         AtualizaCookie(0);
       }
-  });
+    });
 
-    // Generate a random word
+    // Var globais
     var randomIndex = Math.floor(Math.random() * words.length);
-    var word = words[randomIndex];
+    var PalavraSecreta = words[randomIndex];
+    var PalavraComAcento = PalavraSecreta;
+    var currentLine = 1;
+    var currentLetter = 0;
     var vLetrasVermelho = [];   
     var vLetrasAmarelo = []; 
-    var vLetrasVerde = [];
-    var wordComAcento = word;
+    var vLetrasVerde = [];   
     var vModoLivre = false;
     var vVenceu = false;
     var vPerdeu = false;
     var vTentouENaoExiste = 0; 
     var vUsouDica = 0;   
-    var Elemento;
+    var elementoEmFoco;
     var vNaoUsouPalAleatoria = 1;
     var vPalavraTestadaGlobal = '';
     var vRepetiuLetraVermelha = 0;
@@ -299,26 +304,18 @@
     var vDesafioDescricao = '';
     var vQtdPalavrasAleatorias = 0;
 
-    
     function GravaElementoEmFoco() {
-      Elemento = document.activeElement;
+      elementoEmFoco = document.activeElement;
       vModoLivre = true;
     }
   
-    function removerAcentos(word) {
-      return word.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    function removerAcentos(PalavraSecreta) {
+      return PalavraSecreta.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     }
-    
-    word = removerAcentos(word);
-
-    // Current line and letter index
-    var currentLine = 1;
-    var currentLetter = 0;
-      
-    // Function to proceed to the next line
-    function proceed() {
+        
+    function ProximaLinha() {
       var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input');
-      var correctWord = word.split('');
+      var correctWord = PalavraSecreta.split('');
       var guessedWord = Array.from(lineInputs).map(input => input.value.toUpperCase());
       vPalavraTestadaGlobal = guessedWord.join('');
       
@@ -331,33 +328,33 @@
       else
       {
       // Check the guessed word against the correct word
-      for (var i = 0; i < guessedWord.length; i++) {
-        var letter = guessedWord[i];
-        var input = lineInputs[i];
+        for (var i = 0; i < guessedWord.length; i++) {
+          var letter = guessedWord[i];
+          var input = lineInputs[i];
 
-        if (letter === correctWord[i]) {
-          input.style.backgroundColor = 'green';
-          vLetrasVerde = vLetrasVerde + [letter];
-        } else if (correctWord.includes(letter)) {
-          input.style.backgroundColor = 'GoldenRod';
-          vLetrasAmarelo= vLetrasAmarelo + [letter];
-        } else {
-          if (!vLetrasVermelho.includes(guessedWord[i])){
-            vLetrasVermelho = vLetrasVermelho + [letter];
+          if (letter === correctWord[i]) {
+            input.style.backgroundColor = 'green';
+            vLetrasVerde = vLetrasVerde + [letter];
+          } else if (correctWord.includes(letter)) {
+            input.style.backgroundColor = 'GoldenRod';
+            vLetrasAmarelo= vLetrasAmarelo + [letter];
+          } else {
+            if (!vLetrasVermelho.includes(guessedWord[i])){
+              vLetrasVermelho = vLetrasVermelho + [letter];
+            }
+            else
+            {
+              if(currentLine > 1){
+                if(guessedWord[i] != 'A' && guessedWord[i] != 'E' && guessedWord[i] != 'I' && guessedWord[i] != 'O' && guessedWord[i] != 'U'){
+                  vRepetiuLetraVermelha++;
+                }
+              }            
+            }
+            
+            input.style.backgroundColor = 'DarkRed';
           }
-          else
-          {
-            if(currentLine > 1){
-              if(guessedWord[i] != 'A' && guessedWord[i] != 'E' && guessedWord[i] != 'I' && guessedWord[i] != 'O' && guessedWord[i] != 'U'){
-                vRepetiuLetraVermelha++;
-              }
-            }            
-          }
-          
-          input.style.backgroundColor = 'DarkRed';
         }
       }
-    }
 
       // Disable the current line and enable the next line
       lineInputs.forEach(input => input.disabled = true);
@@ -367,17 +364,17 @@
       }
       
       // Check if the player has won
-      if (guessedWord.join('') === word) {  
+      if (guessedWord.join('') === PalavraSecreta) {  
         var vPontosDesafio = 0;      
         vVenceu = true; 
-        vMsgVenceu = 'Parabéns, você venceu! Palavra: ' + wordComAcento + '\n' + MensagemPontuacao(true);
+        vMsgVenceu = 'Parabéns, você venceu! Palavra: ' + PalavraComAcento + '\n' + MensagemPontuacao(true);
 
         if (DesafioExiste('Desafio4Aleatorias')){
           if(vQtdPalavrasAleatorias > 3){
             vPontosDesafio = 20;
 
             vMsgVenceu =  'Parabéns, você venceu completando o Desafio! Palavra: ' 
-                       + wordComAcento + '\n' 
+                       + PalavraComAcento + '\n' 
                        + '\nDesafio: ' + vDesafioDescricao
                        + '\nPontos: 20';
           }  
@@ -387,7 +384,7 @@
             vPontosDesafio = 20;
 
             vMsgVenceu =  'Parabéns, você venceu completando o Desafio! Palavra: ' 
-                       + wordComAcento + '\n' 
+                       + PalavraComAcento + '\n' 
                        + '\nDesafio: ' + vDesafioDescricao
                        + '\nPontos: 20'
                        + '\nLetras usadas: ' + CalculaLetrasDiferentesUsadas();
@@ -401,11 +398,11 @@
       }
 
       // Check if the player has lost
-      if (currentLine > 6 && guessedWord.join('') !== word) {
+      if (currentLine > 6 && guessedWord.join('') !== PalavraSecreta) {
         AtualizaCookie(0);
         vPerdeu = true;
-        alert('Você perdeu! A palavra certa era: ' + wordComAcento);       
-        PesquisaPalavraNaWeb(wordComAcento);
+        alert('Você perdeu! A palavra certa era: ' + PalavraComAcento);       
+        PesquisaPalavraNaWeb(PalavraComAcento);
       }
       
       FocusPrimeiroElemento();
@@ -428,8 +425,6 @@
       AtualizaPontuacao(0);
     }
     
-    
-    //Palavra não existe no vocabulário
     function PalavraNaoExiste(lineInputs) {
       var guessedWord = Array.from(lineInputs).map(input => input.value.toUpperCase());
       if (!wordsSemAcento.includes(guessedWord.join(''))) {      
@@ -446,7 +441,6 @@
       }       
     }   
     
-    //focus primeiro elemento
     function FocusPrimeiroElemento() {
       var vlineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input');
       input = vlineInputs[0];
@@ -455,22 +449,18 @@
       vModoLivre = false;
     }    
     
-    
-    // Limpa linha
     function LimpaLinha() {
       document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input').forEach(input => input.value = '');
       document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input').forEach(input => input.style.backgroundColor = 'grey');
 
       FocusPrimeiroElemento();
     }
-    
-    //Limpa só cores
+
     function LimpaCores() {
       document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input').forEach(input => input.style.backgroundColor = 'grey');
       FocusPrimeiroElemento();
     }
 
-    // Function to insert a letter into the input box
     function insertLetter(element) {
       if (element.classList.contains('disabled')) return;
 
@@ -481,8 +471,8 @@
       
       //Grava na caixa em foco
       if (vModoLivre == true){
-        Elemento.value = element.innerText;
-        Elemento.focus();
+        elementoEmFoco.value = element.innerText;
+        elementoEmFoco.focus();
       }
       else
       {
@@ -503,8 +493,8 @@
        
     function Delete() {
       if (vModoLivre == true){
-        Elemento.value = '';
-        Elemento.focus();
+        elementoEmFoco.value = '';
+        elementoEmFoco.focus();
       }
       else
       {
@@ -544,9 +534,7 @@
         window.open(url, "_blank");
       }
     }
-    
-    
-    
+      
     function Info(){
       var texto = 
       `
@@ -562,8 +550,7 @@
       Para atingir 10 pontos, deve-se acertar a palavra usando todas as 6 linhas disponíveis, dentre outras regras conforme pode ser visto ao clicar na barra de Ranking inferior.`;
 
       alert(texto
-        + '\n' + word); 
-
+        + '\n' + PalavraSecreta); 
     }
     
     function LinhasUsadas(){
@@ -624,10 +611,10 @@
         return "<{= Ludopentografador =}>";
       } else if (nota >= 90 && nota < 100) {
         CorDoRank = "#9f5209"; //Laranja Escuro
-        return "<{(≡ Ludopentografovernacultor ≡)}> ";
+        return "<{(≡ Ludopentografolexicador ≡)}> ";
       } else if (nota >= 100) {
         CorDoRank = "#420042"; //Roxo
-        return "<{:[≡ Centiludopentografovernacurador ≡]:}>";
+        return "<{:[≡ Centiludopentografolexicologista ≡]:}>";
       } else {
         CorDoRank = "#1a932a"; //Verde
         return "- Penteiro -";
@@ -669,25 +656,24 @@
   
       return PontuacaoPartida;       
     }
-    
-   //InserePalavraAleatoria   
-   function InserePalavraAleatoria(){
-     var randomIndex = Math.floor(Math.random() * wordsSemAcento.length);
-     var vPalavraAleatoria = wordsSemAcento[randomIndex];
+
+    function InserePalavraAleatoria(){
+      var randomIndex = Math.floor(Math.random() * wordsSemAcento.length);
+      var vPalavraAleatoria = wordsSemAcento[randomIndex];
 
 
-     for (var j = 0; j < 5; j++) {
-       var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input')[j].value = vPalavraAleatoria[j];   
-     }       
-     
-     vNaoUsouPalAleatoria = 0;
+      for (var j = 0; j < 5; j++) {
+        var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input')[j].value = vPalavraAleatoria[j];   
+      }       
 
-     if (DesafioExiste('Desafio4Aleatorias')){
-       vQtdPalavrasAleatorias++;
-     }
-     
-     proceed();
-   }
+      vNaoUsouPalAleatoria = 0;
+
+      if (DesafioExiste('Desafio4Aleatorias')){
+        vQtdPalavrasAleatorias++;
+      }
+
+      ProximaLinha();
+    }
 
     function AtualizaCookie(vValor) {
       let vCookieString = getCookie("CookiePontuacao");
@@ -811,7 +797,7 @@
       var vTodasLetras = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'X', 'Z'];
       var vNaoPalavraNaoVermelho = [];
       var vNaoPalavra = [];
-      var vLetrasNaPalavra = word;
+      var vLetrasNaPalavra = PalavraSecreta;
 
       vNaoPalavra = vTodasLetras.filter(value => !vLetrasNaPalavra.includes(value));
       vNaoPalavraNaoVermelho = vNaoPalavra.filter(value => !vLetrasVermelho.includes(value));
@@ -822,7 +808,6 @@
       AtualizaPontuacao(0);
       
       alert('- Dica - \nLetra que não existe na Palavra Secreta: ' + vLetraAleatoriaNaoPalavra);
-
     }
 
  </script>
