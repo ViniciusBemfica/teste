@@ -376,22 +376,22 @@
 
         if (DesafioExiste('Desafio4Aleatorias')){
           if(vQtdPalavrasAleatorias > 3){
-            vPontosDesafio = 20;
+            vPontosDesafio = 20 - vUsouDica;
 
             vMsgVenceu =  'Parabéns, você venceu completando o Desafio! Palavra: ' 
                        + PalavraComAcento + '\n' 
                        + '\nDesafio: ' + vDesafioDescricao
-                       + '\nPontos: 20';
+                       + '\nPontos: ' + vPontosDesafio;
           }  
         }
         if (DesafioExiste('Desafio20Letras')){
           if(CalculaLetrasDiferentesUsadas() > 19){
-            vPontosDesafio = 20;
+            vPontosDesafio = 20 - vUsouDica;
 
             vMsgVenceu =  'Parabéns, você venceu completando o Desafio! Palavra: ' 
                        + PalavraComAcento + '\n' 
                        + '\nDesafio: ' + vDesafioDescricao
-                       + '\nPontos: 20'
+                       + '\nPontos: ' + vPontosDesafio;
                        + '\nLetras usadas: ' + CalculaLetrasDiferentesUsadas();
           }  
         }
