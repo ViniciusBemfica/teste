@@ -378,6 +378,8 @@
           if(vQtdPalavrasAleatorias > 3){
             vPontosDesafio = vPontosDesafio - (vUsouDica * 5);
 
+            AtualizaPontuacao(vPontosDesafio);
+
             vMsgVenceu =  'Parabéns, você venceu completando o Desafio! Palavra: ' 
                        + PalavraComAcento + '\n' 
                        + '\nDesafio: ' + vDesafioDescricao
@@ -387,9 +389,11 @@
                        + '\n\n- Pontuação: ' + vPontosDesafio;
           }  
         }
-        if (DesafioExiste('Desafio20Letras')){
+        else if (DesafioExiste('Desafio20Letras')){
           if(CalculaLetrasDiferentesUsadas() > 19){
             vPontosDesafio = vPontosDesafio - (vUsouDica * 5);
+
+            AtualizaPontuacao(vPontosDesafio);
 
             vMsgVenceu =  'Parabéns, você venceu completando o Desafio! Palavra: ' 
                        + PalavraComAcento + '\n' 
@@ -400,8 +404,10 @@
                        + '\n\n- Pontuação: ' + vPontosDesafio;
           }  
         }
-
-        AtualizaPontuacao(vPontosDesafio);
+        else{
+          AtualizaPontuacao(0);
+        }
+      
         AtualizaCookie(PontuacaoPartida);
 
         alert(vMsgVenceu);       
