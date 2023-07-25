@@ -553,9 +553,96 @@
         window.open(url, "_blank");
       }
     }
+
+    function CalculaPossibilidades(){
+      // Função para calcular a quantidade de palavras possíveis
+      function calculatePossibleWords(wordSet, wordleWords, feedbacks) {
+        const possibleWords = [];
+        
+        // Percorre cada palavra do conjunto
+
+        for (const word of wordSet) {
+          if (word.length === wordleWords[0].length) {      
+            let validWord = true;
+
+            // Verifica se a palavra pode ser formada com as dicas fornecidas
+            for (let i = 0; i < wordleWords.length; i++) {
+              const wordleChars = wordleWords[i].split('');
+              const feedback = feedbacks[i];
+
+              for (let j = 0; j < word.length; j++) {
+                if (feedback[j] === 'verde') {
+                  if (wordleChars[j] !== word[j]) {
+                    validWord = false;
+                    break;
+                  }
+                } else if (feedback[j] === 'vermelho') {
+                  if (word.includes(wordleChars[j])) {
+                    validWord = false;
+                    break;
+                  }
+                } else if (feedback[j] === 'amarelo') {
+                  if (wordleChars[j] === word[j] || !word.includes(wordleChars[j])) {
+                    validWord = false;
+                    break;
+                  }
+                }
+              }
+
+
+              if (!validWord) {
+                break;
+              }
+            }
+
+            // Se a palavra for válida, adiciona-a à lista de palavras possíveis
+            if (validWord) {
+              possibleWords.push(word);
+            }
+          }
+        }
+
+        return possibleWords;
+      }
+
+      // Exemplo de uso:
+      var palavrasTentadas = [];
+      var linhaFeedback = [];
+      for (var j = 0; j < currentLine - 1; j++) {
+        var lineInputs = document.querySelectorAll('.line')[j].querySelectorAll('.letter-input');
+        var guessedWord = Array.from(lineInputs).map(input => input.value);
+        guessedWord = guessedWord.join('');
+
+        palavrasTentadas.push(guessedWord);
+
+
+        var posicaoFeedback = [];
+        
+        for (var i = 0; i < 5; i++) {
+
+          if (lineInputs[i].style.backgroundColor == 'darkred'){
+            posicaoFeedback.push('vermelho');
+          }   
+          else if (lineInputs[i].style.backgroundColor == 'goldenrod'){
+            posicaoFeedback.push('amarelo');
+          } 
+          else if (lineInputs[i].style.backgroundColor == 'green'){
+            posicaoFeedback.push('verde');
+          }      
+        }
+        linhaFeedback.push(posicaoFeedback);
+      }
+                   
+      const possibleWords = calculatePossibleWords(wordsSemAcento, palavrasTentadas, linhaFeedback);
+
+      const uniqueSet = new Set(possibleWords);
+      const uniqueArray = Array.from(uniqueSet);
+      
+      return uniqueArray;
+    }
       
     function Info(){
-      var texto = 
+      /*var texto = 
       `
       - Não tem palavras com cedilha.
       - A barra inferior é seu ranking e pontuação, quão bem você esta indo no jogo nas últimas partidas. Clique nela para ver a pontuação da Partida.
@@ -569,7 +656,12 @@
       Para atingir 10 pontos, deve-se acertar a palavra usando todas as 6 linhas disponíveis, dentre outras regras conforme pode ser visto ao clicar na barra de Ranking inferior.`;
 
       alert(texto
-        + '\n' + PalavraSecreta);       
+        + '\n' + PalavraSecreta);*/  
+
+      vPalavrasPossiveis = CalculaPossibilidades();   
+      alert('Qtd. Palavras possíveis: ' + vPalavrasPossiveis.length
+           +'\n\n\n\n\n\n\n\n\n\nPalavras possíveis: ' + vPalavrasPossiveis);
+           
     }
     
     function LinhasUsadas(){
@@ -947,6 +1039,7 @@
       AtualizaPontuacao(0);
       alert('- Dica - \n' + textoDica);      
     }
+
 
  </script>
 </body>
