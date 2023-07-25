@@ -265,6 +265,7 @@
     window.onload = function() {
       FocusPrimeiroElemento();
       //setCookie("CookiePontuacao", "0|0|0", 30);
+      //setCookie("CookiePalavras", "", 30);
       setTextoPontuacaoRodape();
       DesafioAleatorio();
       
@@ -409,6 +410,7 @@
         }
       
         AtualizaCookie(PontuacaoPartida);
+        AtualizaCookiePalavras(PalavraComAcento);
 
         alert(vMsgVenceu);       
       }
@@ -416,6 +418,7 @@
       // Check if the player has lost
       if (currentLine > 6 && guessedWord.join('') !== PalavraSecreta) {
         AtualizaCookie(0);
+        AtualizaCookiePalavras(PalavraComAcento);
         vPerdeu = true;
         alert('Você perdeu! A palavra certa era: ' + PalavraComAcento);       
         PesquisaPalavraNaWeb(PalavraComAcento);
@@ -663,7 +666,7 @@
         + '\nDicas (-2 por dica): ' + (vUsouDica * 2)
         + '\n\n- Pontos nas Partidas Anteriores: \n' + vCookieString.split('|') 
         + '\nPontuação Total: ' + CookieRetornaTotal() 
-        + '\nÚltimas palavras adivinhadas: ' + 1;
+        + '\nÚltimas palavras: ' + CookieRetornaListaPalavra();
 
       return Nota;        
     }
@@ -748,6 +751,34 @@
       });
       
       return PontuacaoTodosJogos;
+    }
+
+    //To do
+    function AtualizaCookiePalavras(vValor) {
+      let vCookieString = getCookie("CookiePalavras");
+      
+      vCookieString = CookieAddPalavraRetornaString(vCookieString, vValor); 
+      setCookie("CookiePalavras", vCookieString, 30);
+    } 
+
+    function CookieAddPalavraRetornaString(vString, vPalavraAdicionar){
+      const QtdPalavras = 10;
+      var vArray = vString.split(', ');
+
+      if (vArray.length >= QtdPalavras){
+        vArray.shift();
+      }
+     
+      vArray.push(vPalavraAdicionar);
+      vString = vArray.join(', ');
+      
+      return vString;
+    }
+
+    function CookieRetornaListaPalavra(){
+      var vCookieString = getCookie("CookiePalavras"); 
+
+      return vCookieString;
     }
 
     function VerDesafio(){
