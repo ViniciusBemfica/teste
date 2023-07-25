@@ -637,9 +637,8 @@
       }
     }
 
-    function setTextoPontuacaoRodape(){
-      var vCookieString = getCookie("CookiePontuacao");    
-      var vPontuacao = CookieRetornaTotal(vCookieString);
+    function setTextoPontuacaoRodape(){  
+      var vPontuacao = CookieRetornaTotal();
 
       if (vPontuacao > 100){
         vPontuacao = 100;    
@@ -662,7 +661,9 @@
         + '\nRepetiu Consoante Vermelha (-): ' + vRepetiuLetraVermelha
         + '\nAdivinhou e não existe (-): ' + vTentouENaoExiste
         + '\nDicas (-2 por dica): ' + (vUsouDica * 2)
-        + '\n\n- Pontos nas Partidas Anteriores: \n' + vCookieString.split('|'); 
+        + '\n\n- Pontos nas Partidas Anteriores: \n' + vCookieString.split('|') 
+        + '\nPontuação Total: ' + CookieRetornaTotal() 
+        + '\nÚltimas palavras adivinhadas: ' + 1;
 
       return Nota;        
     }
@@ -732,10 +733,11 @@
       return vString;
     }
 
-    function CookieRetornaTotal(vString){
+    function CookieRetornaTotal(){
       const QtdJogosSomar = 10;
+      var vCookieString = getCookie("CookiePontuacao"); 
       var PontuacaoTodosJogos = 0;
-      var vArray = vString.split('|');
+      var vArray = vCookieString.split('|');
 
       if (vArray.length != QtdJogosSomar){
         vArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -773,7 +775,7 @@
     function DesafioAleatorio(){
       function Desafio4Aleatorias(){   
         vDesafioNome = 'Desafio4Aleatorias';
-        vDesafioDescricao = 'Encontre a palavra secreta usando pelo menos 4 vezes o Aleatória.'; 
+        vDesafioDescricao = 'Encontre a palavra secreta usando pelo menos 4 vezes uma palavra aleatória.'; 
       }
       function Desafio20Letras(){  
         vDesafioNome = 'Desafio20Letras';
