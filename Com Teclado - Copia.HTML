@@ -555,7 +555,7 @@
     }
       
     function Info(){
-      var texto = 
+      /*var texto = 
       `
       - Não tem palavras com cedilha.
       - A barra inferior é seu ranking e pontuação, quão bem você esta indo no jogo nas últimas partidas. Clique nela para ver a pontuação da Partida.
@@ -569,7 +569,9 @@
       Para atingir 10 pontos, deve-se acertar a palavra usando todas as 6 linhas disponíveis, dentre outras regras conforme pode ser visto ao clicar na barra de Ranking inferior.`;
 
       alert(texto
-        + '\n' + PalavraSecreta); 
+        + '\n' + PalavraSecreta); */
+
+       
     }
     
     function LinhasUsadas(){
@@ -683,21 +685,61 @@
     }
 
     function InserePalavraAleatoria(){
-      var randomIndex = Math.floor(Math.random() * wordsSemAcento.length);
-      var vPalavraAleatoria = wordsSemAcento[randomIndex];
+      var vPalavraAleatoria = '';
 
+      var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input');
+      var guessedWord = Array.from(lineInputs).map(input => input.value);
 
-      for (var j = 0; j < 5; j++) {
-        var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input')[j].value = vPalavraAleatoria[j];   
-      }       
+      var vPalavraTestada = guessedWord.join('');
+      vPalavraTestada = vPalavraTestada.split('');
 
-      vIniciouPalAleatoria = 1;
+      if (vPalavraTestada.length == 3){
+        vPalavraAleatoria = PalavraAleatoriaPossivel(vPalavraTestada);
 
-      if (DesafioExiste('Desafio4Aleatorias')){
-        vQtdPalavrasAleatorias++;
+        for (var j = 0; j < 5; j++) {
+          var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input')[j].value = vPalavraAleatoria[j];   
+        }  
+      }
+      else{
+        var randomIndex = Math.floor(Math.random() * wordsSemAcento.length);
+        vPalavraAleatoria = wordsSemAcento[randomIndex];
+
+        vIniciouPalAleatoria = 1;
+
+        if (DesafioExiste('Desafio4Aleatorias')){
+          vQtdPalavrasAleatorias++;
+        }
+
+        for (var j = 0; j < 5; j++) {
+          var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input')[j].value = vPalavraAleatoria[j];   
+        }
+
+        ProximaLinha();  
+      }
+      
+    }
+
+    function PalavraAleatoriaPossivel(vPalavraTestada){ 
+      function filterWords(words, letters) {
+          const myArrayOfLetters = Array.from(letters);
+          const output = words.filter((word) =>
+               myArrayOfLetters.every((letter) => word.includes(letter))
+          );
+          return output;
       }
 
-      ProximaLinha();
+      const palavrasFiltradas = filterWords(words, vPalavraTestada);
+      
+      // Verifica se há palavras que satisfazem o critério
+      if (palavrasFiltradas.length === 0) {
+        alert('Nenhuma palavra encontrada com essas letras')
+        return null; // Retorna null caso não haja palavras que atendam aos requisitos
+      }
+
+      // Escolhe uma palavra aleatória entre as palavras filtradas
+      const vPalavraPossivel = palavrasFiltradas[Math.floor(Math.random() * palavrasFiltradas.length)];
+
+      return vPalavraPossivel; 
     }
 
     function AtualizaCookie(vValor) {
