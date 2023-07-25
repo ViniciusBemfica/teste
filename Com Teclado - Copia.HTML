@@ -720,13 +720,13 @@
     function PalavraAleatoriaPossivel(vPalavraTestada){ 
       function filterWords(words, letters) {
           const myArrayOfLetters = Array.from(letters);
-          const output = words.filter((word) =>
+          const output = wordsSemAcento.filter((word) =>
                myArrayOfLetters.every((letter) => word.includes(letter))
           );
           return output;
       }
 
-      const palavrasFiltradas = filterWords(words, vPalavraTestada);
+      const palavrasFiltradas = filterWords(wordsSemAcento, vPalavraTestada);
       
       // Verifica se há palavras que satisfazem o critério
       if (palavrasFiltradas.length === 0) {
