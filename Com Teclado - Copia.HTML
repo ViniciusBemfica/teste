@@ -555,7 +555,7 @@
     }
       
     function Info(){
-      /*var texto = 
+      var texto = 
       `
       - Não tem palavras com cedilha.
       - A barra inferior é seu ranking e pontuação, quão bem você esta indo no jogo nas últimas partidas. Clique nela para ver a pontuação da Partida.
@@ -569,9 +569,7 @@
       Para atingir 10 pontos, deve-se acertar a palavra usando todas as 6 linhas disponíveis, dentre outras regras conforme pode ser visto ao clicar na barra de Ranking inferior.`;
 
       alert(texto
-        + '\n' + PalavraSecreta); */
-
-       
+        + '\n' + PalavraSecreta);       
     }
     
     function LinhasUsadas(){
@@ -799,8 +797,12 @@
     function AtualizaCookiePalavras(vValor) {
       let vCookieString = getCookie("CookiePalavras");
       
-      vCookieString = CookieAddPalavraRetornaString(vCookieString, vValor); 
-      setCookie("CookiePalavras", vCookieString, 30);
+      if (vCookieString != "" && vCookieString !== null) {
+        vCookieString = CookieAddPalavraRetornaString(vCookieString, vValor); 
+        setCookie("CookiePalavras", vCookieString, 30);
+      } else {
+        setCookie("CookiePalavras", "TESTE", 30);  
+      }
     } 
 
     function CookieAddPalavraRetornaString(vString, vPalavraAdicionar){
