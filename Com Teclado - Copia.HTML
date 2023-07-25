@@ -295,7 +295,7 @@
     var vTentouENaoExiste = 0; 
     var vUsouDica = 0;   
     var elementoEmFoco;
-    var vNaoUsouPalAleatoria = 1;
+    var vIniciouPalAleatoria = 0;
     var vPalavraTestadaGlobal = '';
     var vRepetiuLetraVermelha = 0;
     var PontuacaoPartida = 5;
@@ -370,31 +370,33 @@
       
       // Check if the player has won
       if (guessedWord.join('') === PalavraSecreta) {  
-        var vPontosDesafio = 0;      
+        var vPontosDesafio = 15;      
         vVenceu = true; 
-        vMsgVenceu = 'Parabéns, você venceu! Palavra: ' + PalavraComAcento + '\n' + MensagemPontuacao(true);
+        vMsgVenceu = 'Parabéns, você venceu! Palavra: ' + PalavraComAcento + '\n' + MensagemPontuacao();
 
         if (DesafioExiste('Desafio4Aleatorias')){
           if(vQtdPalavrasAleatorias > 3){
-            vPontosDesafio = 20 - (vUsouDica * 2);
+            vPontosDesafio = vPontosDesafio - (vUsouDica * 5);
 
             vMsgVenceu =  'Parabéns, você venceu completando o Desafio! Palavra: ' 
                        + PalavraComAcento + '\n' 
-                       + '\n\nDesafio: ' + vDesafioDescricao
+                       + '\nDesafio: ' + vDesafioDescricao
                        + '\nPalavras Aleatórias: ' + vQtdPalavrasAleatorias
-                       + '\nDicas (x 2): ' + (vUsouDica * 2)
+                       + '\nPontos Base do Desafio: 15'
+                       + '\nDicas (-5 por dica): ' + (vUsouDica * 5)
                        + '\n\n- Pontuação: ' + vPontosDesafio;
           }  
         }
         if (DesafioExiste('Desafio20Letras')){
           if(CalculaLetrasDiferentesUsadas() > 19){
-            vPontosDesafio = 20 - (vUsouDica * 2);
+            vPontosDesafio = vPontosDesafio - (vUsouDica * 5);
 
             vMsgVenceu =  'Parabéns, você venceu completando o Desafio! Palavra: ' 
                        + PalavraComAcento + '\n' 
-                       + '\n\nDesafio: ' + vDesafioDescricao
+                       + '\nDesafio: ' + vDesafioDescricao
                        + '\nLetras usadas: ' + CalculaLetrasDiferentesUsadas()
-                       + '\nDicas (x 2): ' + (vUsouDica * 2)
+                       + '\nPontos Base do Desafio: 15' 
+                       + '\nDicas (-5 por dica): ' + (vUsouDica * 5)
                        + '\n\n- Pontuação: ' + vPontosDesafio;
           }  
         }
@@ -641,19 +643,20 @@
       document.getElementById("barraPontuacao").style.backgroundColor = CorDoRank;     
     }
     
-    function MensagemPontuacao(MsgAoVencer){
+    function MensagemPontuacao(){
       AtualizaPontuacao(0);
       
       var vCookieString = getCookie("CookiePontuacao");    
 
-      var Nota = 'Pontos da partida: ' + PontuacaoPartida+ '/10'
-        + '\n\nLinhas Usadas (+): ' + LinhasUsadas()
-        + '\nNão Usou Pal. Aleatória (-): ' + vNaoUsouPalAleatoria
+      var Nota = 'Pontuação na partida: ' + PontuacaoPartida+ '/10'
+        + '\nPontos Base: 3' 
+        + '\nLinhas Usadas (+): ' + LinhasUsadas()
+        + '\nIniciou com Palavra Aleatória (+): ' + vIniciouPalAleatoria
         + '\nRepetiu Amarelo ou Verde na mesma coluna(-): ' + Duplicacoes()
         + '\nRepetiu Consoante Vermelha (-): ' + vRepetiuLetraVermelha
         + '\nAdivinhou e não existe (-): ' + vTentouENaoExiste
-        + '\nUsou Dica (-): ' + vUsouDica
-        + '\n\n- Pontos nas Partidas Anteriores: \n' + vCookieString.split('|');  
+        + '\nDicas (-2 por dica): ' + (vUsouDica * 2)
+        + '\n\n- Pontos nas Partidas Anteriores: \n' + vCookieString.split('|'); 
 
       return Nota;        
     }
@@ -663,7 +666,7 @@
         PontuacaoPartida = pPontos;
       }
       else{
-        PontuacaoPartida = (10) - ((6 - LinhasUsadas()) + Duplicacoes() + vTentouENaoExiste  + vRepetiuLetraVermelha + vNaoUsouPalAleatoria + vUsouDica); 
+        PontuacaoPartida = (10 + (vIniciouPalAleatoria - 1)) - ((6 - LinhasUsadas()) + Duplicacoes() + vTentouENaoExiste  + vRepetiuLetraVermelha + (vUsouDica * 2)); 
       }
   
       return PontuacaoPartida;       
@@ -678,7 +681,7 @@
         var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input')[j].value = vPalavraAleatoria[j];   
       }       
 
-      vNaoUsouPalAleatoria = 0;
+      vIniciouPalAleatoria = 1;
 
       if (DesafioExiste('Desafio4Aleatorias')){
         vQtdPalavrasAleatorias++;
