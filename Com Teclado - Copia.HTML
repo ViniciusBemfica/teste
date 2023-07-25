@@ -640,6 +640,22 @@
       
       return uniqueArray;
     }
+
+    function Insere5Palavras(){
+      var vPalavras = ['CLIPS', 'FUGAZ', 'HAJAM', 'VERBO', 'DENTES'];
+
+      for (let i = 0; i < 5; i++) { 
+        for (let j = 0; j < 5; j++) { 
+          document.querySelectorAll('.line')[i].querySelectorAll('.letter-input')[j].value = vPalavras[i][j];
+        }
+        ProximaLinha(); 
+      }     
+
+      var vPalavrasPossiveis = CalculaPossibilidades(); 
+      for (let j = 0; j < 5; j++) { 
+        document.querySelectorAll('.line')[5].querySelectorAll('.letter-input')[j].value = vPalavrasPossiveis[0][j];
+      }
+    }
       
     function Info(){
       /*var texto = 
@@ -658,10 +674,13 @@
       alert(texto
         + '\n' + PalavraSecreta);*/  
 
+      
+
+      Insere5Palavras();  
+
       vPalavrasPossiveis = CalculaPossibilidades();   
       alert('Qtd. Palavras possíveis: ' + vPalavrasPossiveis.length
            +'\n\n\n\n\n\n\n\n\n\nPalavras possíveis: ' + vPalavrasPossiveis);
-           
     }
     
     function LinhasUsadas(){
