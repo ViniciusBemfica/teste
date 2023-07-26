@@ -120,9 +120,9 @@
       width: 100%;
       background-color: Sienna; 
       border: 1px solid black;
-      position:fixed;
-      bottom:0px;
-      padding-bottom: 3px;
+      //position:fixed;
+      //bottom:0px;
+      //padding-bottom: 3px;
     }
     .textoPontuacao {
       display: inline-block;
@@ -139,6 +139,34 @@
       color: white;
       line-height: 180%; 
       padding-left: 20px;
+    }
+    .barraPossibilidades {
+      display: flex;  
+      justify-content: end;
+      width: 100%;
+      //background-color: Sienna; 
+      //border: 1px solid black;
+      //position:fixed;
+      //bottom:0px;
+      //padding-bottom: 3px;
+    }
+    .textoPossibilidades {
+      display: inline-block;
+      font-size: 205%;
+      color: white;
+      //margin-right: 10px;
+      padding-right: 20px;
+      line-height: 180%;
+    }
+    .barraRodape {
+      display:  inline-block;  
+      //justify-content: space-between;
+      width: 100%;
+      //background-color: Sienna; 
+     //border: 1px solid black;
+      position:fixed;
+      bottom:0px;
+      //padding-bottom: 3px;
     }
   </style>
 </head>
@@ -240,12 +268,16 @@
       <div class="Adivinhar" onclick="InserePalavraAleatoria()">🎲</div>
     </div>
     
-    <div class="barraPontuacao" id="barraPontuacao" onclick="alert(MensagemPontuacao())">
-      <div class="texto100">🏆</div>      
-      <div class="texto100" id="rankPontuacaoRodape">Pantoludopentigrafovernacomante</div>
-      <div class="textoPontuacao" id="textoPontuacaoRodape">0</div> 
-    </div>
-    
+    <div class="barraRodape">
+      <div class="barraPossibilidades">    
+        <div class="textoPossibilidades" id="textoPossibilidades">6000</div> 
+      </div>
+      <div class="barraPontuacao" id="barraPontuacao" onclick="alert(MensagemPontuacao())">
+        <div class="texto100">🏆</div>      
+        <div class="texto100" id="rankPontuacaoRodape">Pantoludopentigrafovernacomante</div>
+        <div class="textoPontuacao" id="textoPontuacaoRodape">0</div> 
+      </div> 
+    </div>  
   </div>
   
 
@@ -441,6 +473,7 @@
         }
       });  
 
+      atualizaIndicadorPossibilidades();
       AtualizaPontuacao(0);
     }
     
@@ -605,7 +638,6 @@
         return possibleWords;
       }
 
-      // Exemplo de uso:
       var palavrasTentadas = [];
       var linhaFeedback = [];
       for (var j = 0; j < currentLine - 1; j++) {
@@ -614,7 +646,6 @@
         guessedWord = guessedWord.join('');
 
         palavrasTentadas.push(guessedWord);
-
 
         var posicaoFeedback = [];
         
@@ -641,21 +672,46 @@
       return uniqueArray;
     }
 
-    function Insere5Palavras(){
-      var vPalavras = ['CLIPS', 'FUGAZ', 'HAJAM', 'VERBO', 'DENTES'];
-
-      for (let i = 0; i < 5; i++) { 
-        for (let j = 0; j < 5; j++) { 
-          document.querySelectorAll('.line')[i].querySelectorAll('.letter-input')[j].value = vPalavras[i][j];
-        }
-        ProximaLinha(); 
-      }     
-
+    function atualizaIndicadorPossibilidades(){
       var vPalavrasPossiveis = CalculaPossibilidades(); 
-      for (let j = 0; j < 5; j++) { 
-        document.querySelectorAll('.line')[5].querySelectorAll('.letter-input')[j].value = vPalavrasPossiveis[0][j];
-      }
+      document.getElementById("textoPossibilidades").innerHTML = vPalavrasPossiveis.length;      
     }
+
+    /*Testa varias palavras ao mesmo tempo
+    var contaVezes = 0;
+    var vListaPalavrasProblema = [];
+    function Insere5Palavras(){
+      var vPalavras = ['CLIPS', 'FUGAZ', 'HAJAM', 'VERBO', 'TENDES'];
+
+      for (let x = 0; x < 1000; x++) { 
+        var randomIndex = Math.floor(Math.random() * wordsSemAcento.length);
+        PalavraSecreta = wordsSemAcento[randomIndex];
+
+        for (let i = 0; i < 5; i++) { 
+          for (let j = 0; j < 5; j++) { 
+            document.querySelectorAll('.line')[i].querySelectorAll('.letter-input')[j].value = vPalavras[i][j];
+          }
+          ProximaLinha(); 
+        }     
+
+        var vPalavrasPossiveis = CalculaPossibilidades(); 
+        if(vPalavrasPossiveis.length > 1){
+          contaVezes++;
+          vListaPalavrasProblema.push(PalavraSecreta); 
+        }
+
+        for (let i = 0; i < 6; i++) { 
+          for (let j = 0; j < 5; j++) { 
+            document.querySelectorAll('.line')[i].querySelectorAll('.letter-input')[j].value = '';
+            document.querySelectorAll('.line')[i].querySelectorAll('.letter-input')[j].style.backgroundColor = 'grey';
+            document.querySelectorAll('.line')[i].querySelectorAll('.letter-input')[j].disabled = false;
+          }
+        }  
+        currentLine = 1;
+      }
+
+      alert('Vezes: ' + contaVezes + '\nPalavras:\n' + vListaPalavrasProblema);
+    }*/
       
     function Info(){
       /*var texto = 
@@ -672,15 +728,13 @@
       Para atingir 10 pontos, deve-se acertar a palavra usando todas as 6 linhas disponíveis, dentre outras regras conforme pode ser visto ao clicar na barra de Ranking inferior.`;
 
       alert(texto
-        + '\n' + PalavraSecreta);*/  
-
-      
-
-      Insere5Palavras();  
+        + '\n' + PalavraSecreta);*/    
 
       vPalavrasPossiveis = CalculaPossibilidades();   
       alert('Qtd. Palavras possíveis: ' + vPalavrasPossiveis.length
            +'\n\n\n\n\n\n\n\n\n\nPalavras possíveis: ' + vPalavrasPossiveis);
+
+      //Insere5Palavras();     
     }
     
     function LinhasUsadas(){
