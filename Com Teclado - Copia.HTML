@@ -270,7 +270,7 @@
     
     <div class="barraRodape">
       <div class="barraPossibilidades">    
-        <div class="textoPossibilidades" id="textoPossibilidades">6000</div> 
+        <div class="textoPossibilidades" id="textoPossibilidades">5876</div> 
       </div>
       <div class="barraPontuacao" id="barraPontuacao" onclick="alert(MensagemPontuacao())">
         <div class="texto100">🏆</div>      
@@ -340,6 +340,10 @@
     var vLetrasVermelhoDica = [];
     var DicaLetrasUnicasJaUsada = false;
     var DicaQtdVogaisJaUsada = false;
+    var vPossibilidadeInicial = 0;
+    var vPossibilidadeFinal = 0;
+    var vPossibilidadeReducao = 0;
+
 
 
     function GravaElementoEmFoco() {
@@ -675,6 +679,60 @@
     function atualizaIndicadorPossibilidades(){
       var vPalavrasPossiveis = CalculaPossibilidades(); 
       document.getElementById("textoPossibilidades").innerHTML = vPalavrasPossiveis.length;      
+
+
+      if(currentLine == 2){
+        vPossibilidadeInicial = vPalavrasPossiveis.length;
+      }
+
+      if(vVenceu){
+        vPossibilidadeFinal = vPalavrasPossiveis.length;
+      }
+      
+    }
+
+    function MelhorPalavraInicial(){
+      var vMelhorScoreAteAgora = 0;
+      var vMelhorPalavraAteAgora = '';
+
+      function inserePalavra(pPalavra){
+        for (let j = 0; j < 5; j++) { 
+          document.querySelectorAll('.line')[0].querySelectorAll('.letter-input')[j].value = pPalavra[j];
+        }
+        ProximaLinha();
+      }
+
+      function salvaPossibilidades(pPalavra){
+
+        var vPossibilidade = CalculaPossibilidades();
+        if(vPossibilidade.length > vMelhorScoreAteAgora){
+          vMelhorScoreAteAgora = vPossibilidade.length;
+          vMelhorPalavraAteAgora = pPalavra;
+        }
+      }
+
+      function apagaLinhaEVolta(){
+        for (let j = 0; j < 5; j++) { 
+          document.querySelectorAll('.line')[0].querySelectorAll('.letter-input')[j].value = '';
+          document.querySelectorAll('.line')[0].querySelectorAll('.letter-input')[j].style.backgroundColor = 'grey';
+          document.querySelectorAll('.line')[0].querySelectorAll('.letter-input')[j].disabled = false;
+        }
+        currentLine = 1;
+      }
+
+      PalavraSecreta = 'MAMAM';
+      for (let i = 0; i < wordsSemAcento.length; i++) {  
+        if(wordsSemAcento[i] == PalavraSecreta){
+          continue;
+        }
+        inserePalavra(wordsSemAcento[i]);   
+        salvaPossibilidades(wordsSemAcento[i]);
+        apagaLinhaEVolta();
+      }  
+
+      alert('Pior: ' + vMelhorPalavraAteAgora 
+           + '\nPossibilidades: ' + vMelhorScoreAteAgora
+           + '\nPalavra Secreta: ' + PalavraSecreta);
     }
 
     /*Testa varias palavras ao mesmo tempo
@@ -734,8 +792,11 @@
       alert('Qtd. Palavras possíveis: ' + vPalavrasPossiveis.length
            +'\n\n\n\n\n\n\n\n\n\nPalavras possíveis: ' + vPalavrasPossiveis);
 
-      //Insere5Palavras();     
+      //Insere5Palavras();  
+
+      //MelhorPalavraInicial();   
     }
+
     
     function LinhasUsadas(){
       return currentLine - 1;         
@@ -831,7 +892,11 @@
         + '\nDicas (-2 por dica): ' + (vUsouDica * 2)
         + '\n\n- Pontos nas Partidas Anteriores: \n' + vCookieString.split('|') 
         + '\nPontuação Total: ' + CookieRetornaTotal() 
-        + '\nÚltimas palavras: ' + CookieRetornaListaPalavra();
+        + '\nÚltimas palavras: ' + CookieRetornaListaPalavra()
+        + '\n\n- Pontos de Possibilidade - '
+        + '\nPossibilidade Incial: ' + vPossibilidadeInicial
+        + '\nPossibilidade Final: ' + vPossibilidadeFinal
+        + '\nRedução (Inicial / Final): ' + (vPossibilidadeInicial / vPossibilidadeFinal);
 
       return Nota;        
     }
