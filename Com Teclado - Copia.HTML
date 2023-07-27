@@ -329,6 +329,7 @@
     var vUsouDica = 0;   
     var elementoEmFoco;
     var vIniciouPalAleatoria = 0;
+    var vVitoriaLimpa = 0;
     var vPalavraTestadaGlobal = '';
     var vRepetiuLetraVermelha = 0;
     var PontuacaoPartida = 5;
@@ -343,6 +344,7 @@
     var vPossibilidadeInicial = 0;
     var vPossibilidadeFinal = 0;
     var vPossibilidadeReducao = 0;
+    var vPalavrasPossiveis = [];
 
 
 
@@ -677,17 +679,14 @@
     }
 
     function atualizaIndicadorPossibilidades(){
-      var vPalavrasPossiveis = CalculaPossibilidades(); 
-      document.getElementById("textoPossibilidades").innerHTML = vPalavrasPossiveis.length;      
-
+      vPalavrasPossiveis = CalculaPossibilidades(); 
+      document.getElementById("textoPossibilidades").innerHTML = vPalavrasPossiveis.length;  
 
       if(currentLine == 2){
         vPossibilidadeInicial = vPalavrasPossiveis.length;
       }
 
-      if(vVenceu){
-        vPossibilidadeFinal = vPalavrasPossiveis.length;
-      }
+      vPossibilidadeFinal = vPalavrasPossiveis.length;
       
     }
 
@@ -836,8 +835,9 @@
       alert(texto
         + '\n' + PalavraSecreta);*/    
 
-      vPalavrasPossiveis = CalculaPossibilidades();   
+      //vPalavrasPossiveis = CalculaPossibilidades();   
       alert('Qtd. Palavras possíveis: ' + vPalavrasPossiveis.length
+           +'\nPalavras secreta: ' + PalavraSecreta
            +'\n\n\n\n\n\n\n\n\n\nPalavras possíveis: ' + vPalavrasPossiveis);
 
 
@@ -929,21 +929,21 @@
     
     function MensagemPontuacao(){
       AtualizaPontuacao(0);
-      
-      var vCookieString = getCookie("CookiePontuacao");    
+ 
+      var vCookieString = getCookie("CookiePontuacao");   
 
-      var Nota = 'Pontuação na partida: ' + PontuacaoPartida+ '/10'
-        + '\nPontos Base: 3' 
-        + '\nLinhas Usadas (+): ' + LinhasUsadas()
-        + '\nIniciou com Palavra Aleatória (+): ' + vIniciouPalAleatoria
-        + '\nRepetiu Amarelo ou Verde na mesma coluna(-): ' + Duplicacoes()
-        + '\nRepetiu Consoante Vermelha (-): ' + vRepetiuLetraVermelha
-        + '\nAdivinhou e não existe (-): ' + vTentouENaoExiste
+      var Nota = ' - Pontuação na partida: ' + PontuacaoPartida+ '/10'
+        //+ '\nLinhas Usadas (+): ' + LinhasUsadas()
+        + '\nInicio Aleatório: ' + vIniciouPalAleatoria
+        //+ '\nRepetiu Amarelo ou Verde na mesma coluna(-): ' + Duplicacoes()
+        //+ '\nRepetiu Consoante Vermelha (-): ' + vRepetiuLetraVermelha
+        //+ '\nAdivinhou e não existe (-): ' + vTentouENaoExiste      
+        + '\nVitoria Limpa: ' +  vVitoriaLimpa
         + '\nDicas (-2 por dica): ' + (vUsouDica * 2)
         + '\n\n- Pontos nas Partidas Anteriores: \n' + vCookieString.split('|') 
         + '\nPontuação Total: ' + CookieRetornaTotal() 
         + '\nÚltimas palavras: ' + CookieRetornaListaPalavra()
-        + '\n\n- Pontos de Possibilidade - '
+        + '\n\n- Pontos de Possibilidade: '
         + '\nPossibilidade Incial: ' + vPossibilidadeInicial
         + '\nPossibilidade Final: ' + vPossibilidadeFinal
         + '\nRedução (Inicial / Final): ' + (vPossibilidadeInicial / vPossibilidadeFinal);
@@ -956,7 +956,10 @@
         PontuacaoPartida = pPontos;
       }
       else{
-        PontuacaoPartida = (10 + (vIniciouPalAleatoria - 1)) - ((6 - LinhasUsadas()) + Duplicacoes() + vTentouENaoExiste  + vRepetiuLetraVermelha + (vUsouDica * 2)); 
+        if (vPossibilidadeFinal == 1){
+          vVitoriaLimpa = 5;  
+        }
+        PontuacaoPartida = (0 + vVitoriaLimpa + vIniciouPalAleatoria) - (vUsouDica * 2); 
       }
   
       return PontuacaoPartida;       
@@ -982,7 +985,7 @@
         var randomIndex = Math.floor(Math.random() * wordsSemAcento.length);
         vPalavraAleatoria = wordsSemAcento[randomIndex];
 
-        vIniciouPalAleatoria = 1;
+        vIniciouPalAleatoria = 5;
 
         if (DesafioExiste('Desafio4Aleatorias')){
           vQtdPalavrasAleatorias++;
@@ -993,8 +996,7 @@
         }
 
         ProximaLinha();  
-      }
-      
+      }    
     }
 
     function PalavraAleatoriaPossivel(vPalavraTestada){ 
