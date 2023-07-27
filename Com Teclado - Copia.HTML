@@ -345,6 +345,7 @@
     var vPossibilidadeFinal = 0;
     var vPossibilidadeReducao = 0;
     var vPalavrasPossiveis = [];
+    
 
 
 
@@ -738,9 +739,11 @@
     function EstrategiaSomenteAleatorias(){
       var contaVezes = 0;
 
-      for (let x = 0; x < 10; x++) { 
+      for (let x = 0; x < 1000; x++) { 
         var randomIndex = Math.floor(Math.random() * wordsSemAcento.length);
         PalavraSecreta = wordsSemAcento[randomIndex];
+
+        var vPalavrasPossiveisLinha2 = [];
 
         for (let i = 0; i < 5; i++) { 
           var randomIndex = Math.floor(Math.random() * wordsSemAcento.length);
@@ -752,9 +755,14 @@
           ProximaLinha(); 
 
           var vPalavrasPossiveis = CalculaPossibilidades(); 
+          if(currentLine == 2){
+            vPalavrasPossiveisLinha2 = vPalavrasPossiveis; 
+          }       
           if(vPalavrasPossiveis.length == 1){
-            contaVezes++;
-            break;
+            if(vPalavrasPossiveisLinha2.length > 500){
+              contaVezes++;
+              break;
+            }  
           }
         }     
 
@@ -852,7 +860,23 @@
 
     
     function LinhasUsadas(){
-      return currentLine - 1;         
+      var vPontosLinhasUsadas = 0;
+
+      if (vPossibilidadeFinal != 1){
+        return vPontosLinhasUsadas;
+      }
+
+      if (currentLine == 4){
+        vPontosLinhasUsadas = 3;
+      }    
+      if (currentLine == 5){
+        vPontosLinhasUsadas = 2;
+      }  
+      if (currentLine == 6){
+        vPontosLinhasUsadas = 1;
+      }   
+
+      return vPontosLinhasUsadas;    
     }
 
     function Duplicacoes(){
@@ -936,7 +960,7 @@
       var vCookieString = getCookie("CookiePontuacao");   
 
       var Nota = ' - Pontuação na partida: ' + PontuacaoPartida+ '/10'
-        //+ '\nLinhas Usadas (+): ' + LinhasUsadas()
+        + '\nLinhas Usadas: ' + LinhasUsadas()
         + '\nInicio Aleatório: ' + vIniciouPalAleatoria
         //+ '\nRepetiu Amarelo ou Verde na mesma coluna(-): ' + Duplicacoes()
         //+ '\nRepetiu Consoante Vermelha (-): ' + vRepetiuLetraVermelha
@@ -961,7 +985,7 @@
         if (vPossibilidadeFinal == 1){
           vVitoriaLimpa = 5;  
         }
-        PontuacaoPartida = (0 + vVitoriaLimpa + vIniciouPalAleatoria) - (vUsouDica * 2); 
+        PontuacaoPartida = (0 + vVitoriaLimpa + vIniciouPalAleatoria + LinhasUsadas()) - (vUsouDica * 2); 
       }
   
       return PontuacaoPartida;       
