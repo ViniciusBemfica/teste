@@ -59,6 +59,7 @@
       //margin-top: 5vh;
       text-align: center;
       width: 100%;
+      margin-bottom: 30px;
       //height: 80;
       //height: 8%;
     }
@@ -92,7 +93,7 @@
       font-size: 300%;
       color: white;
       border: 1px solid black;
-      margin-top: 30px;
+      //margin-top: 30px;
       margin-bottom: 30px;
       margin-left: 2px;
       margin-right: 2px;
@@ -143,6 +144,7 @@
     .barraPossibilidades {
       display: flex;  
       justify-content: end;
+      //margin-right: 10px;
       width: 100%;
       //background-color: Sienna; 
       //border: 1px solid black;
@@ -155,8 +157,8 @@
       font-size: 205%;
       color: white;
       //margin-right: 10px;
-      padding-right: 20px;
-      line-height: 180%;
+      //padding-right: 20px;
+      line-height: 115%;
     }
     .barraRodape {
       display:  inline-block;  
@@ -221,6 +223,9 @@
         <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
         <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
       </div>
+      <div class="barraPossibilidades">    
+        <div class="textoPossibilidades" id="textoPossibilidades">5876</div> 
+      </div>
     </div>
     
     <div class="lines-Adivinhar-container">
@@ -269,9 +274,6 @@
     </div>
     
     <div class="barraRodape">
-      <div class="barraPossibilidades">    
-        <div class="textoPossibilidades" id="textoPossibilidades">5876</div> 
-      </div>
       <div class="barraPontuacao" id="barraPontuacao" onclick="alert(MensagemPontuacao())">
         <div class="texto100">🏆</div>      
         <div class="texto100" id="rankPontuacaoRodape">Pantoludopentigrafovernacomante</div>
