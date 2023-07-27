@@ -262,7 +262,7 @@
       
     </div>
     <div class="lines-Adivinhar-container">
-      <div class="Adivinhar" id="botaDesafio" onclick="VerDesafio()">💀</div>
+      <div class="Adivinhar" id="botaDesafio" onclick="VerDesafio()"  ondblclick="InfoDuploClique()">💀</div>
       <div class="Adivinhar" id="botaDesafio" onclick="VerDica()">💡</div>
       <div class="Adivinhar" onclick="PesquisaPalavraNaWeb()">🔍</div>
       <div class="Adivinhar" onclick="InserePalavraAleatoria()">🎲</div>
@@ -837,7 +837,6 @@
 
       //vPalavrasPossiveis = CalculaPossibilidades();   
       alert('Qtd. Palavras possíveis: ' + vPalavrasPossiveis.length
-           +'\nPalavras secreta: ' + PalavraSecreta
            +'\n\n\n\n\n\n\n\n\n\nPalavras possíveis: ' + vPalavrasPossiveis);
 
 
@@ -845,6 +844,10 @@
 
       //EstrategiaSomenteAleatorias();  
       //EstrategiaAdequadaAleatoria();
+    }
+
+    function InfoDuploClique(){
+      alert('Palavras secreta: ' + PalavraSecreta);
     }
 
     
@@ -940,13 +943,12 @@
         //+ '\nAdivinhou e não existe (-): ' + vTentouENaoExiste      
         + '\nVitoria Limpa: ' +  vVitoriaLimpa
         + '\nDicas (-2 por dica): ' + (vUsouDica * 2)
-        + '\n\n- Pontos nas Partidas Anteriores: \n' + vCookieString.split('|') 
-        + '\nPontuação Total: ' + CookieRetornaTotal() 
-        + '\nÚltimas palavras: ' + CookieRetornaListaPalavra()
-        + '\n\n- Pontos de Possibilidade: '
+        + '\n\n- Pontos nas 10 última partidas: '+ CookieRetornaTotal()
+        +'\n' + vCookieString.split('|') 
+        + '\n' + CookieRetornaListaPalavra()
+        + '\n\n- Palavras Possíveis: '
         + '\nPossibilidade Incial: ' + vPossibilidadeInicial
-        + '\nPossibilidade Final: ' + vPossibilidadeFinal
-        + '\nRedução (Inicial / Final): ' + (vPossibilidadeInicial / vPossibilidadeFinal);
+        + '\nPossibilidade Final: ' + vPossibilidadeFinal;
 
       return Nota;        
     }
