@@ -213,7 +213,7 @@
         <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
       </div>
       <div class="barraPossibilidades">    
-        <div class="textoPossibilidades" id="textoPossibilidades">5876</div> 
+        <div class="textoPossibilidades" id="textoPossibilidades">P: 5876</div> 
       </div>
     </div>
     
@@ -672,7 +672,7 @@
 
     function atualizaIndicadorPossibilidades(){
       vPalavrasPossiveis = CalculaPossibilidades(); 
-      document.getElementById("textoPossibilidades").innerHTML = vPalavrasPossiveis.length;  
+      document.getElementById("textoPossibilidades").innerHTML = 'P: ' + vPalavrasPossiveis.length;  
 
       if(currentLine == 2){
         vPossibilidadeInicial = vPalavrasPossiveis.length;
