@@ -867,13 +867,13 @@
       }
 
       if (currentLine == 4){
-        vPontosLinhasUsadas = 3;
+        vPontosLinhasUsadas = 4;
       }    
       if (currentLine == 5){
-        vPontosLinhasUsadas = 2;
+        vPontosLinhasUsadas = 3;
       }  
       if (currentLine == 6){
-        vPontosLinhasUsadas = 1;
+        vPontosLinhasUsadas = 2;
       }   
 
       return vPontosLinhasUsadas;    
@@ -983,7 +983,7 @@
       }
       else{
         if (vPossibilidadeFinal == 1){
-          vVitoriaLimpa = 5;  
+          vVitoriaLimpa = 4;  
         }
         PontuacaoPartida = (0 + vVitoriaLimpa + vIniciouPalAleatoria + LinhasUsadas()) - (vUsouDica * 2); 
       }
@@ -1011,7 +1011,7 @@
         var randomIndex = Math.floor(Math.random() * wordsSemAcento.length);
         vPalavraAleatoria = wordsSemAcento[randomIndex];
 
-        vIniciouPalAleatoria = 5;
+        vIniciouPalAleatoria = 4;
 
         if (DesafioExiste('Desafio4Aleatorias')){
           vQtdPalavrasAleatorias++;
