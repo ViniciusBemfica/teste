@@ -159,6 +159,38 @@
       position:fixed;
       bottom:0px;
     }
+    //----- modal -------
+    .modalFrame{
+      position: relative;
+      //z-index: 1;
+      padding-top: 40px;
+      padding-left: 40px;
+      //top: 0;
+      //overflow: auto;
+      
+      width: 600px;
+      max-width: 100%;
+    }
+    .modal-content {
+      display: none;
+      position: fixed;
+      background-color: black;
+      margin: auto;
+      background-color: rgba(0, 0, 0, 0.7);
+      //left: 0;
+      //top: 0;
+      border: 1px solid #888;
+      width: 85%;
+      height: 85%;
+    }
+    .close {
+      display: none;
+      position: absolute;
+      top: 0;
+      font-size: 5vh;
+      font-weight: bold;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -216,7 +248,7 @@
         <div class="textoPossibilidades" id="textoPossibilidades">P: 5876</div> 
       </div>
     </div>
-    
+
     <div class="lines-Adivinhar-container">
       <div class="Adivinhar" onclick="LimpaLinha()">🗑️</div>    
       <div class="Adivinhar" onclick="ProximaLinha()">✅</div>
@@ -269,7 +301,17 @@
         <div class="textoPontuacao" id="textoPontuacaoRodape">0</div> 
       </div> 
     </div>  
+
+
+ 
+    <div id="modal" class="modal-content">
+      <div class="close" id="closeModalBtn" onclick="FechaModalPesquisa()" >&times;</div>
+      <iframe class="modalFrame" style="width:100%; height:100%; " id="modalIframe" src="" frameborder="0"></iframe>
   </div>
+
+  </div>
+
+  
   
 
   <script>
@@ -829,8 +871,10 @@
         + '\n' + PalavraSecreta);*/    
 
       //vPalavrasPossiveis = CalculaPossibilidades();   
-      alert('Qtd. Palavras possíveis: ' + vPalavrasPossiveis.length
-           +'\n\n\n\n\n\n\n\n\n\nPalavras possíveis: ' + vPalavrasPossiveis);
+      /*alert('Qtd. Palavras possíveis: ' + vPalavrasPossiveis.length
+           +'\n\n\n\n\n\n\n\n\n\nPalavras possíveis: ' + vPalavrasPossiveis);*/
+
+      AbreModalPesquisa()     
 
 
       //MelhorPalavraInicial(); 
@@ -1281,6 +1325,28 @@
       vUsouDica++;
       AtualizaPontuacao(0);
       alert('- Dica - \n' + textoDica);      
+    }
+
+
+    //----- modal -----
+    
+    function AbreModalPesquisa(){
+      const url = "https://www.dicio.com.br/perdi/"; // Substitua pela URL fornecida
+      const modalIframe = document.getElementById("modalIframe");
+      const modal = document.getElementById("modal");
+      const closeModalBtn = document.getElementById("closeModalBtn");
+
+      modalIframe.src = url;
+      modal.style.display = "block";
+      closeModalBtn.style.display = "block";
+    }
+
+    function FechaModalPesquisa(){
+      const closeModalBtn = document.getElementById("closeModalBtn");
+      const modal = document.getElementById("modal");
+      modalIframe.src = "";
+      modal.style.display = "none";
+      closeModalBtn.style.display = "none";
     }
 
 
