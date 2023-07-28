@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="viewport" content="user-scalable=0">
-  <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+  <!--<meta name="viewport" content="user-scalable=0">-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Wordle Game</title>
   <style>
     body {
@@ -28,7 +28,7 @@
       display: inline-block;
       justify-content: center;
       width: 90%;
-      height: 50vh;
+      height: 20vh;
     }
     .letter-input {
       //width: 41px;
@@ -215,112 +215,115 @@
 </head>
 <body>
   <div class="wordle-container">
-    <div class="lines-container">
-      <!-- Line 1 -->
-      <div class="line">
-        <input type="text" class="letter-input" maxlength="1" readonly="readonly" autofocus onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
-        <input type="text" class="letter-input" maxlength="1" readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
-        <input type="text" class="letter-input" maxlength="1" readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
-        <input type="text" class="letter-input" maxlength="1" readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
-        <input type="text" class="letter-input" maxlength="1" readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
+    <div>
+      <div class="lines-container">
+        <!-- Line 1 -->
+        <div class="line">
+          <input type="text" class="letter-input" maxlength="1" readonly="readonly" autofocus onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
+          <input type="text" class="letter-input" maxlength="1" readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
+          <input type="text" class="letter-input" maxlength="1" readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
+          <input type="text" class="letter-input" maxlength="1" readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
+          <input type="text" class="letter-input" maxlength="1" readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
+        </div>
+        <!-- Line 2 -->
+        <div class="line">
+          <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
+          <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
+          <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
+          <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
+          <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
+        </div>
+        <!-- Line 3 -->
+        <div class="line">
+          <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
+          <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
+          <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
+          <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
+          <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
+        </div>
+        <!-- Line 4 -->
+        <div class="line">
+          <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
+          <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
+          <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
+          <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
+          <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
+        </div>
+        <!-- Line 5 -->
+        <div class="line">
+          <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
+          <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
+          <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
+          <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
+          <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
+        </div>
+        <!-- Line 6 -->
+        <div class="line">
+          <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
+          <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
+          <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
+          <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
+          <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
+        </div>
+        <div class="barraPossibilidades">    
+          <div class="textoPossibilidades" id="textoPossibilidades">P: 5876</div> 
+        </div>
       </div>
-      <!-- Line 2 -->
-      <div class="line">
-        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
-        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
-        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
-        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
-        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
-      </div>
-      <!-- Line 3 -->
-      <div class="line">
-        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
-        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
-        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
-        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
-        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
-      </div>
-      <!-- Line 4 -->
-      <div class="line">
-        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
-        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
-        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
-        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
-        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
-      </div>
-      <!-- Line 5 -->
-      <div class="line">
-        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
-        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
-        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
-        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
-        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
-      </div>
-      <!-- Line 6 -->
-      <div class="line">
-        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
-        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
-        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
-        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
-        <input type="text" class="letter-input" maxlength="1" disabled readonly="readonly" onclick="GravaElementoEmFoco(this)" ondblclick="Delete()">
-      </div>
-      <div class="barraPossibilidades">    
-        <div class="textoPossibilidades" id="textoPossibilidades">P: 5876</div> 
-      </div>
-    </div>
 
-    <div class="lines-Adivinhar-container">
-      <div class="Adivinhar" onclick="LimpaLinha()">🗑️</div>    
-      <div class="Adivinhar" onclick="ProximaLinha()">✅</div>
-    </div>
-    <div class="keyboard-container">
-      <div class="keyboard-line">
-        <div class="keyboard-key" onclick="insertLetter(this)">Q</div>
-        <div class="keyboard-key" onclick="insertLetter(this)">E</div>
-        <div class="keyboard-key" onclick="insertLetter(this)">R</div>
-        <div class="keyboard-key" onclick="insertLetter(this)">T</div>
-        <div class="keyboard-key" onclick="insertLetter(this)">U</div>
-        <div class="keyboard-key" onclick="insertLetter(this)">I</div>
-        <div class="keyboard-key" onclick="insertLetter(this)">O</div>
-        <div class="keyboard-key" onclick="insertLetter(this)">P</div>
+
+      <div class="lines-Adivinhar-container">
+        <div class="Adivinhar" onclick="LimpaLinha()">🗑️</div>    
+        <div class="Adivinhar" onclick="ProximaLinha()">✅</div>
       </div>
-      <div class="keyboard-line">
-        <div class="keyboard-key" onclick="insertLetter(this)">A</div>
-        <div class="keyboard-key" onclick="insertLetter(this)">S</div>
-        <div class="keyboard-key" onclick="insertLetter(this)">D</div>
-        <div class="keyboard-key" onclick="insertLetter(this)">F</div>
-        <div class="keyboard-key" onclick="insertLetter(this)">G</div>
-        <div class="keyboard-key" onclick="insertLetter(this)">H</div>
-        <div class="keyboard-key" onclick="insertLetter(this)">J</div>
-        <div class="keyboard-key" onclick="insertLetter(this)">L</div>
+      <div class="keyboard-container">
+        <div class="keyboard-line">
+          <div class="keyboard-key" onclick="insertLetter(this)">Q</div>
+          <div class="keyboard-key" onclick="insertLetter(this)">E</div>
+          <div class="keyboard-key" onclick="insertLetter(this)">R</div>
+          <div class="keyboard-key" onclick="insertLetter(this)">T</div>
+          <div class="keyboard-key" onclick="insertLetter(this)">U</div>
+          <div class="keyboard-key" onclick="insertLetter(this)">I</div>
+          <div class="keyboard-key" onclick="insertLetter(this)">O</div>
+          <div class="keyboard-key" onclick="insertLetter(this)">P</div>
+        </div>
+        <div class="keyboard-line">
+          <div class="keyboard-key" onclick="insertLetter(this)">A</div>
+          <div class="keyboard-key" onclick="insertLetter(this)">S</div>
+          <div class="keyboard-key" onclick="insertLetter(this)">D</div>
+          <div class="keyboard-key" onclick="insertLetter(this)">F</div>
+          <div class="keyboard-key" onclick="insertLetter(this)">G</div>
+          <div class="keyboard-key" onclick="insertLetter(this)">H</div>
+          <div class="keyboard-key" onclick="insertLetter(this)">J</div>
+          <div class="keyboard-key" onclick="insertLetter(this)">L</div>
+        </div>
+        <div class="keyboard-line">
+          <div class="keyboard-key" onclick="insertLetter(this)">Z</div>
+          <div class="keyboard-key" onclick="insertLetter(this)">X</div>
+          <div class="keyboard-key" onclick="insertLetter(this)">C</div>
+          <div class="keyboard-key" onclick="insertLetter(this)">V</div>
+          <div class="keyboard-key" onclick="insertLetter(this)">B</div>
+          <div class="keyboard-key" onclick="insertLetter(this)">N</div>
+          <div class="keyboard-key" onclick="insertLetter(this)">M</div>
+          <div class="keyboard-key" onclick="Info()">ℹ️</div>
+        </div>
+        
+        
       </div>
-      <div class="keyboard-line">
-        <div class="keyboard-key" onclick="insertLetter(this)">Z</div>
-        <div class="keyboard-key" onclick="insertLetter(this)">X</div>
-        <div class="keyboard-key" onclick="insertLetter(this)">C</div>
-        <div class="keyboard-key" onclick="insertLetter(this)">V</div>
-        <div class="keyboard-key" onclick="insertLetter(this)">B</div>
-        <div class="keyboard-key" onclick="insertLetter(this)">N</div>
-        <div class="keyboard-key" onclick="insertLetter(this)">M</div>
-        <div class="keyboard-key" onclick="Info()">ℹ️</div>
+      <div class="lines-Adivinhar-container">
+        <div class="Adivinhar" id="botaDesafio" onclick="VerDesafio()"  ondblclick="InfoDuploClique()">💀</div>
+        <div class="Adivinhar" id="botaDesafio" onclick="VerDica()">💡</div>
+        <div class="Adivinhar" onclick="PesquisaPalavraNaWeb()">🔍</div>
+        <div class="Adivinhar" onclick="InserePalavraAleatoria()">🎲</div>
       </div>
       
-      
-    </div>
-    <div class="lines-Adivinhar-container">
-      <div class="Adivinhar" id="botaDesafio" onclick="VerDesafio()"  ondblclick="InfoDuploClique()">💀</div>
-      <div class="Adivinhar" id="botaDesafio" onclick="VerDica()">💡</div>
-      <div class="Adivinhar" onclick="PesquisaPalavraNaWeb()">🔍</div>
-      <div class="Adivinhar" onclick="InserePalavraAleatoria()">🎲</div>
-    </div>
-    
-    <div class="barraRodape">
-      <div class="barraPontuacao" id="barraPontuacao" onclick="alert(MensagemPontuacao())">
-        <div class="texto100">⭐</div>      
-        <div class="texto100" id="rankPontuacaoRodape">Pantoludopentigrafovernacomante</div>
-        <div class="textoPontuacao" id="textoPontuacaoRodape">0</div> 
-      </div> 
-    </div>  
+      <div class="barraRodape">
+        <div class="barraPontuacao" id="barraPontuacao" onclick="alert(MensagemPontuacao())">
+          <div class="texto100">⭐</div>      
+          <div class="texto100" id="rankPontuacaoRodape">Pantoludopentigrafovernacomante</div>
+          <div class="textoPontuacao" id="textoPontuacaoRodape">0</div> 
+        </div> 
+      </div>  
+
 
 
  
