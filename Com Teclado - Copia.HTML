@@ -566,20 +566,15 @@
       var lineInputs = document.querySelectorAll('.line')[linhaPesquisar].querySelectorAll('.letter-input');
       var vPalavraTestada = Array.from(lineInputs).map(input => input.value.toUpperCase());    
       vPalavraTestada = vPalavraTestada.join('');
-      var vTipoBusca = 'ms'; //i - começa com essas letras; ms - letras existem na palavra 
 
       if (vPalavraTestada.length == 0){
         vPalavraTestada = vPalavraTestadaGlobal;
-        vTipoBusca = "i";
       }
-      else if (vPalavraTestada.length == 5){
-        vTipoBusca = "i";
-      }
-      
+   
       var Confirma = confirm("Pesquisar a palavra " + vPalavraTestada + " na web?");
       
       if (Confirma) {
-        var url = "https://www.palavras.net/search.php?"+vTipoBusca+"="+encodeURIComponent(vPalavraTestada)+"&fnl=5&fnl2=5&d=18";
+        var url = "https://www.dicio.com.br/" + encodeURIComponent(vPalavraTestada.toLowerCase());
         window.open(url, "_blank");
       }
     }
@@ -1019,16 +1014,21 @@
       }    
     }
 
-    function PalavraAleatoriaPossivel(vPalavraTestada){ 
-      function filterWords(words, letters) {
-          const myArrayOfLetters = Array.from(letters);
-          const output = wordsSemAcento.filter((word) =>
-               myArrayOfLetters.every((letter) => word.includes(letter))
-          );
-          return output;
-      }
+    function filtraPalavrasComEssasLetras(letters) {
+      const myArrayOfLetters = Array.from(letters);
+      const vPalavrasPossiveis = wordsSemAcento.filter((word) =>
+           myArrayOfLetters.every((letter) => word.includes(letter))
+      );
 
-      const palavrasFiltradas = filterWords(wordsSemAcento, vPalavraTestada);
+      const vPalavrasPossiveisSet = new Set(vPalavrasPossiveis);
+      const vPalavrasPossiveisArray = Array.from(vPalavrasPossiveisSet);
+
+      return vPalavrasPossiveisArray;
+    }
+
+    function PalavraAleatoriaPossivel(vPalavraTestada){ 
+    
+      const palavrasFiltradas = filtraPalavrasComEssasLetras(vPalavraTestada);
       
       // Verifica se há palavras que satisfazem o critério
       if (palavrasFiltradas.length === 0) {
@@ -1238,10 +1238,17 @@
 
         if (vPalavraTestada.length == 5){
           if(wordsSemAcento.includes(vPalavraTestada)){
-            alert('- Dica - \nPalavra Existe');  
+            alert('- Dica - \nA Palavra '+ vPalavraTestada +' Existe no Vocabulário');  
           }else{
-            alert('- Dica - \nPalavra não Existe'); 
+            alert('- Dica - \nA Palavra '+ vPalavraTestada +' não Existe no Vocabulário'); 
           }
+
+          return true;
+        }
+        else if(vPalavraTestada.length > 2){
+          var vQtdPalavrasPossiveis = filtraPalavrasComEssasLetras(vPalavraTestada); 
+          alert('- Dica - \nPalavras com as Letras '
+               + vPalavraTestada + ' no Vocabulário: ' + vQtdPalavrasPossiveis.length); 
 
           return true;
         }
