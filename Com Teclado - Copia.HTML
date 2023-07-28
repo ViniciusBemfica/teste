@@ -264,7 +264,7 @@
     
     <div class="barraRodape">
       <div class="barraPontuacao" id="barraPontuacao" onclick="alert(MensagemPontuacao())">
-        <div class="texto100">🏆</div>      
+        <div class="texto100">⭐</div>      
         <div class="texto100" id="rankPontuacaoRodape">Pantoludopentigrafovernacomante</div>
         <div class="textoPontuacao" id="textoPontuacaoRodape">0</div> 
       </div> 
@@ -323,19 +323,18 @@
     var vVitoriaLimpa = 0;
     var vPalavraTestadaGlobal = '';
     var vRepetiuLetraVermelha = 0;
-    var PontuacaoPartida = 5;
+    var PontuacaoPartida = 0;
     var CorDoRank = '';
     var vDesafioNome = '';
     var vDesafioDescricao = '';
     var vQtdPalavrasAleatorias = 0;
     var textoDica = '';
     var vLetrasVermelhoDica = [];
-    var DicaLetrasUnicasJaUsada = false;
-    var DicaQtdVogaisJaUsada = false;
     var vPossibilidadeInicial = 0;
     var vPossibilidadeFinal = 0;
     var vPossibilidadeReducao = 0;
     var vPalavrasPossiveis = [];
+    const vDicasDisponiveis = [1,2,3];
     
 
 
@@ -927,10 +926,10 @@
         return "<{(≡ Ludopentografolexicador ≡)}> ";
       } else if (nota >= 100) {
         CorDoRank = "#420042"; //Roxo
-        return "<{:[≡ Centiludopentografolexicologista ≡]:}>";
+        return "<{:(+ Pluriludipentografolexicologista +):}>";
       } else {
         CorDoRank = "#1a932a"; //Verde
-        return "- Penteiro -";
+        return "· Penteiro ·";
       }
     }
 
@@ -957,7 +956,7 @@
         //+ '\nRepetiu Consoante Vermelha (-): ' + vRepetiuLetraVermelha
         //+ '\nAdivinhou e não existe (-): ' + vTentouENaoExiste      
         + '\nVitoria Limpa: ' +  vVitoriaLimpa
-        + '\nDicas (-2 por dica): ' + (vUsouDica * 2)
+        + '\nDicas (-): ' + (vUsouDica)
         + '\n\n- Pontos nas 10 última partidas: '+ CookieRetornaTotal()
         +'\n' + vCookieString.split('|') 
         + '\n' + CookieRetornaListaPalavra()
@@ -976,7 +975,11 @@
         if (vPossibilidadeFinal == 1){
           vVitoriaLimpa = 4;  
         }
-        PontuacaoPartida = (0 + vVitoriaLimpa + vIniciouPalAleatoria + LinhasUsadas()) - (vUsouDica * 2); 
+        PontuacaoPartida = (0 + vVitoriaLimpa + vIniciouPalAleatoria + LinhasUsadas()) - (vUsouDica); 
+      }
+
+      if(PontuacaoPartida < 0){
+        PontuacaoPartida = 0;
       }
   
       return PontuacaoPartida;       
@@ -1213,34 +1216,40 @@
 
       function DicaLetrasUnicas(){
         textoDica = textoDica + '\n' + 'Letras úinicas na Palavra Secreta: ' + new Set(PalavraSecreta).size;
-        DicaLetrasUnicasJaUsada = true;
       }
 
       function DicaQtdVogais(){
         textoDica = textoDica + '\n' + 'Vogais na Palavra Secreta: ' + PalavraSecreta.match(/[AEIOU]/gi).length;
-        DicaQtdVogaisJaUsada = true;
       }
 
-      var chance = Math.random();
-      if (chance > 0.66){
-        DicaLetraNaoExiste();
+      function DicaPalavraPossivel(){
+        var vPalavrasPossiveis = CalculaPossibilidades(); 
+
+        var vPalavraPossiveiAleatoria = vPalavrasPossiveis[Math.floor(Math.random()*vPalavrasPossiveis.length)]; 
+        textoDica = textoDica + '\n' + 'Palavra Secreta Possível: ' + vPalavraPossiveiAleatoria;
+
+        return vPalavraPossiveiAleatoria;
       }
-      else if (chance > 0.33){
-        if (DicaLetrasUnicasJaUsada){
-          DicaLetraNaoExiste();
-        }
-        else{
-          DicaLetrasUnicas();
-        }          
-      } 
-      else{
-        if (DicaQtdVogaisJaUsada){
-          DicaLetraNaoExiste();
-        }
-        else{
+ 
+      if(currentLine == 1){
+        return;
+      }
+
+      var vDicasAleatoria = vDicasDisponiveis[Math.floor(Math.random()*vDicasDisponiveis.length)];
+
+      switch (vDicasAleatoria){
+        case 1: 
+          DicaPalavraPossivel();
+          break;   
+        case 2: 
           DicaQtdVogais();
-        }          
-      } 
+          vDicasDisponiveis.pop();
+          break;
+        case 3: 
+          DicaLetrasUnicas();
+          vDicasDisponiveis.pop();
+          break;
+      }
 
       vUsouDica++;
       AtualizaPontuacao(0);
