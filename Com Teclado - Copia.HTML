@@ -1200,7 +1200,7 @@
       }
 
       var chance = Math.random();
-      if (chance < 0.01){
+      if (chance < 0.3){
         if (chance > 0.15){
           Desafio4Aleatorias();
         }
@@ -1293,6 +1293,11 @@
           return true;
         }
       }
+
+      function RemoveDoArray(pArray, pElemento){
+        const index = pArray.indexOf(pElemento);
+        const x = pArray.splice(index, 1);
+      }
  
       if(currentLine == 1){
         return;
@@ -1310,11 +1315,11 @@
           break;   
         case 2: 
           DicaQtdVogais();
-          vDicasDisponiveis.pop();
+          RemoveDoArray(vDicasDisponiveis, 2);
           break;
         case 3: 
           DicaLetrasUnicas();
-          vDicasDisponiveis.pop();
+          RemoveDoArray(vDicasDisponiveis, 3);
           break;
       }
 
