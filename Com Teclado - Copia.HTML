@@ -1230,8 +1230,28 @@
 
         return vPalavraPossiveiAleatoria;
       }
+
+      function VerificaPalavraExiste(){
+        var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input');
+        var guessedWord = Array.from(lineInputs).map(input => input.value);
+        var vPalavraTestada = guessedWord.join('');
+
+        if (vPalavraTestada.length == 5){
+          if(wordsSemAcento.includes(vPalavraTestada)){
+            alert('- Dica - \nPalavra Existe');  
+          }else{
+            alert('- Dica - \nPalavra não Existe'); 
+          }
+
+          return true;
+        }
+      }
  
       if(currentLine == 1){
+        return;
+      }
+
+      if (VerificaPalavraExiste()){
         return;
       }
 
