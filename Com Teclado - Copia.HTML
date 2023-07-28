@@ -635,19 +635,11 @@
       var vPalavraTestada = Array.from(lineInputs).map(input => input.value.toUpperCase());    
       vPalavraTestada = vPalavraTestada.join('');
 
-      
-
-      
-
       if (vPalavraTestada.length == 0){
         vPalavraTestada = vPalavraTestadaGlobal;
       }
    
-      var Confirma = confirm("Pesquisar a palavra " + vPalavraTestada + " na web?");
-      
-      if (Confirma) {
-        AbreModalPesquisa();
-      }  
+      AbreModalPesquisa(); 
     }
 
     function CalculaPossibilidades(){
