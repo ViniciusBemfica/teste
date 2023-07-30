@@ -592,9 +592,7 @@
       }
       else
       {
-
         input.value = '';
-
       }    
     }
 
@@ -1297,16 +1295,7 @@
         var guessedWord = Array.from(lineInputs).map(input => input.value);
         var vPalavraTestada = guessedWord.join('');
 
-        if (vPalavraTestada.length == 5){
-          if(wordsSemAcento.includes(vPalavraTestada)){
-            alert('- Dica - \nA Palavra '+ vPalavraTestada +' Existe no Vocabulário');  
-          }else{
-            alert('- Dica - \nA Palavra '+ vPalavraTestada +' não Existe no Vocabulário'); 
-          }
-
-          return true;
-        }
-        else if(vPalavraTestada.length > 2){
+        if(vPalavraTestada.length > 1){
           var vQtdPalavrasPossiveis = filtraPalavrasComEssasLetras(vPalavraTestada); 
           alert('- Dica - \nPalavras com as Letras '
                + vPalavraTestada + ' no Vocabulário: ' + vQtdPalavrasPossiveis.length); 
