@@ -34,7 +34,7 @@
       line-height: 175%;
       font-size: 175%;
       margin: 0 3px;
-      border: 2px solid black;
+      border: 1px solid black;
       width: 100%;
       color: white;
       background-color: grey;
@@ -385,6 +385,7 @@
       }
       else
       {
+        lineInputs.forEach(input => input.style.color = 'white');
       // Check the guessed word against the correct word
         for (var i = 0; i < guessedWord.length; i++) {
           var letter = guessedWord[i];
@@ -423,13 +424,13 @@
       
       // Check if the player has won
       if (guessedWord.join('') === PalavraSecreta) {  
-        var vPontosDesafio = 15;      
+        var vPontosDesafio = 12;      
         vVenceu = true; 
         vMsgVenceu = 'Parabéns, você venceu! Palavra: ' + PalavraComAcento + '\n' + MensagemPontuacao();
 
         if (DesafioExiste('Desafio4Aleatorias')){
           if(vQtdPalavrasAleatorias > 3){
-            vPontosDesafio = vPontosDesafio - (vUsouDica * 5);
+            vPontosDesafio = vPontosDesafio - (vUsouDica);
 
             AtualizaPontuacao(vPontosDesafio);
 
@@ -437,14 +438,14 @@
                        + PalavraComAcento + '\n' 
                        + '\nDesafio: ' + vDesafioDescricao
                        + '\nPalavras Aleatórias: ' + vQtdPalavrasAleatorias
-                       + '\nPontos Base do Desafio: 15'
-                       + '\nDicas (-5 por dica): ' + (vUsouDica * 5)
+                       + '\nPontos Base do Desafio: 12'
+                       + '\nDicas (-5 por dica): ' + (vUsouDica)
                        + '\n\n- Pontuação: ' + vPontosDesafio;
           }  
         }
         else if (DesafioExiste('Desafio20Letras')){
           if(CalculaLetrasDiferentesUsadas() > 19){
-            vPontosDesafio = vPontosDesafio - (vUsouDica * 5);
+            vPontosDesafio = vPontosDesafio - (vUsouDica);
 
             AtualizaPontuacao(vPontosDesafio);
 
@@ -452,8 +453,8 @@
                        + PalavraComAcento + '\n' 
                        + '\nDesafio: ' + vDesafioDescricao
                        + '\nLetras usadas: ' + CalculaLetrasDiferentesUsadas()
-                       + '\nPontos Base do Desafio: 15' 
-                       + '\nDicas (-5 por dica): ' + (vUsouDica * 5)
+                       + '\nPontos Base do Desafio: 12' 
+                       + '\nDicas (-5 por dica): ' + (vUsouDica)
                        + '\n\n- Pontuação: ' + vPontosDesafio;
           }  
         }
@@ -540,6 +541,19 @@
       var input = lineInputs[currentLetter];
       var NextInput = lineInputs[currentLetter + 1];   
       //input.value = element.innerText;
+
+      function PintaPalavraSeExiste(){
+        var palavraInteira = Array.from(lineInputs).map(input => input.value); 
+        var palavraInteira = palavraInteira.filter(value => {return value !== ''});
+        var vPalavraTestada = palavraInteira.join('');
+        if(palavraInteira.length == 5){
+          if(wordsSemAcento.includes(vPalavraTestada)){
+            lineInputs.forEach(input => input.style.color = 'MidnightBlue');
+          }
+        }    
+      }   
+
+      lineInputs.forEach(input => input.style.color = 'white');
       
       //Grava na caixa em foco
       if (vModoLivre == true){
@@ -560,18 +574,25 @@
           currentLetter = 0;
           FocusPrimeiroElemento();
         }
-      }      
+      }
+
+      PintaPalavraSeExiste()
+
     }
        
     function Delete() {
+
+      var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input');
+        lineInputs.forEach(input => input.style.color = 'white');
+        var input = lineInputs[currentLetter];
+
       if (vModoLivre == true){
         elementoEmFoco.value = '';
         elementoEmFoco.focus();
       }
       else
       {
-        var lineInputs = document.querySelectorAll('.line')[currentLine - 1].querySelectorAll('.letter-input');
-        var input = lineInputs[currentLetter];
+
         input.value = '';
 
       }    
@@ -895,10 +916,10 @@
         vPontosLinhasUsadas = 4;
       }    
       if (currentLine == 5){
-        vPontosLinhasUsadas = 3;
+        vPontosLinhasUsadas = 2;
       }  
       if (currentLine == 6){
-        vPontosLinhasUsadas = 2;
+        vPontosLinhasUsadas = 1;
       }   
 
       return vPontosLinhasUsadas;    
