@@ -463,7 +463,9 @@
         }
       
         AtualizaCookie(PontuacaoPartida);
-        AtualizaCookiePalavras(PalavraComAcento);
+        AtualizaCookiePalavras("CookiePalavras", PalavraComAcento);
+        AtualizaCookiePalavras("CookiePossibilidadeInicial", vPossibilidadeInicial);
+        AtualizaCookiePalavras("CookieLinhasVenceu", currentLine - 1);
 
         alert(vMsgVenceu);       
       }
@@ -471,7 +473,9 @@
       // Check if the player has lost
       if (currentLine > 6 && guessedWord.join('') !== PalavraSecreta) {
         AtualizaCookie(0);
-        AtualizaCookiePalavras(PalavraComAcento);
+        AtualizaCookiePalavras("CookiePalavras", PalavraComAcento);
+        AtualizaCookiePalavras("CookiePossibilidadeInicial", vPossibilidadeInicial);
+        AtualizaCookiePalavras("CookieLinhasVenceu", 0);
         vPerdeu = true;
         alert('Você perdeu! A palavra certa era: ' + PalavraComAcento);       
         PesquisaPalavraNaWeb(PalavraComAcento);
@@ -1005,6 +1009,8 @@
         + '\n\n- Pontos nas 10 última partidas: '+ CookieRetornaTotal()
         +'\n' + vCookieString.split('|') 
         + '\n' + CookieRetornaListaPalavra()
+        + '\nP. Inicial: ' + CookieRetornaListaPosInicial()
+        + '\nN. Linhas Venceu: ' + CookieRetornaListaLinhasVenceu()
         + '\n\n- Palavras Possíveis: '
         + '\nPossibilidade Incial: ' + vPossibilidadeInicial
         + '\nPossibilidade Final: ' + vPossibilidadeFinal;
@@ -1145,15 +1151,14 @@
       return PontuacaoTodosJogos;
     }
 
-    //To do
-    function AtualizaCookiePalavras(vValor) {
-      let vCookieString = getCookie("CookiePalavras");
+    function AtualizaCookiePalavras(pCookie, vValor) {
+      let vCookieString = getCookie(pCookie);
       
       if (vCookieString != "" && vCookieString !== null) {
         vCookieString = CookieAddPalavraRetornaString(vCookieString, vValor); 
-        setCookie("CookiePalavras", vCookieString, 30);
+        setCookie(pCookie, vCookieString, 30);
       } else {
-        setCookie("CookiePalavras", "TESTE", 30);  
+        setCookie(pCookie, "TESTE", 30);  
       }
     } 
 
@@ -1173,6 +1178,18 @@
 
     function CookieRetornaListaPalavra(){
       var vCookieString = getCookie("CookiePalavras"); 
+
+      return vCookieString;
+    }
+
+    function CookieRetornaListaPosInicial(){
+      var vCookieString = getCookie("CookiePossibilidadeInicial"); 
+
+      return vCookieString;
+    }
+
+    function CookieRetornaListaLinhasVenceu(){
+      var vCookieString = getCookie("CookieLinhasVenceu"); 
 
       return vCookieString;
     }
