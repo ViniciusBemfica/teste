@@ -875,19 +875,16 @@
     function Info(){
       var texto = 
       `
-      - Não tem palavras com cedilha.
-      - A barra inferior é seu ranking e pontuação, quão bem você esta indo no jogo nas últimas partidas. Clique nela para mais informações.
-      - Clique no dado para gerar uma palavra aleatória.
-      - Clique na lâmpada para dicas.
+      - A barra inferior é seu ranking e pontuação, clique nela para mais informações.
       - Clique duas vezes sobre a letra já inserida para deletar a letra. 
-      - Clique na caveira para ver o desafio da partida, se existir um. De vez em quando a partida terá um Desafio opcional. Vença o desafio para ganhar mais pontos de uma só vez. 
+      - Clique na caveira para ver o desafio da partida, se existir um. 
 
       --- Sistema de Pontuação e Ranking --- 
 
       Na barra inferior tem a sua pontuação total nas últimas 10 partidas, vença várias partidas em sequência fazendo muitos pontos para avançar de Rank.
       No canto inferior direito tem o nro. total de palavras possíveis, dada a situação atual das dicas. Descubra a palavra secreta restando apenas uma palavra possível para obter uma vitória limpa (não acertou a palavra por pura sorte).
-      A pontuação de Linhas Usadas concede pontos baseado na dificuldade inicial do jogo (mais palavras possíveis = mais difícil), completando situações difíceis usando menos linhas concede mais pontos, completando situações fáceis usando mais linhas concede menos pontos.
-      Para ganhar mais pontos, é necessário iniciar com uma palavra aleatório, para evitar usos indevidos de palavras iniciais que facilitam muito o jogo.`;
+      A pontuação de Linhas Usadas concede pontos baseado na dificuldade inicial do jogo (mais palavras possíveis = mais difícil), completando situações difíceis usando menos linhas concede mais pontos.
+      Para ganhar mais pontos, é necessário iniciar com uma palavra aleatória, para evitar usos indevidos de palavras iniciais que facilitam muito o jogo.`;
 
       alert(texto
         + '\n' + PalavraSecreta);   
@@ -915,7 +912,7 @@
           vPontosLinhasUsadas = 4;
         }
       } 
-      else if (vPossibilidadeInicial >= 500 && vPossibilidadeInicial < 1000){
+      else if (vPossibilidadeInicial >= 300 && vPossibilidadeInicial < 1000){
         if (linhaAnterior <= 4){
           vPontosLinhasUsadas = 5;
         }    
@@ -926,7 +923,7 @@
           vPontosLinhasUsadas = 3;
         } 
       }
-      else if (vPossibilidadeInicial < 500){
+      else if (vPossibilidadeInicial < 300){
         if (linhaAnterior <= 4){
           vPontosLinhasUsadas = 4;
         }    
