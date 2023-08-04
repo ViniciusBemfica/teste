@@ -901,19 +901,41 @@
     function LinhasUsadas(){
       var vPontosLinhasUsadas = 0;
 
-      if (vPossibilidadeFinal != 1){
-        return vPontosLinhasUsadas;
-      }
+      var linhaAnterior = currentLine - 1;
 
-      if (currentLine == 4){
-        vPontosLinhasUsadas = 4;
-      }    
-      if (currentLine == 5){
-        vPontosLinhasUsadas = 2;
-      }  
-      if (currentLine == 6){
-        vPontosLinhasUsadas = 1;
-      }   
+      if (vPossibilidadeInicial >= 1000){
+        if (linhaAnterior <= 4){
+          vPontosLinhasUsadas = 6;
+        }    
+        if (linhaAnterior == 5){
+          vPontosLinhasUsadas = 5;
+        }  
+        if (linhaAnterior == 6){
+          vPontosLinhasUsadas = 4;
+        }
+      } 
+      else if (vPossibilidadeInicial >= 500 && vPossibilidadeInicial < 1000){
+        if (linhaAnterior <= 4){
+          vPontosLinhasUsadas = 5;
+        }    
+        if (linhaAnterior == 5){
+          vPontosLinhasUsadas = 4;
+        }  
+        if (linhaAnterior == 6){
+          vPontosLinhasUsadas = 3;
+        } 
+      }
+      else if (vPossibilidadeInicial < 500){
+        if (linhaAnterior <= 4){
+          vPontosLinhasUsadas = 4;
+        }    
+        if (linhaAnterior == 5){
+          vPontosLinhasUsadas = 3;
+        }  
+        if (linhaAnterior == 6){
+          vPontosLinhasUsadas = 2;
+        } 
+      }
 
       return vPontosLinhasUsadas;    
     }
@@ -1024,7 +1046,7 @@
       }
       else{
         if (vPossibilidadeFinal == 1){
-          vVitoriaLimpa = 4;  
+          vVitoriaLimpa = 3;  
         }
         PontuacaoPartida = (0 + vVitoriaLimpa + vIniciouPalAleatoria + LinhasUsadas()) - (vUsouDica); 
       }
@@ -1056,7 +1078,7 @@
         var randomIndex = Math.floor(Math.random() * wordsSemAcento.length);
         vPalavraAleatoria = wordsSemAcento[randomIndex];
 
-        vIniciouPalAleatoria = 4;
+        vIniciouPalAleatoria = 3;
 
         if (DesafioExiste('Desafio4Aleatorias')){
           vQtdPalavrasAleatorias++;
