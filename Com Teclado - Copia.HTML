@@ -871,6 +871,41 @@
 
       alert('Chegou em 1 possibilidade antes do fim:\n' + contaVezes);
     }
+
+    //1000 jogos - chegou em 1 +- 400 vezes
+    function EstrategiaTestaPosIniciais(){
+      var contaVezes = 0;
+
+      var vPIniciais = [];
+      var vPossibilidades = [];
+
+      for (let x = 0; x < 1000; x++) { 
+        var randomIndex = Math.floor(Math.random() * wordsSemAcento.length);
+        PalavraSecreta = wordsSemAcento[randomIndex];
+
+        var randomIndex = Math.floor(Math.random() * wordsSemAcento.length);
+        vPalavraAleatoria = wordsSemAcento[randomIndex];
+
+        for (let j = 0; j < 5; j++) { 
+          document.querySelectorAll('.line')[0].querySelectorAll('.letter-input')[j].value = vPalavraAleatoria[j];
+        }
+
+        ProximaLinha(); 
+
+        vPIniciais.push(vPossibilidadeInicial);
+
+        for (let j = 0; j < 5; j++) { 
+          document.querySelectorAll('.line')[0].querySelectorAll('.letter-input')[j].value = '';
+          document.querySelectorAll('.line')[0].querySelectorAll('.letter-input')[j].style.backgroundColor = 'grey';
+          document.querySelectorAll('.line')[0].querySelectorAll('.letter-input')[j].disabled = false;
+        }
+         
+        currentLine = 1; 
+      }
+
+      const count = vPIniciais.filter(number => number > 500).length;
+      alert('Chegou em 1 possibilidade antes do fim:\n' + count);
+    }
       
     function Info(){
       var texto = 
@@ -887,7 +922,10 @@
       Para ganhar mais pontos, é necessário iniciar com uma palavra aleatória, para evitar usos indevidos de palavras iniciais que facilitam muito o jogo.`;
 
       alert(texto
-        + '\n' + PalavraSecreta);   
+        + '\n' + PalavraSecreta);  
+
+
+      //EstrategiaTestaPosIniciais()   
 
     }
 
@@ -901,7 +939,7 @@
 
       var linhaAnterior = currentLine - 1;
 
-      if (vPossibilidadeInicial >= 1000){
+      if (vPossibilidadeInicial >= 500){
         if (linhaAnterior <= 4){
           vPontosLinhasUsadas = 6;
         }    
@@ -912,7 +950,7 @@
           vPontosLinhasUsadas = 4;
         }
       } 
-      else if (vPossibilidadeInicial >= 300 && vPossibilidadeInicial < 1000){
+      else if (vPossibilidadeInicial >= 75 && vPossibilidadeInicial < 500){
         if (linhaAnterior <= 4){
           vPontosLinhasUsadas = 5;
         }    
@@ -923,7 +961,7 @@
           vPontosLinhasUsadas = 3;
         } 
       }
-      else if (vPossibilidadeInicial < 300){
+      else if (vPossibilidadeInicial < 75){
         if (linhaAnterior <= 4){
           vPontosLinhasUsadas = 4;
         }    
